@@ -1,6 +1,7 @@
 # 💰 Crypto Sandbox
 
 ## 👤 Autor
+
 Vinicius Liepienski de França
 
 ---
@@ -25,15 +26,9 @@ O objetivo do projeto é proporcionar uma experiência prática de mercado finan
 
 ---
 
-## 🎨 Prototipação no Figma
+## 🎨 Prototipação no Stich
 
-Em andamento
-
----
-
-## 🧩 Design System
-
-Em andamento
+[Design System](https://stitch.withgoogle.com/projects/7598302925290636969) - Identidade Visual
 
 ---
 
