@@ -34,13 +34,40 @@ O objetivo do projeto é proporcionar uma experiência prática de mercado finan
 
 ## 🎨 Framework CSS
 
-Em andamento
+**Bootstrap 5 (v5.x)**
+
+**Por que Bootstrap?**
+
+- **Responsividade (Grid):** o sistema de grid (breakpoints como `sm`, `md`, `lg`, `xl`) facilita adaptar o layout para *mobile / tablet / desktop* sem reescrever CSS do zero.
+- **Componentes prontos:** possui exatamente o que um app como o *Crypto Sandbox* costuma precisar (Navbar, Cards para moedas, Tables para histórico, Modals para confirmar compra/venda, Forms, Buttons, Alerts etc.).
+- **JS pronto para componentes interativos:** modais, dropdowns, offcanvas e tooltips já funcionam com o bundle oficial (sem jQuery), acelerando muito a entrega.
+- **Saúde do projeto:** é um projeto extremamente ativo e popular no GitHub (repositório `twbs/bootstrap`), com commits recentes (pushed em **2026-03-31**) e grande comunidade.
+- **Licença:** MIT, amigável para projetos open-source e acadêmicos.
 
 ---
 
-## 📦 Dependências
+## 🌐 API Pública
 
-Em andamento
+**CoinGecko API (Public API)**
+
+**Por que CoinGecko?**
+
+- **Aderência ao tema do projeto:** entrega dados reais do mercado cripto, como preço atual, variação 24h, volume, market cap e ranking.
+- **Boa para dashboards:** permite listar múltiplas moedas e atualizar periodicamente (ex.: a cada 30s/60s) para simular “tempo real”.
+- **Não exige chave para começar:** dá para prototipar e testar rapidamente usando endpoints públicos.
+
+**Como ela agrega valor ao sistema:**
+
+- Alimenta a tela de dashboard com preços e variação.
+- Permite preencher automaticamente o catálogo de criptomoedas disponíveis para compra/venda.
+- Ajuda a validar transações do sandbox com base no preço real no momento da simulação.
+
+---
+
+## 📦 Tecnologias e Dependências
+
+- **Framework CSS:** Bootstrap 5 (v5.x)
+- **API Pública:** CoinGecko API
 
 ---
 
@@ -105,3 +132,4 @@ O sistema contará com pelo menos:
 1. Clone o repositório:
 ```bash
 git clone https://github.com/Vinicius-L-Franca/crypto-sandbox
+```
