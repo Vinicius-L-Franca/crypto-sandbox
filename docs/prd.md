@@ -91,6 +91,23 @@ O problema que o sistema busca resolver é a dificuldade de iniciantes entrarem 
 
 ---
 
+### ⚙️ Configurações e Segurança
+
+- Como usuário, eu quero alterar meu perfil e preferências para personalizar a experiência.
+- Como usuário, eu quero ativar autenticação 2FA para proteger minha conta.
+- Como usuário, eu quero escolher entre autenticação biométrica ou por OTP.
+- Como usuário, eu quero selecionar o idioma e a moeda base da aplicação.
+
+---
+
+### 📈 Visualização de Gráficos
+
+- Como usuário, eu quero visualizar gráficos de linha do mercado para acompanhar tendências de preço.
+- Como usuário, eu quero ver um gráfico de pizza com a distribuição dos meus ativos no portfólio.
+- Como usuário, eu quero ajustar a precision view (casas decimais) dos criptoativos.
+
+---
+
 ## 📌 Observações
 
 Este sistema não realiza transações reais e tem finalidade exclusivamente educacional, simulando operações com criptomoedas para aprendizado do usuário.
