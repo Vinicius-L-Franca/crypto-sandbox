@@ -66,8 +66,24 @@ O objetivo do projeto é proporcionar uma experiência prática de mercado finan
 
 ## 📦 Tecnologias e Dependências
 
-- **Framework CSS:** Bootstrap 5 (v5.x)
-- **API Pública:** CoinGecko API
+### Frontend
+- **Bootstrap 5.3.3** - Framework CSS responsivo com componentes prontos
+- **Chart.js 4.4.1** - Biblioteca para gráficos (linha e pizza)
+- **Font Awesome 6.5.1** - Ícones SVG escaláveis
+
+### APIs e Serviços
+- **CoinGecko API v3** - Dados reais de criptomoedas em tempo real
+- **Fetch API (nativa)** - Requisições assíncronas
+
+### Desenvolvimento e Qualidade
+- **Node.js 20.x LTS** - Runtime JavaScript
+- **npm 10.x** - Gerenciador de pacotes e dependências
+- **ESLint 8.56.0** - Linter para qualidade de código
+- **Prettier 3.1.1** - Formatador de código automático
+
+### Persistência
+- **localStorage (nativo)** - Armazenamento local no navegador
+- **JSON Server 0.17.4 (dev)** - API fake para desenvolvimento e testes
 
 ---
 
