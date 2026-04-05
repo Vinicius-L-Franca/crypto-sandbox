@@ -127,6 +127,25 @@ O sistema contará com pelo menos:
 
 ---
 
+## 📱 Páginas da Aplicação
+
+1. **Dashboard** - Visão geral do mercado com gráfico de preços
+2. **Mercado** - Lista de criptomoedas com opções de compra e venda
+3. **Portfólio** - Carteira do usuário com distribuição de ativos (gráfico pizza)
+4. **Transações** - Histórico de compras e vendas
+5. **Configurações** - Preferências, segurança e perfil do usuário
+
+---
+
+## 🎨 Componentes Visuais
+
+- 📈 Gráficos de linha (evolução de preços no mercado)
+- 🥧 Gráficos de pizza (distribuição de ativos no portfólio)
+- 🔐 Painel de Segurança (2FA, senha, autenticação biométrica)
+- ⚙️ Preferências (idioma, moeda base, precision view)
+
+---
+
 ## 🚀 Instruções de Execução
 
 1. Clone o repositório:

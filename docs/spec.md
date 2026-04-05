@@ -16,6 +16,8 @@ erDiagram
     USUARIO ||--|| CARTEIRA : possui
     CARTEIRA ||--o{ TRANSACAO : registra
     CRIPTOMOEDA ||--o{ TRANSACAO : referencia
+    USUARIO ||--|| CONFIGURACOES : personaliza
+    USUARIO ||--o{ NOTIFICACOES : recebe
 
     USUARIO {
         string id PK
@@ -43,5 +45,24 @@ erDiagram
         string data
         string carteiraId FK
         string criptoId FK
+    }
+
+    CONFIGURACOES {
+        string id PK
+        string usuarioId FK
+        string idioma
+        string moedaBase
+        boolean autenticacao2FA
+        boolean biometria
+        int precisionView
+        string tema
+    }
+
+    NOTIFICACOES {
+        string id PK
+        string usuarioId FK
+        string tipo
+        string mensagem
+        string data
     }
 ```
