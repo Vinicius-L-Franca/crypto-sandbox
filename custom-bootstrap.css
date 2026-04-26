@@ -21,6 +21,18 @@ body {
     background-color: var(--cs-background);
     color: var(--cs-on-surface);
     font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+footer {
+    margin-top: auto;
+    flex-shrink: 0;
 }
 
 h1, h2, h3, h4, h5, h6, .display-1, .display-2, .display-3, .display-4, .display-5, .display-6 {
@@ -195,7 +207,7 @@ h1, h2, h3, h4, h5, h6, .display-1, .display-2, .display-3, .display-4, .display
 .bg-surface-container-high\/50 { background-color: rgba(34, 42, 61, 0.5) !important; }
 
 /* Tailwind resets that Bootstrap lacks */
-button:not(.btn) {
+button:not(.btn):not(.btn-connect) {
     background-color: transparent;
     padding: 0;
     border: none;

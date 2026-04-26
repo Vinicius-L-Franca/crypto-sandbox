@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Perfil - Crypto Sandbox</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    :root {
+        --bg: #080c14;
+        --surface: #0e1420;
+        --surface2: #131b2b;
+        --surface3: #172030;
+        --border: rgba(255, 255, 255, 0.07);
+        --cyan: #00d4ff;
+        --green: #0fffa3;
+        --red: #ff4d6a;
+        --muted: rgba(255, 255, 255, 0.42);
+        --text: #dce8f8;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        background: var(--bg) !important;
+        font-family: 'Inter', sans-serif;
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+        margin: 0;
+    }
+
+    .font-headline { font-family: 'Space Grotesk', sans-serif; }
+
+    .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 200;
+        background: rgba(8, 12, 20, 0.88);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 800;
+        font-size: 1.2rem;
+        color: var(--cyan);
+        text-decoration: none;
+        letter-spacing: -.4px;
+        text-shadow: 0 0 18px rgba(0, 212, 255, .45);
+        white-space: nowrap;
+    }
+
+    .nav-pill {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 600;
+        font-size: .78rem;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+        color: var(--muted);
+        text-decoration: none;
+        padding: .3rem .7rem;
+        border-radius: 6px;
+        transition: color .2s, background .2s;
+        white-space: nowrap;
+    }
+
+    .nav-pill:hover { color: #fff; background: rgba(255, 255, 255, .06); }
+    .nav-pill.active { color: var(--cyan); background: rgba(0, 212, 255, .08); position: relative; }
+    .nav-pill.active::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
+        height: 2px;
+        background: var(--cyan);
+        border-radius: 2px 2px 0 0;
+    }
+
+    .patrimony-label {
+        font-size: .6rem;
+        text-transform: uppercase;
+        letter-spacing: .12em;
+        color: var(--muted);
+        line-height: 1;
+    }
+
+    .patrimony-value {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: 1rem;
+        color: var(--cyan);
+        line-height: 1.3;
+        text-shadow: 0 0 12px rgba(0, 212, 255, .35);
+    }
+
+    .btn-connect {
+        background: linear-gradient(135deg, #00d4ff 0%, #009fc0 100%);
+        color: #050a12;
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: .78rem;
+        border: none;
+        border-radius: 8px;
+        padding: .42rem 1rem;
+        box-shadow: 0 0 16px rgba(0, 212, 255, .3);
+        transition: box-shadow .2s, transform .15s;
+        white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+    }
+
+    .btn-connect:hover { box-shadow: 0 0 26px rgba(0, 212, 255, .55); transform: translateY(-1px); }
+    .btn-connect:active { transform: scale(.97); }
+
+    .icon-btn {
+        background: transparent;
+        border: none;
+        color: var(--muted);
+        padding: .3rem;
+        border-radius: 6px;
+        transition: color .2s, background .2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .icon-btn:hover { color: #fff; background: rgba(255, 255, 255, .07); }
+
+    .mobile-nav {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 300;
+        background: rgba(8, 12, 20, .92);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 767.98px) {
+        .mobile-nav { display: flex; }
+        body { padding-bottom: 72px; }
+    }
+
+    .mnav-link {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .2rem;
+        text-decoration: none;
+        color: var(--muted);
+        padding: .6rem .25rem;
+        font-size: .6rem;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: .06em;
+        transition: color .2s;
+    }
+    .mnav-link.active { color: var(--cyan); }
+    .mnav-link .material-symbols-outlined { font-size: 1.3rem; }
+
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        vertical-align: middle;
+        line-height: 1;
+    }
+
+    .page-shell {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 1.5rem .9rem 2.25rem;
+    }
+
+    @media (min-width: 768px) {
+        .page-shell { padding: 2rem 1.5rem 2.75rem; }
+    }
+
+    .section-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        color: #e6eef9;
+        letter-spacing: -.02em;
+        margin: 0;
+    }
+
+    .section-subtitle {
+        color: #90a2be;
+        margin-top: .4rem;
+        font-size: .96rem;
+    }
+
+    .tabbar {
+        display: flex;
+        gap: 1.5rem;
+        border-bottom: 1px solid rgba(255,255,255,.05);
+        overflow-x: auto;
+        padding-bottom: .1rem;
+        margin-top: .8rem;
+    }
+
+    .tab-link {
+        display: inline-flex;
+        align-items: center;
+        gap: .45rem;
+        padding: .95rem 0;
+        text-decoration: none;
+        color: #94a3bd;
+        font-weight: 600;
+        white-space: nowrap;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -1px;
+    }
+
+    .tab-link.active {
+        color: #46d9ff;
+        border-bottom-color: #46d9ff;
+    }
+
+    .profile-grid {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    @media (max-width: 991.98px) {
+        .profile-grid { grid-template-columns: 1fr; }
+    }
+
+    .panel {
+        background: #1a2337;
+        border: 1px solid rgba(255,255,255,.04);
+        border-radius: 8px;
+    }
+
+    .profile-card {
+        min-height: 308px;
+        padding: 2rem 1.25rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .avatar-wrap {
+        position: relative;
+        width: 88px;
+        height: 88px;
+        border-radius: 16px;
+        padding: 3px;
+        background: linear-gradient(135deg, rgba(0,212,255,.95), rgba(0,212,255,.2));
+        box-shadow: 0 0 0 1px rgba(0,212,255,.1), 0 0 22px rgba(0,212,255,.12);
+        margin-bottom: 1rem;
+    }
+
+    .avatar {
+        width: 100%;
+        height: 100%;
+        border-radius: 14px;
+        background: #0b1326;
+        display: grid;
+        place-items: center;
+        color: #dce8f8;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .avatar svg {
+        width: 70px;
+        height: 70px;
+    }
+
+    .avatar-edit {
+        position: absolute;
+        right: -2px;
+        bottom: -2px;
+        width: 30px;
+        height: 30px;
+        border-radius: 999px;
+        border: 2px solid #1a2337;
+        background: #26324a;
+        display: grid;
+        place-items: center;
+        color: #89d9ff;
+    }
+
+    .profile-name {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #e9eff9;
+        margin: .25rem 0 .2rem;
+    }
+
+    .profile-level {
+        font-size: .66rem;
+        text-transform: uppercase;
+        letter-spacing: .24em;
+        color: #72d7ff;
+        font-weight: 700;
+    }
+
+    .divider {
+        width: 100%;
+        height: 1px;
+        background: rgba(255,255,255,.05);
+        margin: 1.4rem 0 1.1rem;
+    }
+
+    .meta-row {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #cad5e7;
+        font-size: .92rem;
+    }
+
+    .form-shell {
+        padding: 1.6rem 1.5rem 1.5rem;
+    }
+
+    .panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: .75rem;
+        margin-bottom: 1.1rem;
+    }
+
+    .panel-heading {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #e8eff8;
+        margin: 0;
+    }
+
+    .edit-link {
+        color: #8bdcff;
+        font-size: .86rem;
+        font-weight: 600;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    .field-group {
+        margin-bottom: 1rem;
+    }
+
+    .field-label {
+        font-size: .64rem;
+        text-transform: uppercase;
+        letter-spacing: .14em;
+        color: #94a7c2;
+        margin-bottom: .42rem;
+        font-weight: 700;
+    }
+
+    .input-cs {
+        width: 100%;
+        background: #0b1326;
+        border: 1px solid rgba(255,255,255,.04);
+        color: #eef4fb;
+        border-radius: 4px;
+        padding: .82rem .9rem;
+        font-size: .95rem;
+        outline: none;
+    }
+
+    .input-cs::placeholder { color: #8494af; }
+
+    .actions-row {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: .75rem;
+        flex-wrap: wrap;
+        margin-top: 1.15rem;
+    }
+
+    .link-cs {
+        color: #8bdcff;
+        text-decoration: none;
+        font-size: .9rem;
+    }
+
+    .btn-primary-cs {
+        border: none;
+        border-radius: 4px;
+        background: linear-gradient(135deg, #5ad4ff, #2ccdf3);
+        color: #07111d;
+        font-weight: 700;
+        padding: .7rem 1.1rem;
+        box-shadow: 0 0 18px rgba(0,212,255,.18);
+    }
+
+    @media (max-width: 767.98px) {
+        .page-shell { padding-left: .75rem; padding-right: .75rem; }
+        .profile-card { min-height: auto; }
+        .form-shell { padding: 1.25rem 1rem; }
+        .actions-row { justify-content: stretch; }
+        .btn-primary-cs, .link-cs { width: 100%; text-align: center; }
+    }
+</style>
+<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="custom-bootstrap.css" rel="stylesheet">
+</head>
+<body class="bg-background text-on-background font-body min-vh-100 d-flex flex-column">
+<header class="topbar">
+<div class="container-fluid px-3 px-md-4" style="max-width:1440px;">
+<div class="d-flex align-items-center justify-content-between" style="height:58px; gap:.75rem;">
+<a href="conectar_carteira.html" class="brand flex-shrink-0">Crypto Sandbox</a>
+<nav class="d-none d-lg-flex align-items-center gap-1 mx-3">
+<a href="negociacao.html" class="nav-pill">Mercado</a>
+<a href="portfolio_carteira.html" class="nav-pill">Portfólio</a>
+<a href="transacoes.html" class="nav-pill">Transações</a>
+<a href="conf_seguranca_header.html" class="nav-pill active">Configurações</a>
+</nav>
+<div class="d-flex align-items-center gap-2 ms-auto flex-shrink-0">
+<div class="d-none d-md-flex flex-column align-items-end me-2 pe-2" style="border-right:1px solid var(--border);">
+<span class="patrimony-label">Patrimônio Total</span>
+<span class="patrimony-value">$42,500.24</span>
+</div>
+<button class="icon-btn">
+<span class="material-symbols-outlined" style="font-size:1.25rem;">notifications</span>
+</button>
+<a href="conectar_carteira.html" class="btn-connect">Conectar Carteira</a>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow-1">
+<div class="page-shell">
+<div class="mb-4">
+<h1 class="section-title" style="font-size: clamp(1.6rem, 4vw, 2.6rem);">Perfil</h1>
+<p class="section-subtitle">Gerencie suas informações pessoais e de contato.</p>
+</div>
+<div class="tabbar" role="tablist" aria-label="Configurações">
+<a class="tab-link active" href="conf_perfil_header.html"><span class="material-symbols-outlined" style="font-size:1rem;">person</span>Perfil</a>
+<a class="tab-link" href="conf_seguranca_header.html"><span class="material-symbols-outlined" style="font-size:1rem;">shield</span>Segurança</a>
+<a class="tab-link" href="conf_preferencias_header.html"><span class="material-symbols-outlined" style="font-size:1rem;">settings</span>Preferências</a>
+</div>
+<div class="profile-grid">
+<section class="panel profile-card">
+<div class="avatar-wrap">
+<div class="avatar">
+<svg viewBox="0 0 100 100" aria-hidden="true">
+<circle cx="50" cy="37" r="16" fill="#ffcfa8"></circle>
+<path d="M28 88c2-16 14-25 22-25s20 9 22 25" fill="#23262f"></path>
+<path d="M31 36c0-14 9-24 19-24s19 10 19 24c0 1-1 2-3 2H34c-2 0-3-1-3-2z" fill="#222"></path>
+<path d="M35 56c6 3 24 3 30 0" stroke="#1e2230" stroke-width="4" stroke-linecap="round" fill="none"></path>
+<circle cx="43" cy="38" r="2" fill="#1b1f27"></circle>
+<circle cx="57" cy="38" r="2" fill="#1b1f27"></circle>
+</svg>
+</div>
+<div class="avatar-edit"><span class="material-symbols-outlined" style="font-size:1rem;">edit</span></div>
+</div>
+<div class="profile-name">Alexandre Silva</div>
+<div class="profile-level">Nível: Explorer</div>
+<div class="divider"></div>
+<div class="meta-row"><span>Membro desde</span><span>Out 2023</span></div>
+</section>
+<section class="panel form-shell">
+<div class="panel-header">
+<h2 class="panel-heading">Informações Pessoais</h2>
+<a class="edit-link" href="#"><span class="material-symbols-outlined" style="font-size:1rem;">edit</span> Editar Tudo</a>
+</div>
+<div class="field-group">
+<div class="field-label">Nome Completo</div>
+<input class="input-cs" type="text" value="Alexandre Silva" aria-label="Nome completo"/>
+</div>
+<div class="row g-3">
+<div class="col-12 col-md-6">
+<div class="field-group mb-0">
+<div class="field-label">E-mail</div>
+<input class="input-cs" type="email" value="alexandre.silva@cryptosandbox.io" aria-label="E-mail"/>
+</div>
+</div>
+<div class="col-12 col-md-6">
+<div class="field-group mb-0">
+<div class="field-label">Telefone</div>
+<input class="input-cs" type="text" value="+55 11 99999-0000" aria-label="Telefone"/>
+</div>
+</div>
+</div>
+<div class="actions-row">
+<a class="link-cs" href="#">Cancelar</a>
+<button class="btn-primary-cs">Salvar Alterações</button>
+</div>
+</section>
+</div>
+</div>
+</main>
+<nav class="mobile-nav">
+<a href="negociacao.html" class="mnav-link">
+<span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">show_chart</span>
+<span>Mercado</span>
+</a>
+<a href="portfolio_carteira.html" class="mnav-link">
+<span class="material-symbols-outlined">pie_chart</span>
+<span>Portfólio</span>
+</a>
+<a href="transacoes.html" class="mnav-link">
+<span class="material-symbols-outlined">receipt_long</span>
+<span>Transações</span>
+</a>
+<a href="conf_seguranca_header.html" class="mnav-link active">
+<span class="material-symbols-outlined">settings</span>
+<span>Configurações</span>
+</a>
+</nav>
+<footer class="w-100 mt-auto" style="border-top: 1px solid var(--border);">
+<div class="container-fluid px-4 py-4" style="max-width:1440px;">
+<div class="d-flex flex-column align-items-center gap-2" style="opacity:.6;">
+<p class="m-0" style="font-size:.75rem; color:var(--muted);">© 2026 Crypto Sandbox Protocol. Todos os direitos reservados.</p>
+</div>
+</div>
+</footer>
+<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body></html>

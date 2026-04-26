@@ -8,8 +8,562 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 
 <style>
+      :root {
+        --bg: #080c14;
+        --surface: #0e1420;
+        --surface2: #131b2b;
+        --surface3: #172030;
+        --border: rgba(255, 255, 255, 0.07);
+        --cyan: #00d4ff;
+        --cyan-glow: rgba(0, 212, 255, 0.18);
+        --green: #0fffa3;
+        --red: #ff4d6a;
+        --muted: rgba(255, 255, 255, 0.42);
+        --text: #dce8f8;
+      }
+
+      body {
+        background: var(--bg) !important;
+        font-family: 'Inter', sans-serif;
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      .font-headline {
+        font-family: 'Space Grotesk', sans-serif;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 200;
+        background: rgba(8, 12, 20, 0.88);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .brand {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 800;
+        font-size: 1.2rem;
+        color: var(--cyan);
+        text-decoration: none;
+        letter-spacing: -.4px;
+        text-shadow: 0 0 18px rgba(0, 212, 255, .45);
+        white-space: nowrap;
+      }
+
+      .nav-pill {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 600;
+        font-size: .78rem;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+        color: var(--muted);
+        text-decoration: none;
+        padding: .3rem .7rem;
+        border-radius: 6px;
+        transition: color .2s, background .2s;
+        white-space: nowrap;
+      }
+
+      .nav-pill:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, .06);
+      }
+
+      .nav-pill.active {
+        color: var(--cyan);
+        background: rgba(0, 212, 255, .08);
+        position: relative;
+      }
+
+      .nav-pill.active::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
+        height: 2px;
+        background: var(--cyan);
+        border-radius: 2px 2px 0 0;
+      }
+
+      .patrimony-label {
+        font-size: .6rem;
+        text-transform: uppercase;
+        letter-spacing: .12em;
+        color: var(--muted);
+        line-height: 1;
+      }
+
+      .patrimony-value {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: 1rem;
+        color: var(--cyan);
+        line-height: 1.3;
+        text-shadow: 0 0 12px rgba(0, 212, 255, .35);
+      }
+
+      .btn-connect {
+        background: linear-gradient(135deg, #00d4ff 0%, #009fc0 100%);
+        color: #050a12;
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: .78rem;
+        border: none;
+        border-radius: 8px;
+        padding: .42rem 1rem;
+        box-shadow: 0 0 16px rgba(0, 212, 255, .3);
+        transition: box-shadow .2s, transform .15s;
+        white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+      }
+
+      .btn-connect:hover {
+        box-shadow: 0 0 26px rgba(0, 212, 255, .55);
+        transform: translateY(-1px);
+      }
+
+      .btn-connect:active {
+        transform: scale(.97);
+      }
+
+      .icon-btn {
+        background: transparent;
+        border: none;
+        color: var(--muted);
+        padding: .3rem;
+        border-radius: 6px;
+        transition: color .2s, background .2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .icon-btn:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, .07);
+      }
+
+      .icon-btn:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, .07);
+      }
+
+      .mobile-nav {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 300;
+        background: rgba(8, 12, 20, .92);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid var(--border);
+      }
+
+      @media (max-width: 767.98px) {
+        .mobile-nav {
+          display: flex;
+        }
+
+        body {
+          padding-bottom: 72px;
+        }
+      }
+
+      .mnav-link {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .2rem;
+        text-decoration: none;
+        color: var(--muted);
+        padding: .6rem .25rem;
+        font-size: .6rem;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: .06em;
+        transition: color .2s;
+      }
+
+      .mnav-link.active {
+        color: var(--cyan);
+      }
+
+      .mnav-link .material-symbols-outlined {
+        font-size: 1.3rem;
+      }
+
+      .tx-main {
+        position: relative;
+        z-index: 1;
+      }
+
+      .tx-container {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 1.5rem .9rem 2rem;
+      }
+
+      @media (min-width: 768px) {
+        .tx-container {
+          padding: 2rem 1.5rem 2.5rem;
+        }
+      }
+
+      .page-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-style: italic;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: -.03em;
+        line-height: .95;
+        color: #eef4fb;
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        margin: 0 0 .65rem;
+      }
+
+      .page-subtitle {
+        max-width: 36rem;
+        color: #b7c4da;
+        line-height: 1.55;
+        font-size: 1rem;
+        margin: 0;
+      }
+
+      .header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.25rem;
+      }
+
+      .filters-row {
+        display: flex;
+        align-items: center;
+        gap: .75rem;
+        flex-wrap: wrap;
+      }
+
+      .period-group {
+        display: inline-flex;
+        align-items: center;
+        gap: .15rem;
+        padding: .28rem;
+        border-radius: 8px;
+        background: #11182a;
+        border: 1px solid rgba(255, 255, 255, .04);
+      }
+
+      .period-btn {
+        border: none;
+        background: transparent;
+        color: #98abc7;
+        padding: .32rem .72rem;
+        border-radius: 6px;
+        font-size: .72rem;
+        font-weight: 700;
+        letter-spacing: .02em;
+      }
+
+      .period-btn.active {
+        background: #243247;
+        color: #36c9f5;
+      }
+
+      .select-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: .45rem;
+        border: 1px solid rgba(255, 255, 255, .05);
+        background: #11182a;
+        color: #d3dfef;
+        border-radius: 8px;
+        padding: .62rem .9rem;
+        font-size: .86rem;
+        font-weight: 600;
+      }
+
+      .export-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: .5rem;
+        border: 1px solid rgba(255, 255, 255, .05);
+        background: #11182a;
+        color: #d3dfef;
+        border-radius: 8px;
+        padding: .62rem .9rem;
+        font-size: .86rem;
+        font-weight: 600;
+      }
+
+      .tx-panel {
+        background: #1a2337;
+        border: 1px solid rgba(255, 255, 255, .04);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .tx-table {
+        width: 100%;
+        min-width: 900px;
+        border-collapse: collapse;
+      }
+
+      .tx-table thead {
+        background: #1b2436;
+      }
+
+      .tx-table th {
+        color: #95a7c3;
+        font-size: .68rem;
+        text-transform: uppercase;
+        letter-spacing: .12em;
+        font-weight: 700;
+        padding: .9rem 1rem;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .tx-table td {
+        border-top: 1px solid rgba(255, 255, 255, .03);
+        color: #d6e3f4;
+        padding: 1.05rem 1rem;
+        font-size: .95rem;
+        white-space: nowrap;
+        vertical-align: middle;
+      }
+
+      .tx-table tr:hover td {
+        background: rgba(255, 255, 255, .015);
+      }
+
+      .date-block {
+        line-height: 1.1;
+      }
+
+      .date-main {
+        font-size: .9rem;
+        font-weight: 700;
+        color: #e8f0f8;
+      }
+
+      .date-sub {
+        font-size: .64rem;
+        color: #8598b7;
+        margin-top: .12rem;
+      }
+
+      .asset-cell {
+        display: flex;
+        align-items: center;
+        gap: .75rem;
+      }
+
+      .asset-chip {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: #26314a;
+        color: var(--cyan);
+      }
+
+      .asset-name {
+        font-weight: 700;
+        color: #ecf3fa;
+        line-height: 1.1;
+      }
+
+      .asset-symbol {
+        font-size: .64rem;
+        color: #8d9eb9;
+      }
+
+      .type-badge {
+        display: inline-block;
+        padding: .2rem .42rem;
+        border-radius: 2px;
+        font-size: .56rem;
+        font-weight: 800;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+
+      .type-buy {
+        background: rgba(15, 255, 163, .12);
+        color: #57e5b4;
+      }
+
+      .type-sell {
+        background: rgba(255, 77, 106, .12);
+        color: #ff9cab;
+      }
+
+      .val-cell {
+        text-align: right;
+        font-weight: 700;
+        color: #e9f0fb;
+      }
+
+      .status-wrap {
+        display: inline-flex;
+        align-items: center;
+        gap: .35rem;
+        font-size: .74rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+      }
+
+      .status-ok {
+        color: #52e1ad;
+      }
+
+      .status-pending {
+        color: #5cb8d9;
+      }
+
+      .status-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+
+      .panel-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+        padding: .95rem 1rem;
+        background: rgba(255, 255, 255, .01);
+        border-top: 1px solid rgba(255, 255, 255, .04);
+      }
+
+      .pagination-cs {
+        display: flex;
+        align-items: center;
+        gap: .3rem;
+      }
+
+      .page-btn {
+        width: 28px;
+        height: 28px;
+        display: grid;
+        place-items: center;
+        border-radius: 4px;
+        background: transparent;
+        color: #98a8c2;
+        border: 1px solid transparent;
+        font-size: .8rem;
+        font-weight: 700;
+      }
+
+      .page-btn.active {
+        background: var(--cyan);
+        color: #04131d;
+      }
+
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: .95rem;
+      }
+
+      @media (max-width: 991.98px) {
+        .summary-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .summary-card {
+        position: relative;
+        overflow: hidden;
+        background: #1a2337;
+        border: 1px solid rgba(255, 255, 255, .04);
+        border-radius: 8px;
+        min-height: 122px;
+        padding: 1.1rem 1rem;
+      }
+
+      .summary-title {
+        color: #8799b5;
+        font-size: .56rem;
+        text-transform: uppercase;
+        letter-spacing: .14em;
+        font-weight: 700;
+        margin-bottom: .5rem;
+      }
+
+      .summary-value {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 800;
+        font-size: 1.6rem;
+        line-height: 1;
+        margin-bottom: .35rem;
+      }
+
+      .summary-icon {
+        position: absolute;
+        top: .8rem;
+        right: .9rem;
+        opacity: .07;
+        font-size: 3.5rem;
+      }
+
+      .summary-note {
+        font-size: .72rem;
+        color: #94a7c6;
+        line-height: 1.4;
+      }
+
+      .summary-note .plus {
+        color: #52e1ad;
+      }
+
+      .summary-note .minus {
+        color: #f29c9c;
+      }
+
+      .table-scroll {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      @media (max-width: 767.98px) {
+        .page-title {
+          font-size: 1.9rem;
+        }
+
+        .page-subtitle {
+          font-size: .92rem;
+        }
+
+        .header-row {
+          align-items: flex-start;
+        }
+      }
+
       .material-symbols-outlined {
         font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        vertical-align: middle;
+        line-height: 1;
       }
       .glass-effect {
         backdrop-filter: blur(12px);
@@ -24,363 +578,222 @@
       }
     </style>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="custom-bootstrap.css" rel="stylesheet">
 </head>
 <body class="bg-background text-on-background min-vh-100">
-<!-- TopAppBar -->
-<header class="fixed top-0 left-0 w-100 d-flex justify-content-between align-items-center flex-wrap px-4 h-auto min-h-20 py-2 bg-base/60 backdrop-blur-xl z-50 gap-2">
-<div class="d-flex align-items-center gap-4 lg:gap-12">
-<div class="fs-3 font-black tracking-tighter text-primary-custom drop-shadow-[0_0_8px_rgba(0,209,255,0.5)] brand-logo">
-                Crypto Sandbox
-            </div>
-<nav class="d-none md:d-flex align-items-center gap-8 font-['Space_Grotesk'] fw-bold tracking-tight">
-<a class="text-[#dae2fd] opacity-70 hover:opacity-100 transition-opacity" href="#">Painel</a>
-<a class="text-[#dae2fd] opacity-70 hover:opacity-100 transition-opacity" href="#">Mercado</a>
-<a class="text-primary-container" href="#">Transações</a>
-<a class="text-[#dae2fd] opacity-70 hover:opacity-100 transition-opacity" href="#">Configurações</a>
+<header class="topbar">
+<div class="container-fluid px-3 px-md-4" style="max-width:1440px;">
+<div class="d-flex align-items-center justify-content-between" style="height:58px; gap:.75rem;">
+<a href="conectar_carteira.html" class="brand flex-shrink-0">Crypto Sandbox</a>
+<nav class="d-none d-lg-flex align-items-center gap-1 mx-3">
+<a href="negociacao.html" class="nav-pill">Mercado</a>
+<a href="portfolio_carteira.html" class="nav-pill">Portfólio</a>
+<a href="transacoes.html" class="nav-pill active">Transações</a>
+<a href="conf_seguranca_header.html" class="nav-pill">Configurações</a>
 </nav>
+<div class="d-flex align-items-center gap-2 ms-auto flex-shrink-0">
+<div class="d-none d-md-flex flex-column align-items-end me-2 pe-2" style="border-right:1px solid var(--border);">
+<span class="patrimony-label">Patrimônio Total</span>
+<span class="patrimony-value">$42,500.24</span>
 </div>
-<div class="d-flex flex-wrap align-items-center justify-content-end gap-2 gap-lg-4 mt-2 mt-md-0">
-<div class="d-flex flex-column align-items-end">
-<span class="text-[10px] text-uppercase tracking-widest text-outline">Saldo</span>
-<span class="text-primary-container font-headline fw-bold small">$42.284,50</span>
-</div>
-<div class="d-flex align-items-center gap-3">
-<button class="p-2 text-on-surface opacity-70 hover:opacity-100 hover:bg-surface-high rounded-2 transition-all">
-<span class="material-symbols-outlined">notifications</span>
+<button class="icon-btn">
+<span class="material-symbols-outlined" style="font-size:1.25rem;">notifications</span>
 </button>
-<button class="d-flex align-items-center gap-2 px-2 py-1 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-2 fw-bold small active:scale-95 transition-all duration-100">
-
-                    Conectar
-                </button>
+<a href="conectar_carteira.html" class="btn-connect">Conectar Carteira</a>
+</div>
 </div>
 </div>
 </header>
-<main class="pt-28 pb-12 px-8 max-w-7xl mx-auto">
-<!-- Page Header & Filters -->
-<section class="mb-10">
-<div class="d-flex d-flex-column md:d-flex-row md:align-items-end justify-content-between gap-4">
+<main class="tx-main">
+<div class="tx-container">
+<div class="header-row">
 <div>
-<h1 class="text-4xl font-black text-on-background tracking-tight mb-2 text-uppercase italic">Histórico de Transações</h1>
-<p class="text-on-surface-variant max-w-xl">Acompanhe e filtre todas as suas atividades de compra, venda e transferências simuladas no Kinetic Ledger.</p>
+<h1 class="page-title">HISTÓRICO DE TRANSAÇÕES</h1>
+<p class="page-subtitle">Acompanhe e filtre todas as suas atividades de compra, venda e transferências simuladas no Kinetic Ledger.</p>
 </div>
-<div class="d-flex d-flex-wrap align-items-center gap-3">
-<!-- Period Selector -->
-<div class="bg-surface-container-low p-1 rounded-3 d-flex border border-outline-variant/15">
-<button class="px-3 py-1.5 x-small fw-bold rounded-2 bg-surface-container-high rounded-3 text-primary-container">30D</button>
-<button class="px-3 py-1.5 x-small fw-medium rounded-2 text-on-surface-variant hover:text-on-surface">90D</button>
-<button class="px-3 py-1.5 x-small fw-medium rounded-2 text-on-surface-variant hover:text-on-surface">YTD</button>
-<button class="px-3 py-1.5 x-small fw-medium rounded-2 text-on-surface-variant hover:text-on-surface">TUDO</button>
+<div class="filters-row">
+<div class="period-group">
+<button class="period-btn active">30D</button>
+<button class="period-btn">90D</button>
+<button class="period-btn">YTD</button>
+<button class="period-btn">TUDO</button>
 </div>
-<!-- Type Filter -->
-<div class="relative group">
-<button class="d-flex align-items-center gap-2 px-3 py-2 bg-surface-container-low border border-outline-variant rounded-3 small fw-medium text-on-surface hover:bg-surface-container-high transition-colors">
-<span class="material-symbols-outlined fs-5">filter_list</span>
-                            Todos os Tipos
-                            <span class="material-symbols-outlined fs-5">expand_more</span>
-</button>
-</div>
-<!-- Export -->
-<button class="d-flex align-items-center gap-2 px-3 py-2 bg-surface-container-low border border-outline-variant rounded-3 small fw-medium text-on-surface hover:bg-surface-bright transition-colors">
-<span class="material-symbols-outlined fs-5">download</span>
-                        Exportar CSV
-                    </button>
+<button class="select-btn"><span class="material-symbols-outlined" style="font-size:1rem;">filter_list</span> Todos os Tipos <span class="material-symbols-outlined" style="font-size:1rem;">expand_more</span></button>
+<button class="export-btn"><span class="material-symbols-outlined" style="font-size:1rem;">download</span> Exportar CSV</button>
 </div>
 </div>
-</section>
-<!-- Transaction Table Container -->
-<div class="bg-surface-container-low rounded-xl overflow-d-none shadow-2xl border-bottom border-outline-variant">
-<div class="overflow-x-auto">
-<table class="w-100 text-left border-collapse table-layout-fixed">
+
+<section class="tx-panel">
+<div class="table-scroll">
+<table class="tx-table">
 <thead>
-<tr class="bg-surface-container-high/50 border-bottom border-outline-variant">
-<th class="px-4 py-3 x-small fw-bold text-uppercase tracking-widest text-on-surface-variant">Data &amp; Hora</th>
-<th class="px-4 py-3 x-small fw-bold text-uppercase tracking-widest text-on-surface-variant">Ativo</th>
-<th class="px-4 py-3 x-small fw-bold text-uppercase tracking-widest text-on-surface-variant">Tipo</th>
-<th class="px-4 py-3 x-small fw-bold text-uppercase tracking-widest text-on-surface-variant">Quantidade</th>
-<th class="px-4 py-3 x-small fw-bold text-uppercase tracking-widest text-on-surface-variant text-right">Valor Total (USD)</th>
-<th class="px-4 py-3 x-small fw-bold text-uppercase tracking-widest text-on-surface-variant text-center">Status</th>
-<th class="px-4 py-3 x-small fw-bold text-uppercase tracking-widest text-on-surface-variant"></th>
+<tr>
+<th>Data &amp; Hora</th>
+<th>Ativo</th>
+<th>Tipo</th>
+<th>Quantidade</th>
+<th style="text-align:right;">Valor Total (USD)</th>
+<th style="text-align:center;">Status</th>
 </tr>
 </thead>
-<tbody class="divide-y divide-outline-variant">
-<!-- Transaction Row 1 -->
-<tr class="hover:bg-surface-bright/20 transition-colors group">
-<td class="px-4 py-5">
-<div class="d-flex d-flex-column">
-<span class="small fw-semibold text-on-surface">Out 24, 2026</span>
-<span class="text-[10px] text-outline text-uppercase">14:22:10</span>
-</div>
+<tbody>
+<tr>
+<td>
+<div class="date-block"><div class="date-main">Out 24, 2023</div><div class="date-sub">14:22:10</div></div>
 </td>
-<td class="px-4 py-5">
-<div class="d-flex align-items-center gap-3">
-<div class="w-8 h-8 rounded-pill bg-surface-container-highest d-flex align-items-center justify-content-center border border-outline-variant/20">
-<span class="material-symbols-outlined text-primary-container fs-5">currency_bitcoin</span>
-</div>
-<div class="d-flex d-flex-column">
-<span class="small fw-bold text-on-surface">Bitcoin</span>
-<span class="text-[10px] text-outline text-uppercase tracking-tighter">BTC</span>
+<td>
+<div class="asset-cell">
+<div class="asset-chip"><span class="material-symbols-outlined" style="font-size:1rem;">currency_bitcoin</span></div>
+<div>
+<div class="asset-name">Bitcoin</div>
+<div class="asset-symbol">BTC</div>
 </div>
 </div>
 </td>
-<td class="px-4 py-5">
-<span class="px-2 py-1 text-[10px] font-black text-uppercase rounded bg-secondary-container text-secondary border border-secondary">Compra</span>
-</td>
-<td class="px-4 py-5 small fw-medium text-on-surface">
-                                0.0425 BTC
-                            </td>
-<td class="px-4 py-5 small fw-bold text-on-surface text-right">
-                                $1.452,12
-                            </td>
-<td class="px-4 py-5 text-center">
-<div class="d-flex align-items-center justify-content-center gap-1 text-secondary">
-<span class="material-symbols-outlined small" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="text-[10px] fw-bold text-uppercase">Concluído</span>
-</div>
-</td>
-<td class="px-4 py-5 text-right">
-<button class="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-surface-container-highest rounded">
-<span class="material-symbols-outlined text-outline">open_in_new</span>
-</button>
-</td>
+<td><span class="type-badge type-buy">Compra</span></td>
+<td>0.0425 BTC</td>
+<td class="val-cell">$1.452,12</td>
+<td style="text-align:center;"><span class="status-wrap status-ok"><span class="status-dot" style="background:#4be0ad;"></span>Concluído</span></td>
 </tr>
-<!-- Transaction Row 2 -->
-<tr class="hover:bg-surface-bright/20 transition-colors group">
-<td class="px-4 py-5">
-<div class="d-flex d-flex-column">
-<span class="small fw-semibold text-on-surface">Out 23, 2026</span>
-<span class="text-[10px] text-outline text-uppercase">09:15:45</span>
-</div>
+<tr>
+<td>
+<div class="date-block"><div class="date-main">Out 23, 2023</div><div class="date-sub">09:15:45</div></div>
 </td>
-<td class="px-4 py-5">
-<div class="d-flex align-items-center gap-3">
-<div class="w-8 h-8 rounded-pill bg-surface-container-highest d-flex align-items-center justify-content-center border border-outline-variant/20">
-<span class="material-symbols-outlined text-primary-container fs-5">eco</span>
-</div>
-<div class="d-flex d-flex-column">
-<span class="small fw-bold text-on-surface">Ethereum</span>
-<span class="text-[10px] text-outline text-uppercase tracking-tighter">ETH</span>
+<td>
+<div class="asset-cell">
+<div class="asset-chip"><span class="material-symbols-outlined" style="font-size:1rem;">eco</span></div>
+<div>
+<div class="asset-name">Ethereum</div>
+<div class="asset-symbol">ETH</div>
 </div>
 </div>
 </td>
-<td class="px-4 py-5">
-<span class="px-2 py-1 text-[10px] font-black text-uppercase rounded bg-error-container text-error border border-error">Venda</span>
-</td>
-<td class="px-4 py-5 small fw-medium text-on-surface">
-                                1.2500 ETH
-                            </td>
-<td class="px-4 py-5 small fw-bold text-on-surface text-right">
-                                $2.240,50
-                            </td>
-<td class="px-4 py-5 text-center">
-<div class="d-flex align-items-center justify-content-center gap-1 text-secondary">
-<span class="material-symbols-outlined small" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="text-[10px] fw-bold text-uppercase">Concluído</span>
-</div>
-</td>
-<td class="px-4 py-5 text-right">
-<button class="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-surface-container-highest rounded">
-<span class="material-symbols-outlined text-outline">open_in_new</span>
-</button>
-</td>
+<td><span class="type-badge type-sell">Venda</span></td>
+<td>1.2500 ETH</td>
+<td class="val-cell">$2.240,50</td>
+<td style="text-align:center;"><span class="status-wrap status-ok"><span class="status-dot" style="background:#4be0ad;"></span>Concluído</span></td>
 </tr>
-<!-- Transaction Row 3 -->
-<tr class="hover:bg-surface-bright/20 transition-colors group">
-<td class="px-4 py-5">
-<div class="d-flex d-flex-column">
-<span class="small fw-semibold text-on-surface">Out 22, 2026</span>
-<span class="text-[10px] text-outline text-uppercase">18:05:12</span>
-</div>
+<tr>
+<td>
+<div class="date-block"><div class="date-main">Out 22, 2023</div><div class="date-sub">18:05:12</div></div>
 </td>
-<td class="px-4 py-5">
-<div class="d-flex align-items-center gap-3">
-<div class="w-8 h-8 rounded-pill bg-surface-container-highest d-flex align-items-center justify-content-center border border-outline-variant/20">
-<span class="material-symbols-outlined text-primary-container fs-5">token</span>
-</div>
-<div class="d-flex d-flex-column">
-<span class="small fw-bold text-on-surface">Solana</span>
-<span class="text-[10px] text-outline text-uppercase tracking-tighter">SOL</span>
+<td>
+<div class="asset-cell">
+<div class="asset-chip"><span class="material-symbols-outlined" style="font-size:1rem;">token</span></div>
+<div>
+<div class="asset-name">Solana</div>
+<div class="asset-symbol">SOL</div>
 </div>
 </div>
 </td>
-<td class="px-4 py-5">
-<span class="px-2 py-1 text-[10px] font-black text-uppercase rounded bg-secondary-container text-secondary border border-secondary">Compra</span>
-</td>
-<td class="px-4 py-5 small fw-medium text-on-surface">
-                                45.000 SOL
-                            </td>
-<td class="px-4 py-5 small fw-bold text-on-surface text-right">
-                                $1.080,00
-                            </td>
-<td class="px-4 py-5 text-center">
-<div class="d-flex align-items-center justify-content-center gap-1 text-surface-tint">
-<span class="material-symbols-outlined small animate-pulse" style="font-variation-settings: 'FILL' 1;">schedule</span>
-<span class="text-[10px] fw-bold text-uppercase">Pendente</span>
-</div>
-</td>
-<td class="px-4 py-5 text-right">
-<button class="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-surface-container-highest rounded">
-<span class="material-symbols-outlined text-outline">open_in_new</span>
-</button>
-</td>
+<td><span class="type-badge type-buy">Compra</span></td>
+<td>45.000 SOL</td>
+<td class="val-cell">$1.080,00</td>
+<td style="text-align:center;"><span class="status-wrap status-pending"><span class="status-dot" style="background:#5cb8d9;"></span>Pendente</span></td>
 </tr>
-<!-- Transaction Row 4 -->
-<tr class="hover:bg-surface-bright/20 transition-colors group">
-<td class="px-4 py-5">
-<div class="d-flex d-flex-column">
-<span class="small fw-semibold text-on-surface">Out 20, 2026</span>
-<span class="text-[10px] text-outline text-uppercase">11:30:00</span>
-</div>
+<tr>
+<td>
+<div class="date-block"><div class="date-main">Out 20, 2023</div><div class="date-sub">11:30:00</div></div>
 </td>
-<td class="px-4 py-5">
-<div class="d-flex align-items-center gap-3">
-<div class="w-8 h-8 rounded-pill bg-surface-container-highest d-flex align-items-center justify-content-center border border-outline-variant/20">
-<span class="material-symbols-outlined text-primary-container fs-5">monetization_on</span>
-</div>
-<div class="d-flex d-flex-column">
-<span class="small fw-bold text-on-surface">Cardano</span>
-<span class="text-[10px] text-outline text-uppercase tracking-tighter">ADA</span>
+<td>
+<div class="asset-cell">
+<div class="asset-chip"><span class="material-symbols-outlined" style="font-size:1rem;">monetization_on</span></div>
+<div>
+<div class="asset-name">Cardano</div>
+<div class="asset-symbol">ADA</div>
 </div>
 </div>
 </td>
-<td class="px-4 py-5">
-<span class="px-2 py-1 text-[10px] font-black text-uppercase rounded bg-secondary-container text-secondary border border-secondary">Compra</span>
-</td>
-<td class="px-4 py-5 small fw-medium text-on-surface">
-                                2.500 ADA
-                            </td>
-<td class="px-4 py-5 small fw-bold text-on-surface text-right">
-                                $625,00
-                            </td>
-<td class="px-4 py-5 text-center">
-<div class="d-flex align-items-center justify-content-center gap-1 text-secondary">
-<span class="material-symbols-outlined small" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="text-[10px] fw-bold text-uppercase">Concluído</span>
-</div>
-</td>
-<td class="px-4 py-5 text-right">
-<button class="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-surface-container-highest rounded">
-<span class="material-symbols-outlined text-outline">open_in_new</span>
-</button>
-</td>
+<td><span class="type-badge type-buy">Compra</span></td>
+<td>2.500 ADA</td>
+<td class="val-cell">$625,00</td>
+<td style="text-align:center;"><span class="status-wrap status-ok"><span class="status-dot" style="background:#4be0ad;"></span>Concluído</span></td>
 </tr>
-<!-- Transaction Row 5 -->
-<tr class="hover:bg-surface-bright/20 transition-colors group">
-<td class="px-4 py-5">
-<div class="d-flex d-flex-column">
-<span class="small fw-semibold text-on-surface">Out 18, 2026</span>
-<span class="text-[10px] text-outline text-uppercase">15:44:22</span>
-</div>
+<tr>
+<td>
+<div class="date-block"><div class="date-main">Out 18, 2023</div><div class="date-sub">15:44:22</div></div>
 </td>
-<td class="px-4 py-5">
-<div class="d-flex align-items-center gap-3">
-<div class="w-8 h-8 rounded-pill bg-surface-container-highest d-flex align-items-center justify-content-center border border-outline-variant/20">
-<span class="material-symbols-outlined text-primary-container fs-5">circle</span>
-</div>
-<div class="d-flex d-flex-column">
-<span class="small fw-bold text-on-surface">Polkadot</span>
-<span class="text-[10px] text-outline text-uppercase tracking-tighter">DOT</span>
+<td>
+<div class="asset-cell">
+<div class="asset-chip"><span class="material-symbols-outlined" style="font-size:1rem;">circle</span></div>
+<div>
+<div class="asset-name">Polkadot</div>
+<div class="asset-symbol">DOT</div>
 </div>
 </div>
 </td>
-<td class="px-4 py-5">
-<span class="px-2 py-1 text-[10px] font-black text-uppercase rounded bg-error-container text-error border border-error">Venda</span>
-</td>
-<td class="px-4 py-5 small fw-medium text-on-surface">
-                                120 DOT
-                            </td>
-<td class="px-4 py-5 small fw-bold text-on-surface text-right">
-                                $480,00
-                            </td>
-<td class="px-4 py-5 text-center">
-<div class="d-flex align-items-center justify-content-center gap-1 text-secondary">
-<span class="material-symbols-outlined small" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="text-[10px] fw-bold text-uppercase">Concluído</span>
-</div>
-</td>
-<td class="px-4 py-5 text-right">
-<button class="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-surface-container-highest rounded">
-<span class="material-symbols-outlined text-outline">open_in_new</span>
-</button>
-</td>
+<td><span class="type-badge type-sell">Venda</span></td>
+<td>120 DOT</td>
+<td class="val-cell">$480,00</td>
+<td style="text-align:center;"><span class="status-wrap status-ok"><span class="status-dot" style="background:#4be0ad;"></span>Concluído</span></td>
 </tr>
 </tbody>
 </table>
 </div>
-<!-- Table Pagination/Footer -->
-<div class="px-4 py-3 bg-surface-container-high/30 border-top border-outline-variant/10 d-flex align-items-center justify-content-between">
-<p class="text-[10px] fw-medium text-on-surface-variant text-uppercase tracking-widest">Mostrando 5 de 1.240 transações</p>
-<div class="d-flex align-items-center gap-2">
-<button class="p-2 bg-surface-container-low border border-outline-variant rounded text-on-surface opacity-50 cursor-not-allowed">
-<span class="material-symbols-outlined small">chevron_left</span>
-</button>
-<div class="d-flex gap-1">
-<button class="w-8 h-8 d-flex align-items-center justify-content-center rounded x-small fw-bold bg-primary-container text-on-primary-container">1</button>
-<button class="w-8 h-8 d-flex align-items-center justify-content-center rounded x-small fw-bold text-on-surface-variant hover:bg-surface-container-low transition-colors">2</button>
-<button class="w-8 h-8 d-flex align-items-center justify-content-center rounded x-small fw-bold text-on-surface-variant hover:bg-surface-container-low transition-colors">3</button>
-<span class="px-2 text-outline">...</span>
-<button class="w-8 h-8 d-flex align-items-center justify-content-center rounded x-small fw-bold text-on-surface-variant hover:bg-surface-container-low transition-colors">248</button>
+<div class="panel-footer">
+<p class="m-0" style="font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:#a1b0c9;">Mostrando 5 de 1.240 transações</p>
+<div class="pagination-cs">
+<button class="page-btn" aria-label="Anterior"><span class="material-symbols-outlined" style="font-size:1rem;">chevron_left</span></button>
+<button class="page-btn active">1</button>
+<button class="page-btn">2</button>
+<button class="page-btn">3</button>
+<span style="color:#6f809d; padding:0 .25rem;">...</span>
+<button class="page-btn" style="width:auto; padding:0 .45rem;">248</button>
+<button class="page-btn" aria-label="Próxima"><span class="material-symbols-outlined" style="font-size:1rem;">chevron_right</span></button>
 </div>
-<button class="p-2 bg-surface-container-low border border-outline-variant rounded text-on-surface hover:bg-surface-bright transition-colors">
-<span class="material-symbols-outlined small">chevron_right</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Secondary Layout: Mini Summary Cards -->
-<section class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
-<div class="bg-surface-container-low border border-outline-variant/10 p-4 rounded-xl overflow-d-none relative group">
-<div class="absolute top-0 right-0 p-3 opacity-5">
-<span class="material-symbols-outlined text-6xl">shopping_cart</span>
-</div>
-<h3 class="text-[10px] text-uppercase tracking-widest text-outline mb-1">Total Comprado (30d)</h3>
-<p class="fs-3 font-black font-headline text-secondary mb-1">$12.450,00</p>
-<p class="text-[10px] text-on-surface-variant d-flex align-items-center gap-1">
-<span class="material-symbols-outlined x-small text-secondary">trending_up</span>
-                    +12% em relação ao mês anterior
-                </p>
-</div>
-<div class="bg-surface-container-low border border-outline-variant/10 p-4 rounded-xl overflow-d-none relative group">
-<div class="absolute top-0 right-0 p-3 opacity-5">
-<span class="material-symbols-outlined text-6xl">sell</span>
-</div>
-<h3 class="text-[10px] text-uppercase tracking-widest text-outline mb-1">Total Vendido (30d)</h3>
-<p class="fs-3 font-black font-headline text-error mb-1">$8.210,45</p>
-<p class="text-[10px] text-on-surface-variant d-flex align-items-center gap-1">
-<span class="material-symbols-outlined x-small text-error">trending_down</span>
-                    -4% em relação ao mês anterior
-                </p>
-</div>
-<div class="bg-surface-container-low border border-outline-variant/10 p-4 rounded-xl overflow-d-none relative group">
-<div class="absolute top-0 right-0 p-3 opacity-5">
-<span class="material-symbols-outlined text-6xl">receipt_long</span>
-</div>
-<h3 class="text-[10px] text-uppercase tracking-widest text-outline mb-1">Total de Taxas (30d)</h3>
-<p class="fs-3 font-black font-headline text-on-background mb-1">$142,20</p>
-<p class="text-[10px] text-on-surface-variant">Economia de <span class="text-primary-container fw-bold">$22,00</span> em taxas sandbox</p>
 </div>
 </section>
+
+<section class="mt-4 mt-md-5">
+<div class="summary-grid">
+<article class="summary-card">
+<span class="material-symbols-outlined summary-icon">shopping_cart</span>
+<div class="summary-title">Total Comprado (30d)</div>
+<div class="summary-value" style="color:#55e0ad;">$12.450,00</div>
+<div class="summary-note"><span class="plus">↗ +12%</span> em relação ao mês anterior</div>
+</article>
+<article class="summary-card">
+<span class="material-symbols-outlined summary-icon">sell</span>
+<div class="summary-title">Total Vendido (30d)</div>
+<div class="summary-value" style="color:#ff9b9f;">$8.210,45</div>
+<div class="summary-note"><span class="minus">↘ -4%</span> em relação ao mês anterior</div>
+</article>
+<article class="summary-card">
+<span class="material-symbols-outlined summary-icon">receipt_long</span>
+<div class="summary-title">Total de Taxas (30d)</div>
+<div class="summary-value" style="color:#eef4fb;">$142,20</div>
+<div class="summary-note">Economia de <span style="color:var(--cyan); font-weight:700;">$22,00</span> em taxas sandbox</div>
+</article>
+</div>
+</section>
+</div>
 </main>
-<!-- Bottom Nav for Mobile Only -->
-<nav class="md:d-none fixed bottom-0 left-0 w-100 bg-surface-container-highest/80 backdrop-blur-xl border-top border-outline-variant/10 py-2 d-flex align-items-center justify-content-evenly gap-3 px-2 z-50 shadow-lg">
-<a class="d-flex flex-column align-items-center justify-content-center gap-1 text-on-surface opacity-50 hover:opacity-100 transition-all text-decoration-none" href="#">
-<span class="material-symbols-outlined fs-5">dashboard</span>
-<span class="text-[9px] text-uppercase fw-bold pb-1">Painel</span>
+<nav class="mobile-nav">
+<a href="negociacao.html" class="mnav-link">
+<span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">show_chart</span>
+<span>Mercado</span>
 </a>
-<a class="d-flex flex-column align-items-center justify-content-center gap-1 text-on-surface opacity-50 hover:opacity-100 transition-all text-decoration-none" href="#">
-<span class="material-symbols-outlined fs-5">show_chart</span>
-<span class="text-[9px] text-uppercase fw-bold pb-1">Mercado</span>
+<a href="portfolio_carteira.html" class="mnav-link">
+<span class="material-symbols-outlined">pie_chart</span>
+<span>Portfólio</span>
 </a>
-<a class="d-flex align-items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-pill text-decoration-none shadow" href="#">
-<span class="material-symbols-outlined fs-5" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
-<span class="text-[10px] text-uppercase fw-bold">Transações</span>
+<a href="transacoes.html" class="mnav-link active">
+<span class="material-symbols-outlined">receipt_long</span>
+<span>Transações</span>
 </a>
-<a class="d-flex flex-column align-items-center justify-content-center gap-1 text-on-surface opacity-50 hover:opacity-100 transition-all text-decoration-none" href="#">
-<span class="material-symbols-outlined fs-5">settings</span>
-<span class="text-[9px] text-uppercase fw-bold pb-1">Ajustes</span>
+<a href="conf_seguranca_header.html" class="mnav-link">
+<span class="material-symbols-outlined">settings</span>
+<span>Configurações</span>
 </a>
 </nav>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmxc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<footer class="w-100 mt-auto" style="border-top: 1px solid var(--border);">
+<div class="container-fluid px-4 py-4" style="max-width:1440px;">
+<div class="d-flex flex-column align-items-center gap-2" style="opacity:.6;">
+<p class="m-0" style="font-size:.75rem; color:var(--muted);">© 2026 Crypto Sandbox Protocol. Todos os direitos reservados.</p>
+</div>
+</div>
+</footer>
 </body></html>
