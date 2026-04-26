@@ -72,20 +72,16 @@ erDiagram
 ### 🔧 Tecnologias e Dependências (Versões Exatas)
 
 **Frontend:**
-- Bootstrap 5.3.3 - Framework CSS responsivo com componentes prontos
-- Chart.js 4.4.1 - Biblioteca para gráficos (linha e pizza)
-- Font Awesome 6.5.1 - Ícones SVG escaláveis
+- Bootstrap 5.3.8 - Framework CSS responsivo com componentes prontos
+- jQuery 4.0.0 - Biblioteca JavaScript para manipulação do DOM
+- uuid 13.0.0 - Geração de identificadores únicos
 
 **APIs e Serviços:**
 - CoinGecko API v3 - Dados reais de criptomoedas em tempo real
 - Fetch API - Requisições assíncronas (suporte nativo JavaScript)
 
-**Desenvolvimento e Qualidade:**
-- Node.js 20.x LTS - Runtime JavaScript
-- npm 10.x - Gerenciador de pacotes e dependências
-- ESLint 8.56.0 - Linter para qualidade de código
-- Prettier 3.1.1 - Formatador de código automático
+**Deploy:**
+- gh-pages 6.3.0 (dev) - Deploy para GitHub Pages
 
 **Persistência de Dados:**
 - Web Storage (localStorage) - Armazenamento local no navegador
-- JSON Server 0.17.4 - API fake para desenvolvimento e testes

@@ -58,7 +58,7 @@ O objetivo do projeto é proporcionar uma experiência prática de mercado finan
 
 **Como ela agrega valor ao sistema:**
 
-- Alimenta a tela de dashboard com preços e variação.
+- Alimenta as telas de mercado com preços e variação.
 - Permite preencher automaticamente o catálogo de criptomoedas disponíveis para compra/venda.
 - Ajuda a validar transações do sandbox com base no preço real no momento da simulação.
 
@@ -66,24 +66,13 @@ O objetivo do projeto é proporcionar uma experiência prática de mercado finan
 
 ## 📦 Tecnologias e Dependências
 
-### Frontend
-- **Bootstrap 5.3.3** - Framework CSS responsivo com componentes prontos
-- **Chart.js 4.4.1** - Biblioteca para gráficos (linha e pizza)
-- **Font Awesome 6.5.1** - Ícones SVG escaláveis
-
-### APIs e Serviços
-- **CoinGecko API v3** - Dados reais de criptomoedas em tempo real
+- **Bootstrap 5.3.8** - Framework CSS responsivo com componentes prontos
+- **jQuery 4.0.0** - Biblioteca JavaScript para manipulação do DOM
+- **uuid 13.0.0** - Geração de identificadores únicos
+- **gh-pages 6.3.0** *(dev)* - Deploy para GitHub Pages
+- **CoinGecko API (v3)** - Dados reais de criptomoedas em tempo real
 - **Fetch API (nativa)** - Requisições assíncronas
-
-### Desenvolvimento e Qualidade
-- **Node.js 20.x LTS** - Runtime JavaScript
-- **npm 10.x** - Gerenciador de pacotes e dependências
-- **ESLint 8.56.0** - Linter para qualidade de código
-- **Prettier 3.1.1** - Formatador de código automático
-
-### Persistência
 - **localStorage (nativo)** - Armazenamento local no navegador
-- **JSON Server 0.17.4 (dev)** - API fake para desenvolvimento e testes
 
 ---
 
@@ -137,7 +126,6 @@ O objetivo do projeto é proporcionar uma experiência prática de mercado finan
 
 O sistema contará com pelo menos:
 
-- 🏠 Página inicial (dashboard com preços)
 - 💰 Página de compra/venda
 - 📊 Página de carteira (portfólio do usuário)
 
@@ -145,11 +133,14 @@ O sistema contará com pelo menos:
 
 ## 📱 Páginas da Aplicação
 
-1. **Dashboard** - Visão geral do mercado com gráfico de preços
-2. **Mercado** - Lista de criptomoedas com opções de compra e venda
-3. **Portfólio** - Carteira do usuário com distribuição de ativos (gráfico pizza)
-4. **Transações** - Histórico de compras e vendas
-5. **Configurações** - Preferências, segurança e perfil do usuário
+1. **Mercado/Negociação** (`negociacao.html`) - Lista de criptomoedas com opções de compra e venda
+2. **Portfólio/Carteira** (`portfolio_carteira.html`) - Carteira do usuário com distribuição de ativos
+3. **Transações** (`transacoes.html`) - Histórico de compras e vendas
+4. **Configurações** - Perfil, segurança e preferências do usuário:
+   - `conf_perfil_header.html`
+   - `conf_seguranca_header.html`
+   - `conf_preferencias_header.html`
+5. **Conectar Carteira** (`conectar_carteira.html`) - Conexão de carteira digital
 
 ---
 
