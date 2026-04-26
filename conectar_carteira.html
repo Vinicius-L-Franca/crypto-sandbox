@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-effect {
+        backdrop-filter: blur(12px);
+        background: rgba(45, 52, 73, 0.6);
+      }
+      .liquid-gradient {
+        background: linear-gradient(135deg, #a4e6ff 0%, #00d1ff 100%);
+      }
+      .neon-glow-primary {
+        box-shadow: 0 0 15px rgba(0, 209, 255, 0.3);
+      }
+      .neon-glow-secondary {
+        box-shadow: 0 0 15px rgba(78, 222, 163, 0.3);
+      }
+    </style>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link href="custom-bootstrap.css" rel="stylesheet">
+</head>
+<body class="bg-background text-on-background font-body min-vh-100 d-flex flex-column">
+<!-- TopAppBar Implementation from JSON -->
+<header class="fixed top-0 left-0 w-100 d-flex justify-content-between align-items-center px-8 h-20 bg-base/60 backdrop-blur-xl z-50">
+<div class="d-flex align-items-center gap-8">
+<span class="fs-3 font-black tracking-tighter text-primary-custom drop-shadow-[0_0_8px_rgba(0,209,255,0.5)] font-headline" style="">Crypto Sandbox</span>
+<nav class="d-none md:d-flex gap-4">
+<a class="text-white opacity-70 hover:opacity-100 transition-opacity font-headline fw-bold tracking-tight text-decoration-none" href="#">Dashboard</a>
+<a class="text-white opacity-70 hover:opacity-100 transition-opacity font-headline fw-bold tracking-tight text-decoration-none" href="#">Mercado</a>
+<a class="text-white opacity-70 hover:opacity-100 transition-opacity font-headline fw-bold tracking-tight text-decoration-none" href="#">Transações</a>
+<a class="text-white opacity-70 hover:opacity-100 transition-opacity font-headline fw-bold tracking-tight text-decoration-none" href="#">Configurações</a>
+</nav>
+</div>
+<div class="d-flex align-items-center gap-3">
+<div class="d-none d-md-flex flex-column align-items-end me-4">
+<span class="text-[0.65rem] text-uppercase tracking-widest text-outline">SALDO TOTAL</span>
+<span class="text-white font-headline fw-bold">$42,284.50</span>
+</div>
+<div class="d-flex align-items-center gap-3">
+<button class="p-2 text-white opacity-70 hover:bg-surface-high rounded-2 transition-colors duration-200 border-0 bg-transparent">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="liquid-gradient text-on-primary font-headline fw-bold py-2 px-4 rounded-2 neon-glow-primary active:scale-95 duration-100 ease-in-out border-0">
+                    Conectar carteira</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow-1 pt-32 pb-16 px-3 md:px-8 d-flex flex-column align-items-center justify-content-center relative overflow-hidden w-100">
+<!-- Background Ambient Glows -->
+<div class="absolute top-1/4 -left-20 w-96 h-96 bg-primary-container opacity-5 blur-[120px] rounded-pill"></div>
+<div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-secondary opacity-5 blur-[120px] rounded-pill"></div>
+<!-- Connection Modal/Centerpiece -->
+<div class="w-100 glass-effect border border-outline-variant/15 rounded-xl p-5 md:p-12 relative z-10 shadow-2xl mx-auto" style="max-width: 60rem; margin-top: 7rem;">
+<div class="text-center mb-12">
+<h1 class="font-headline text-4xl md:text-5xl font-black text-on-background tracking-tight mb-3" style="">
+                    Conectar <span class="text-primary-container" style="">Carteira</span>
+</h1>
+<p class="text-on-surface-variant max-w-md mx-auto" style="">
+                    Inicie sua simulação com precisão conectando seu provedor de custódia preferido.
+                </p>
+</div>
+<!-- Wallet Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<!-- MetaMask -->
+<button class="group d-flex align-items-center gap-4 p-4 bg-surface-container-low hover:bg-surface-container-high transition-all duration-300 rounded-xl border border-outline-variant/5 text-left w-100">
+<div class="w-16 h-16 rounded-3 bg-surface-container-highest d-flex align-items-center justify-content-center group-hover:neon-glow-primary transition-all duration-300 flex-shrink-0">
+<img class="w-10 h-10 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5NdZiEC3UblA4ZayBLniMide1kHBUfOpsSc_Xap03h2QzGRkvLjpmTX5w82cgB2DrlsOgYxXOxVg56MPP5PnlgXBZWRiP5-v4w4HnsWMzOh-RHDYh1ZKs9EXGUIDxLzv2IxDMpgPrAr_eFUdiLFTG3G9Q6rsf9c5c-ozXC5_fx3uAyO9ifKQVtUeOdWOgYMbZF93ESoZtzg4afYu_V7ik5k9KrW3rHN4FZGnz8P6kZctBn5NoJfQR8BeBERGcehodr6SzjuioRSs"/>
+</div>
+<div>
+<h3 class="font-headline fs-5 fw-bold text-on-surface group-hover:text-primary-container transition-colors mb-1">MetaMask</h3>
+<p class="x-small font-label text-uppercase tracking-widest text-on-surface-variant/60 m-0">Popular &amp; Browser Ext</p>
+</div>
+</button>
+<!-- Coinbase Wallet -->
+<button class="group d-flex align-items-center gap-4 p-4 bg-surface-container-low hover:bg-surface-container-high transition-all duration-300 rounded-xl border border-outline-variant/5 text-left w-100">
+<div class="w-16 h-16 rounded-3 bg-surface-container-highest d-flex align-items-center justify-content-center group-hover:neon-glow-primary transition-all duration-300 flex-shrink-0">
+<img class="w-10 h-10 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDat50kJZEkS_RGaeAy-LE6CCHPrZLjMUtCHZiLHRfEVjqaKXl2cdeETbyiC7zsfCejK7mM4bE4jUhq2HXvAOHser1NSX_Yls2tB4eIRvJpj5ilHZ2yXVd1LHXyJ3F4MtwJOkN0Sl76LDLN2LB__hZobGPDKVuGkIe1msy6TWp7wnsDLM5PmPvRncAQV4ErgC04jN0kFIlsFuWWfX7OLC5SeToUiGDktnXRmT1R32MQ7MswID2uOSfSxhiPU2Pf8Fy1fOpqDPI0_Tc"/>
+</div>
+<div>
+<h3 class="font-headline fs-5 fw-bold text-on-surface group-hover:text-primary-container transition-colors mb-1">Coinbase Wallet</h3>
+<p class="x-small font-label text-uppercase tracking-widest text-on-surface-variant/60 m-0">Institutional Grade</p>
+</div>
+</button>
+<!-- WalletConnect -->
+<button class="group d-flex align-items-center gap-4 p-4 bg-surface-container-low hover:bg-surface-container-high transition-all duration-300 rounded-xl border border-outline-variant/5 text-left w-100">
+<div class="w-16 h-16 rounded-3 bg-surface-container-highest d-flex align-items-center justify-content-center group-hover:neon-glow-primary transition-all duration-300 flex-shrink-0">
+<img class="w-10 h-10 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATe0QAwx2ePtvflNBsuVJk0CpEipK4aY1HmzdIDB86VJzznjy8H-bIX_3yR1ZtsYq-XwunmS2-fRPu4H3BRbuCBTi4yMfwkk3-C572TI_nSeWhnTv0hfaK8sUqqVBD_hA4kfcWNTXzEVR8_FwTmMULF_MCwx8_N0uaQZf1xyuwLbUsJzijv1OCc5CR4j1hu5673WDme0p4yYCCAnKRWAPgW3qvFDT1FllmAEwp8DIdcgMoL0nbJKYjHnU0UiGZxbU8ToMwovhdR7M"/>
+</div>
+<div>
+<h3 class="font-headline fs-5 fw-bold text-on-surface group-hover:text-primary-container transition-colors mb-1">WalletConnect</h3>
+<p class="x-small font-label text-uppercase tracking-widest text-on-surface-variant/60 m-0">Multi-Chain Protocol</p>
+</div>
+</button>
+<!-- Phantom -->
+<button class="group d-flex align-items-center gap-4 p-4 bg-surface-container-low hover:bg-surface-container-high transition-all duration-300 rounded-xl border border-outline-variant/5 text-left w-100">
+<div class="w-16 h-16 rounded-3 bg-surface-container-highest d-flex align-items-center justify-content-center group-hover:neon-glow-primary transition-all duration-300 flex-shrink-0">
+<img class="w-10 h-10 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJCN8iGvn2mlzyTcYnQ23YH3oMBSErKypv8EVw-UjfPaHkitu5uCapKfdfqk96RKeA15fruTeQ_tWhb1cjZFHW_O3FljjW_vuce5li7f1DYOFPWYyToBqD9qtI8qXG-2CYAhB5zXT576NCOMd-QCDk72uJY5xtWAsfB8ZXZLNnBcsBPL9PBsnSunqqRBLomqsRNPWfEFz-b7x9yUwkhXuixhLks9XzdlaR014VxPQv7nwXM0cedFG9fwMnu4vDNAPlP3e5yeGTwdo"/>
+</div>
+<div>
+<h3 class="font-headline fs-5 fw-bold text-on-surface group-hover:text-primary-container transition-colors mb-1">Phantom</h3>
+<p class="x-small font-label text-uppercase tracking-widest text-on-surface-variant/60 m-0">Solana &amp; Beyond</p>
+</div>
+</button>
+</div>
+</div>
+<!-- Sub-Content Bento Grid for Education/Status -->
+<div class="mt-12 pt-4 grid grid-cols-1 md:grid-cols-3 gap-4 w-100 mx-auto" style="max-width: 60rem;">
+<div class="p-5 bg-surface-container-low rounded-xl border-0 h-100">
+<h4 class="font-headline fs-6 fw-bold text-secondary mb-3">Simulação Segura</h4>
+<p class="x-small text-on-surface-variant leading-relaxed">Suas chaves nunca saem do seu navegador. Operamos em ambiente sandbox 100% isolado.</p>
+</div>
+<div class="p-5 bg-surface-container-low rounded-xl border-0 h-100">
+<h4 class="font-headline fs-6 fw-bold text-secondary mb-3">Zero Taxas Gas</h4>
+<p class="x-small text-on-surface-variant leading-relaxed">Conecte sem pagar taxas de rede. O Kinetic Ledger usa infraestrutura virtualizada.</p>
+</div>
+<div class="p-5 bg-surface-container-low rounded-xl border-0 h-100">
+<h4 class="font-headline fs-6 fw-bold text-secondary mb-3">Multi-Chain Ready</h4>
+<p class="x-small text-on-surface-variant leading-relaxed">Suporte para Ethereum, Solana, Polygon e mais de 15 redes testnet simultâneas.</p>
+</div>
+</div>
+</main>
+<!-- Bottom Nav for Mobile Only -->
+<nav class="md:d-none fixed bottom-0 left-0 w-100 bg-surface-container-highest/80 backdrop-blur-xl border-top border-outline-variant/10 py-2 d-flex align-items-center justify-content-evenly gap-2 px-2 z-50 shadow-lg">
+<a class="d-flex flex-column align-items-center justify-content-center gap-1 text-on-surface opacity-50 hover:opacity-100 transition-all text-decoration-none" href="#">
+<span class="material-symbols-outlined fs-5">dashboard</span>
+<span class="text-[9px] text-uppercase fw-bold pb-1">Painel</span>
+</a>
+<a class="d-flex flex-column align-items-center justify-content-center gap-1 text-on-surface opacity-50 hover:opacity-100 transition-all text-decoration-none" href="#">
+<span class="material-symbols-outlined fs-5">show_chart</span>
+<span class="text-[9px] text-uppercase fw-bold pb-1">Mercado</span>
+</a>
+<a class="d-flex flex-column align-items-center justify-content-center gap-1 text-on-surface opacity-50 hover:opacity-100 transition-all text-decoration-none" href="#">
+<span class="material-symbols-outlined fs-5">receipt_long</span>
+<span class="text-[9px] text-uppercase fw-bold pb-1">Transações</span>
+</a>
+<a class="d-flex align-items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-pill text-decoration-none shadow" href="#">
+<span class="material-symbols-outlined fs-5" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="text-[10px] text-uppercase fw-bold">Ajustes</span>
+</a>
+</nav>
+
+<footer class="w-100 mt-auto border-top border-outline-variant/10">
+<div class="max-w-7xl mx-auto px-4 md:px-8 py-5">
+<div class="d-flex flex-column md:flex-row justify-content-between align-items-center gap-4 opacity-70">
+<p class="x-small font-label m-0">© 2026 Crypto Sandbox Protocol. Todos os direitos reservados.</p>
+<div class="d-flex gap-4">
+<a class="x-small hover:text-primary transition-colors text-decoration-none text-on-surface" href="#">Termos</a>
+<a class="x-small hover:text-primary transition-colors text-decoration-none text-on-surface" href="#">Privacidade</a>
+<a class="x-small hover:text-primary transition-colors text-decoration-none text-on-surface" href="#">Suporte</a>
+</div>
+</div>
+</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmxc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body></html>
