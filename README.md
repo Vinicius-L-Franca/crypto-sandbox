@@ -36,6 +36,8 @@ O objetivo do projeto é proporcionar uma experiência prática de mercado finan
 
 **Bootstrap 5 (v5.x)**
 
+O site usa o bundle oficial do Bootstrap com um tema escuro personalizado em [custom-bootstrap.css](custom-bootstrap.css) para padronizar navbars, cards, botões, formulários e tabelas em todas as telas.
+
 **Por que Bootstrap?**
 
 - **Responsividade (Grid):** o sistema de grid (breakpoints como `sm`, `md`, `lg`, `xl`) facilita adaptar o layout para *mobile / tablet / desktop* sem reescrever CSS do zero.
@@ -159,3 +161,45 @@ O sistema contará com pelo menos:
 ```bash
 git clone https://github.com/Vinicius-L-Franca/crypto-sandbox
 ```
+
+## 🗂 Estrutura Atual do Projeto
+
+Após reorganização, as principais pastas e arquivos estão assim:
+
+- `pages/` — todas as páginas HTML do site, organizadas por domínio:
+	- `pages/market/` — páginas do mercado e conexão (`negociacao.html`, `conectar_carteira.html`)
+	- `pages/portfolio/` — página do portfólio (`portfolio.html`)
+	- `pages/transactions/` — página de transações (`transacoes.html`)
+	- `pages/settings/` — páginas de configuração (`conf_perfil.html`, `conf_seguranca.html`, `conf_preferencias.html`)
+- `assets/` — recursos estáticos
+	- `assets/css/custom-bootstrap.css` — tema personalizado (moved)
+	- `assets/js/` — scripts do frontend
+	- `assets/img/` — imagens e ícones
+- `scripts/convert.py` — utilitário que baixa páginas e converte classes para Bootstrap (atualizado para escrever em `pages/`)
+
+Consulte também a documentação de estrutura: [docs/structure.md](docs/structure.md)
+
+## ⚙️ Comandos Úteis
+
+- Servir o projeto localmente (porta 8000):
+
+```bash
+python3 -m http.server --directory . 8000
+# então abra: http://localhost:8000/pages/market/negociacao.html
+```
+
+- Executar o conversor (baixa páginas externas e escreve em `pages/`):
+
+```bash
+python3 scripts/convert.py
+```
+
+Aviso: `scripts/convert.py` baixa conteúdo da internet — use com cuidado.
+
+## 📄 Atualizações realizadas
+
+- Páginas movidas para a pasta `pages/` e links atualizados para caminhos relativos.
+- `custom-bootstrap.css` movido para `assets/css/` e referências atualizadas nas páginas.
+- `scripts/convert.py` atualizado para gerar arquivos dentro de `pages/`.
+
+Se quiser que eu também atualize os outros arquivos em `docs/` (PRD, spec, design), diga quais preferências você tem ou eu faço um resumo automático das mudanças.

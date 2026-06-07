@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-bs-theme="dark">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mercado | Crypto Sandbox</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1"
-        rel="stylesheet" />
-    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <title>
+      Mercado | Crypto Sandbox
+    </title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1" rel="stylesheet" />
+    <link href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../assets/css/custom-bootstrap.css" rel="stylesheet" />
     <style>
+
         /* ============================================================
        TOKENS
     ============================================================ */
@@ -752,407 +752,510 @@
         .footer-link:hover {
             color: var(--cyan) !important;
         }
+    
     </style>
-</head>
-
-<body>
-
+  </head>
+  <body>
     <!-- Ambient -->
     <div class="ambient">
-        <div class="ambient-blob blob-1"></div>
-        <div class="ambient-blob blob-2"></div>
+      <div class="ambient-blob blob-1">
+      </div>
+      <div class="ambient-blob blob-2">
+      </div>
     </div>
-
     <!-- ================================================================
      TOPBAR
 ================================================================ -->
     <header class="topbar">
-        <div class="container-fluid px-3 px-md-4" style="max-width:1440px;">
-            <div class="d-flex align-items-center justify-content-between" style="height:58px; gap:.75rem;">
-
-                <!-- Brand -->
-                <a href="conectar_carteira.html" class="brand flex-shrink-0">Crypto Sandbox</a>
-
-                <!-- Desktop Nav -->
-                <nav class="d-none d-lg-flex align-items-center gap-1 mx-3">
-                    <a href="negociacao.html" class="nav-pill active">Mercado</a>
-                    <a href="portfolio_carteira.html" class="nav-pill">Portfólio</a>
-                    <a href="transacoes.html" class="nav-pill">Transações</a>
-                    <a href="conf_seguranca_header.html" class="nav-pill">Configurações</a>
-                </nav>
-
-                <!-- Right -->
-                <div class="d-flex align-items-center gap-2 ms-auto flex-shrink-0">
-                    <!-- Patrimony (md+) -->
-                    <div class="d-none d-md-flex flex-column align-items-end me-2 pe-2"
-                        style="border-right:1px solid var(--border);">
-                        <span class="patrimony-label">Patrimônio Total</span>
-                        <span class="patrimony-value">$42,500.24</span>
-                    </div>
-                    <button class="icon-btn">
-                        <span class="material-symbols-outlined" style="font-size:1.25rem;">notifications</span>
-                    </button>
-                    <a href="conectar_carteira.html" class="btn-connect">Conectar Carteira</a>
-                </div>
-
+      <div class="container-fluid px-3 px-md-4" style="max-width:1440px;">
+        <div class="d-flex align-items-center justify-content-between" style="height:58px; gap:.75rem;">
+          <!-- Brand -->
+          <a href="conectar_carteira.html" class="brand flex-shrink-0">
+            Crypto Sandbox
+          </a>
+          <!-- Desktop Nav -->
+          <nav class="d-none d-lg-flex align-items-center gap-1 mx-3">
+            <a href="negociacao.html" class="nav-pill active">
+              Mercado
+            </a>
+            <a href="../portfolio/portfolio.html" class="nav-pill">
+              Portfólio
+            </a>
+            <a href="../transactions/transacoes.html" class="nav-pill">
+              Transações
+            </a>
+            <a href="../settings/conf_seguranca.html" class="nav-pill">
+              Configurações
+            </a>
+          </nav>
+          <!-- Right -->
+          <div class="d-flex align-items-center gap-2 ms-auto flex-shrink-0">
+            <!-- Patrimony (md+) -->
+            <div class="d-none d-md-flex flex-column align-items-end me-2 pe-2" style="border-right:1px solid var(--border);">
+              <span class="patrimony-label">
+                Patrimônio Total
+              </span>
+              <span class="patrimony-value">
+                $42,500.24
+              </span>
             </div>
+            <button class="icon-btn">
+              <span class="material-symbols-outlined" style="font-size:1.25rem;">
+                notifications
+              </span>
+            </button>
+            <a href="conectar_carteira.html" class="btn-connect">
+              Conectar Carteira
+            </a>
+          </div>
         </div>
+      </div>
     </header>
-
     <!-- ================================================================
      MAIN
 ================================================================ -->
     <main class="position-relative" style="z-index:1;">
-        <div class="container-fluid px-3 px-md-4 py-4" style="max-width:1440px;">
-            <div class="row g-4">
-
-                <!-- =====================================================
+      <div class="container-fluid px-3 px-md-4 py-4" style="max-width:1440px;">
+        <div class="row g-4">
+          <!-- =====================================================
            LEFT: MARKET VIEW
       ====================================================== -->
-                <div class="col-12 col-lg-8 d-flex flex-column gap-4">
-
-                    <!-- Asset Selector & Price Header -->
-                    <div class="cs-card p-3 p-md-4">
-                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
-
-                            <!-- Asset + Price -->
-                            <div class="d-flex align-items-center gap-3 flex-wrap">
-                                <button class="asset-btn">
-                                    <div class="asset-icon">
-                                        <span class="material-symbols-outlined"
-                                            style="font-variation-settings:'FILL' 1;">currency_bitcoin</span>
-                                    </div>
-                                    <div class="text-start">
-                                        <div class="field-label" style="font-size:.58rem;">Selecionar Ativo</div>
-                                        <div class="font-headline fw-bold d-flex align-items-center gap-1"
-                                            style="font-size:1rem;">
-                                            Bitcoin
-                                            <span class="text-muted-cs"
-                                                style="font-size:.82rem; font-weight:400;">BTC</span>
-                                            <span class="material-symbols-outlined"
-                                                style="font-size:1rem; color:var(--muted);">expand_more</span>
-                                        </div>
-                                    </div>
-                                </button>
-
-                                <div class="vr-cs d-none d-sm-block"></div>
-
-                                <div>
-                                    <div class="field-label" style="font-size:.58rem; margin-bottom:.2rem;">Preço Atual
-                                    </div>
-                                    <div class="d-flex align-items-baseline gap-2">
-                                        <span class="price-big">$64,231.50</span>
-                                        <span class="change-badge">
-                                            <span class="material-symbols-outlined"
-                                                style="font-size:.95rem;">trending_up</span>
-                                            +2.4%
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Timeframe -->
-                            <div class="tf-group">
-                                <button class="tf-btn">1H</button>
-                                <button class="tf-btn">4H</button>
-                                <button class="tf-btn active">1D</button>
-                                <button class="tf-btn">1S</button>
-                                <button class="tf-btn">TUDO</button>
-                            </div>
-
-                        </div>
+          <div class="col-12 col-lg-8 d-flex flex-column gap-4">
+            <!-- Asset Selector & Price Header -->
+            <div class="cs-card p-3 p-md-4">
+              <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                <!-- Asset + Price -->
+                <div class="d-flex align-items-center gap-3 flex-wrap">
+                  <button class="asset-btn">
+                    <div class="asset-icon">
+                      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">
+                        currency_bitcoin
+                      </span>
                     </div>
-
-                    <!-- Chart -->
-                    <div class="cs-card p-3 p-md-4">
-
-                        <!-- Legend -->
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <div class="chart-legend d-flex gap-3">
-                                <span><span class="dot" style="background:var(--cyan);"></span> Preço (USD)</span>
-                                <span><span class="dot" style="background:var(--green);"></span> Média 24h</span>
-                            </div>
-                            <button class="icon-btn">
-                                <span class="material-symbols-outlined" style="font-size:1.1rem;">fullscreen</span>
-                            </button>
-                        </div>
-
-                        <!-- SVG Chart -->
-                        <div class="chart-wrap">
-                            <svg viewBox="0 0 1000 280" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient id="grad1" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="0%" stop-color="#00d4ff" stop-opacity=".28" />
-                                        <stop offset="100%" stop-color="#00d4ff" stop-opacity="0" />
-                                    </linearGradient>
-                                    <linearGradient id="grad2" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="0%" stop-color="#0fffa3" stop-opacity=".15" />
-                                        <stop offset="100%" stop-color="#0fffa3" stop-opacity="0" />
-                                    </linearGradient>
-                                </defs>
-
-                                <!-- Y grid lines -->
-                                <line x1="0" y1="56" x2="1000" y2="56" stroke="rgba(255,255,255,.05)"
-                                    stroke-width="1" />
-                                <line x1="0" y1="112" x2="1000" y2="112" stroke="rgba(255,255,255,.05)"
-                                    stroke-width="1" />
-                                <line x1="0" y1="168" x2="1000" y2="168" stroke="rgba(255,255,255,.05)"
-                                    stroke-width="1" />
-                                <line x1="0" y1="224" x2="1000" y2="224" stroke="rgba(255,255,255,.05)"
-                                    stroke-width="1" />
-
-                                <!-- Area fill main -->
-                                <path d="M0,220 C60,190 120,160 200,180 C280,200 320,100 400,90
+                    <div class="text-start">
+                      <div class="field-label" style="font-size:.58rem;">
+                        Selecionar Ativo
+                      </div>
+                      <div class="font-headline fw-bold d-flex align-items-center gap-1" style="font-size:1rem;">
+                        Bitcoin
+                        <span class="text-muted-cs" style="font-size:.82rem; font-weight:400;">
+                          BTC
+                        </span>
+                        <span class="material-symbols-outlined" style="font-size:1rem; color:var(--muted);">
+                          expand_more
+                        </span>
+                      </div>
+                    </div>
+                  </button>
+                  <div class="vr-cs d-none d-sm-block">
+                  </div>
+                  <div>
+                    <div class="field-label" style="font-size:.58rem; margin-bottom:.2rem;">
+                      Preço Atual
+                    </div>
+                    <div class="d-flex align-items-baseline gap-2">
+                      <span class="price-big">
+                        $64,231.50
+                      </span>
+                      <span class="change-badge">
+                        <span class="material-symbols-outlined" style="font-size:.95rem;">
+                          trending_up
+                        </span>
+                        +2.4%
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <!-- Timeframe -->
+                <div class="tf-group">
+                  <button class="tf-btn">
+                    1H
+                  </button>
+                  <button class="tf-btn">
+                    4H
+                  </button>
+                  <button class="tf-btn active">
+                    1D
+                  </button>
+                  <button class="tf-btn">
+                    1S
+                  </button>
+                  <button class="tf-btn">
+                    TUDO
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Chart -->
+            <div class="cs-card p-3 p-md-4">
+              <!-- Legend -->
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                <div class="chart-legend d-flex gap-3">
+                  <span>
+                    <span class="dot" style="background:var(--cyan);">
+                    </span>
+                    Preço (USD)
+                  </span>
+                  <span>
+                    <span class="dot" style="background:var(--green);">
+                    </span>
+                    Média 24h
+                  </span>
+                </div>
+                <button class="icon-btn">
+                  <span class="material-symbols-outlined" style="font-size:1.1rem;">
+                    fullscreen
+                  </span>
+                </button>
+              </div>
+              <!-- SVG Chart -->
+              <div class="chart-wrap">
+                <svg viewbox="0 0 1000 280" preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <lineargradient id="grad1" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#00d4ff" stop-opacity=".28" />
+                      <stop offset="100%" stop-color="#00d4ff" stop-opacity="0" />
+                    </lineargradient>
+                    <lineargradient id="grad2" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#0fffa3" stop-opacity=".15" />
+                      <stop offset="100%" stop-color="#0fffa3" stop-opacity="0" />
+                    </lineargradient>
+                  </defs>
+                  <!-- Y grid lines -->
+                  <line x1="0" y1="56" x2="1000" y2="56" stroke="rgba(255,255,255,.05)" stroke-width="1" />
+                  <line x1="0" y1="112" x2="1000" y2="112" stroke="rgba(255,255,255,.05)" stroke-width="1" />
+                  <line x1="0" y1="168" x2="1000" y2="168" stroke="rgba(255,255,255,.05)" stroke-width="1" />
+                  <line x1="0" y1="224" x2="1000" y2="224" stroke="rgba(255,255,255,.05)" stroke-width="1" />
+                  <!-- Area fill main -->
+                  <path d="M0,220 C60,190 120,160 200,180 C280,200 320,100 400,90
                         C480,80 540,160 620,140 C700,120 760,70  840,55
                         C900,44  950,30  1000,18 L1000,280 L0,280 Z" fill="url(#grad1)" />
-
-                                <!-- Area fill avg line -->
-                                <path d="M0,200 C80,195 160,192 240,196 C320,200 400,185 480,180
+                  <!-- Area fill avg line -->
+                  <path d="M0,200 C80,195 160,192 240,196 C320,200 400,185 480,180
                         C560,175 640,178 720,172 C800,166 900,160 1000,155
                         L1000,280 L0,280 Z" fill="url(#grad2)" />
-
-                                <!-- Avg line (green) -->
-                                <path d="M0,200 C80,195 160,192 240,196 C320,200 400,185 480,180
-                        C560,175 640,178 720,172 C800,166 900,160 1000,155" fill="none" stroke="#0fffa3"
-                                    stroke-width="1.5" stroke-dasharray="6 4" opacity=".7" />
-
-                                <!-- Main price line -->
-                                <path d="M0,220 C60,190 120,160 200,180 C280,200 320,100 400,90
+                  <!-- Avg line (green) -->
+                  <path d="M0,200 C80,195 160,192 240,196 C320,200 400,185 480,180
+                        C560,175 640,178 720,172 C800,166 900,160 1000,155" fill="none" stroke="#0fffa3" stroke-width="1.5" stroke-dasharray="6 4" opacity=".7" />
+                  <!-- Main price line -->
+                  <path d="M0,220 C60,190 120,160 200,180 C280,200 320,100 400,90
                         C480,80 540,160 620,140 C700,120 760,70  840,55
                         C900,44  950,30  1000,18" fill="none" stroke="#00d4ff" stroke-width="2.2" />
-
-                                <!-- Tooltip dot -->
-                                <circle cx="640" cy="140" r="5" fill="#00d4ff" />
-                                <circle cx="640" cy="140" r="10" fill="rgba(0,212,255,.18)" />
-                                <!-- vertical drop line -->
-                                <line x1="640" y1="140" x2="640" y2="280" stroke="rgba(0,212,255,.25)" stroke-width="1"
-                                    stroke-dasharray="4 3" />
-                            </svg>
-
-                            <!-- Tooltip pin -->
-                            <div class="chart-pin">
-                                24 MAI, 14:00<br />
-                                <span style="font-size:.95rem; color:var(--cyan);">$64.231,50</span>
-                            </div>
-                        </div>
-
-                        <!-- Time labels -->
-                        <div class="chart-times">
-                            <span>08:00 AM</span>
-                            <span>12:00 PM</span>
-                            <span>04:00 PM</span>
-                            <span>08:00 PM</span>
-                            <span>12:00 AM</span>
-                            <span>04:00 AM</span>
-                        </div>
-
+                  <!-- Tooltip dot -->
+                  <circle cx="640" cy="140" r="5" fill="#00d4ff" />
+                  <circle cx="640" cy="140" r="10" fill="rgba(0,212,255,.18)" />
+                  <!-- vertical drop line -->
+                  <line x1="640" y1="140" x2="640" y2="280" stroke="rgba(0,212,255,.25)" stroke-width="1" stroke-dasharray="4 3" />
+                </svg>
+                <!-- Tooltip pin -->
+                <div class="chart-pin">
+                  24 MAI, 14:00
+                  <br />
+                  <span style="font-size:.95rem; color:var(--cyan);">
+                    $64.231,50
+                  </span>
+                </div>
+              </div>
+              <!-- Time labels -->
+              <div class="chart-times">
+                <span>
+                  08:00 AM
+                </span>
+                <span>
+                  12:00 PM
+                </span>
+                <span>
+                  04:00 PM
+                </span>
+                <span>
+                  08:00 PM
+                </span>
+                <span>
+                  12:00 AM
+                </span>
+                <span>
+                  04:00 AM
+                </span>
+              </div>
+            </div>
+            <!-- Recent Transactions -->
+            <div class="cs-card overflow-hidden">
+              <div class="d-flex align-items-center justify-content-between px-4 py-3" style="border-bottom:1px solid var(--border);">
+                <span class="font-headline fw-bold" style="font-size:.95rem; text-transform:uppercase; letter-spacing:.04em;">
+                  Transações Recentes de BTC
+                </span>
+                <button style="background:none;border:none;color:var(--cyan);font-size:.78rem;font-weight:700;cursor:pointer;padding:0;">
+                  Ver Todas
+                </button>
+              </div>
+              <!-- Row 1 -->
+              <div class="tx-row">
+                <div class="d-flex align-items-center gap-3">
+                  <div class="tx-icon buy">
+                    <span class="material-symbols-outlined">
+                      call_received
+                    </span>
+                  </div>
+                  <div>
+                    <div style="font-weight:600; font-size:.88rem;">
+                      Comprado Bitcoin
                     </div>
-
-                    <!-- Recent Transactions -->
-                    <div class="cs-card overflow-hidden">
-                        <div class="d-flex align-items-center justify-content-between px-4 py-3"
-                            style="border-bottom:1px solid var(--border);">
-                            <span class="font-headline fw-bold"
-                                style="font-size:.95rem; text-transform:uppercase; letter-spacing:.04em;">
-                                Transações Recentes de BTC
-                            </span>
-                            <button
-                                style="background:none;border:none;color:var(--cyan);font-size:.78rem;font-weight:700;cursor:pointer;padding:0;">
-                                Ver Todas
-                            </button>
-                        </div>
-
-                        <!-- Row 1 -->
-                        <div class="tx-row">
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="tx-icon buy">
-                                    <span class="material-symbols-outlined">call_received</span>
-                                </div>
-                                <div>
-                                    <div style="font-weight:600; font-size:.88rem;">Comprado Bitcoin</div>
-                                    <div style="font-size:.7rem; color:var(--muted);">Out 24, 2026 • 14:22</div>
-                                </div>
-                            </div>
-                            <div class="text-end">
-                                <div style="font-weight:700; font-size:.88rem; color:var(--green);">+0.0042 BTC</div>
-                                <div style="font-size:.7rem; color:var(--muted);">$271.42 USD</div>
-                            </div>
-                        </div>
-
-                        <!-- Row 2 -->
-                        <div class="tx-row">
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="tx-icon sell">
-                                    <span class="material-symbols-outlined">call_made</span>
-                                </div>
-                                <div>
-                                    <div style="font-weight:600; font-size:.88rem;">Vendido Bitcoin</div>
-                                    <div style="font-size:.7rem; color:var(--muted);">Out 23, 2026 • 09:15</div>
-                                </div>
-                            </div>
-                            <div class="text-end">
-                                <div style="font-weight:700; font-size:.88rem; color:var(--red);">-0.0150 BTC</div>
-                                <div style="font-size:.7rem; color:var(--muted);">$963.45 USD</div>
-                            </div>
-                        </div>
-
-                        <!-- Row 3 -->
-                        <div class="tx-row">
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="tx-icon buy">
-                                    <span class="material-symbols-outlined">call_received</span>
-                                </div>
-                                <div>
-                                    <div style="font-weight:600; font-size:.88rem;">Comprado Bitcoin</div>
-                                    <div style="font-size:.7rem; color:var(--muted);">Out 21, 2026 • 18:40</div>
-                                </div>
-                            </div>
-                            <div class="text-end">
-                                <div style="font-weight:700; font-size:.88rem; color:var(--green);">+0.0100 BTC</div>
-                                <div style="font-size:.7rem; color:var(--muted);">$642.31 USD</div>
-                            </div>
-                        </div>
-
+                    <div style="font-size:.7rem; color:var(--muted);">
+                      Out 24, 2026 • 14:22
                     </div>
-                </div><!-- /col left -->
-
-                <!-- =====================================================
+                  </div>
+                </div>
+                <div class="text-end">
+                  <div style="font-weight:700; font-size:.88rem; color:var(--green);">
+                    +0.0042 BTC
+                  </div>
+                  <div style="font-size:.7rem; color:var(--muted);">
+                    $271.42 USD
+                  </div>
+                </div>
+              </div>
+              <!-- Row 2 -->
+              <div class="tx-row">
+                <div class="d-flex align-items-center gap-3">
+                  <div class="tx-icon sell">
+                    <span class="material-symbols-outlined">
+                      call_made
+                    </span>
+                  </div>
+                  <div>
+                    <div style="font-weight:600; font-size:.88rem;">
+                      Vendido Bitcoin
+                    </div>
+                    <div style="font-size:.7rem; color:var(--muted);">
+                      Out 23, 2026 • 09:15
+                    </div>
+                  </div>
+                </div>
+                <div class="text-end">
+                  <div style="font-weight:700; font-size:.88rem; color:var(--red);">
+                    -0.0150 BTC
+                  </div>
+                  <div style="font-size:.7rem; color:var(--muted);">
+                    $963.45 USD
+                  </div>
+                </div>
+              </div>
+              <!-- Row 3 -->
+              <div class="tx-row">
+                <div class="d-flex align-items-center gap-3">
+                  <div class="tx-icon buy">
+                    <span class="material-symbols-outlined">
+                      call_received
+                    </span>
+                  </div>
+                  <div>
+                    <div style="font-weight:600; font-size:.88rem;">
+                      Comprado Bitcoin
+                    </div>
+                    <div style="font-size:.7rem; color:var(--muted);">
+                      Out 21, 2026 • 18:40
+                    </div>
+                  </div>
+                </div>
+                <div class="text-end">
+                  <div style="font-weight:700; font-size:.88rem; color:var(--green);">
+                    +0.0100 BTC
+                  </div>
+                  <div style="font-size:.7rem; color:var(--muted);">
+                    $642.31 USD
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /col left -->
+          <!-- =====================================================
            RIGHT: TRADE PANEL
       ====================================================== -->
-                <div class="col-12 col-lg-4 d-flex flex-column gap-4">
-
-                    <!-- Buy / Sell Toggle -->
-                    <div class="tab-toggle">
-                        <button class="tab-btn active-buy" id="btnBuy">Comprar</button>
-                        <button class="tab-btn" id="btnSell">Vender</button>
-                    </div>
-
-                    <!-- Trade Form -->
-                    <div class="cs-card p-4 d-flex flex-column gap-4">
-
-                        <!-- Amount -->
-                        <div>
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="field-label">Valor (USD)</span>
-                                <span style="font-size:.65rem; color:var(--muted);">Máx: $42,500.24</span>
-                            </div>
-                            <div class="position-relative">
-                                <input type="number" class="amount-input" placeholder="0.00" />
-                                <span class="input-suffix position-absolute"
-                                    style="right:1rem; top:50%; transform:translateY(-50%);">USD</span>
-                            </div>
-                        </div>
-
-                        <!-- Stats -->
-                        <div class="cs-card-dark p-3 d-flex flex-column gap-2">
-                            <div class="info-row">
-                                <span class="label">Preço Atual de Mercado</span>
-                                <span class="value">$64,231.50</span>
-                            </div>
-                            <div class="divider-row"></div>
-                            <div class="info-row">
-                                <span class="label">Estimativa de Recebimento</span>
-                                <span class="value green" id="estimateVal">0.00000000 BTC</span>
-                            </div>
-                            <div class="divider-row"></div>
-                            <div class="info-row">
-                                <span class="label">Taxa de Negociação (0.1%)</span>
-                                <span class="value" id="feeVal">$0.00</span>
-                            </div>
-                        </div>
-
-                        <!-- Error -->
-                        <div class="error-alert" id="errorAlert" style="display:none;">
-                            <span class="material-symbols-outlined">error</span>
-                            <span>Saldo insuficiente. Por favor, recarregue sua carteira.</span>
-                        </div>
-
-                        <!-- Confirm -->
-                        <button class="btn-confirm">Confirmar Transação</button>
-
-                    </div>
-
-                    <!-- Portfolio Summary -->
-                    <div class="cs-card p-4 d-flex flex-column gap-3">
-                        <span class="field-label">Seu Portfólio BTC</span>
-
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div>
-                                <div class="font-headline fw-bold" style="font-size:1.6rem; color:#fff;">1.248 BTC</div>
-                                <div style="font-size:.72rem; color:var(--muted);">$80,160.91 USD</div>
-                            </div>
-                            <div class="portfolio-icon">
-                                <span class="material-symbols-outlined"
-                                    style="font-variation-settings:'FILL' 1;">pie_chart</span>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="d-flex justify-content-between align-items-center mb-2"
-                                style="font-size:.65rem; text-transform:uppercase; letter-spacing:.08em; font-weight:700;">
-                                <span style="color:var(--muted);">P/L (24h)</span>
-                                <span style="color:var(--green);">+$1,924.12</span>
-                            </div>
-                            <div class="progress-cs">
-                                <div class="progress-fill"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Tip -->
-                    <div class="cs-card p-3 d-flex align-items-start gap-3">
-                        <div class="tip-icon">
-                            <span class="material-symbols-outlined">auto_awesome</span>
-                        </div>
-                        <div>
-                            <div style="font-size:.82rem; font-weight:700;">Dica de Negociação</div>
-                            <p style="font-size:.75rem; color:var(--muted); margin:.3rem 0 0; line-height:1.55;">
-                                Considere configurar uma ordem de <span
-                                    style="color:var(--cyan); font-weight:600;">Stop-Loss</span>
-                                para proteger seu capital em momentos de alta volatilidade.
-                            </p>
-                        </div>
-                    </div>
-
-                </div><!-- /col right -->
-
-            </div><!-- /row -->
+          <div class="col-12 col-lg-4 d-flex flex-column gap-4">
+            <!-- Buy / Sell Toggle -->
+            <div class="tab-toggle">
+              <button class="tab-btn active-buy" id="btnBuy">
+                Comprar
+              </button>
+              <button class="tab-btn" id="btnSell">
+                Vender
+              </button>
+            </div>
+            <!-- Trade Form -->
+            <div class="cs-card p-4 d-flex flex-column gap-4">
+              <!-- Amount -->
+              <div>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="field-label">
+                    Valor (USD)
+                  </span>
+                  <span style="font-size:.65rem; color:var(--muted);">
+                    Máx: $42,500.24
+                  </span>
+                </div>
+                <div class="position-relative">
+                  <input type="number" class="amount-input" placeholder="0.00" />
+                  <span class="input-suffix position-absolute" style="right:1rem; top:50%; transform:translateY(-50%);">
+                    USD
+                  </span>
+                </div>
+              </div>
+              <!-- Stats -->
+              <div class="cs-card-dark p-3 d-flex flex-column gap-2">
+                <div class="info-row">
+                  <span class="label">
+                    Preço Atual de Mercado
+                  </span>
+                  <span class="value">
+                    $64,231.50
+                  </span>
+                </div>
+                <div class="divider-row">
+                </div>
+                <div class="info-row">
+                  <span class="label">
+                    Estimativa de Recebimento
+                  </span>
+                  <span class="value green" id="estimateVal">
+                    0.00000000 BTC
+                  </span>
+                </div>
+                <div class="divider-row">
+                </div>
+                <div class="info-row">
+                  <span class="label">
+                    Taxa de Negociação (0.1%)
+                  </span>
+                  <span class="value" id="feeVal">
+                    $0.00
+                  </span>
+                </div>
+              </div>
+              <!-- Error -->
+              <div class="error-alert" id="errorAlert" style="display:none;">
+                <span class="material-symbols-outlined">
+                  error
+                </span>
+                <span>
+                  Saldo insuficiente. Por favor, recarregue sua carteira.
+                </span>
+              </div>
+              <!-- Confirm -->
+              <button class="btn-confirm">
+                Confirmar Transação
+              </button>
+            </div>
+            <!-- Portfolio Summary -->
+            <div class="cs-card p-4 d-flex flex-column gap-3">
+              <span class="field-label">
+                Seu Portfólio BTC
+              </span>
+              <div class="d-flex align-items-center justify-content-between">
+                <div>
+                  <div class="font-headline fw-bold" style="font-size:1.6rem; color:#fff;">
+                    1.248 BTC
+                  </div>
+                  <div style="font-size:.72rem; color:var(--muted);">
+                    $80,160.91 USD
+                  </div>
+                </div>
+                <div class="portfolio-icon">
+                  <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">
+                    pie_chart
+                  </span>
+                </div>
+              </div>
+              <div>
+                <div class="d-flex justify-content-between align-items-center mb-2" style="font-size:.65rem; text-transform:uppercase; letter-spacing:.08em; font-weight:700;">
+                  <span style="color:var(--muted);">
+                    P/L (24h)
+                  </span>
+                  <span style="color:var(--green);">
+                    +$1,924.12
+                  </span>
+                </div>
+                <div class="progress-cs">
+                  <div class="progress-fill">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Tip -->
+            <div class="cs-card p-3 d-flex align-items-start gap-3">
+              <div class="tip-icon">
+                <span class="material-symbols-outlined">
+                  auto_awesome
+                </span>
+              </div>
+              <div>
+                <div style="font-size:.82rem; font-weight:700;">
+                  Dica de Negociação
+                </div>
+                <p style="font-size:.75rem; color:var(--muted); margin:.3rem 0 0; line-height:1.55;">
+                  Considere configurar uma ordem de
+                  <span style="color:var(--cyan); font-weight:600;">
+                    Stop-Loss
+                  </span>
+                  para proteger seu capital em momentos de alta volatilidade.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- /col right -->
         </div>
+        <!-- /row -->
+      </div>
     </main>
-
     <!-- ================================================================
      MOBILE BOTTOM NAV
 ================================================================ -->
     <nav class="mobile-nav">
-        <a href="negociacao.html" class="mnav-link active">
-            <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">show_chart</span>
-            <span>Mercado</span>
-        </a>
-        <a href="portfolio_carteira.html" class="mnav-link">
-            <span class="material-symbols-outlined">pie_chart</span>
-            <span>Portfólio</span>
-        </a>
-        <a href="transacoes.html" class="mnav-link">
-            <span class="material-symbols-outlined">receipt_long</span>
-            <span>Transações</span>
-        </a>
-        <a href="conf_seguranca_header.html" class="mnav-link">
-            <span class="material-symbols-outlined">settings</span>
-            <span>Configurações</span>
-        </a>
+      <a href="negociacao.html" class="mnav-link active">
+        <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">
+          show_chart
+        </span>
+        <span>
+          Mercado
+        </span>
+      </a>
+      <a href="../portfolio/portfolio.html" class="mnav-link">
+        <span class="material-symbols-outlined">
+          pie_chart
+        </span>
+        <span>
+          Portfólio
+        </span>
+      </a>
+      <a href="../transactions/transacoes.html" class="mnav-link">
+        <span class="material-symbols-outlined">
+          receipt_long
+        </span>
+        <span>
+          Transações
+        </span>
+      </a>
+      <a href="../settings/conf_seguranca.html" class="mnav-link">
+        <span class="material-symbols-outlined">
+          settings
+        </span>
+        <span>
+          Configurações
+        </span>
+      </a>
     </nav>
-
-    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js">
+    </script>
     <!-- Footer -->
     <footer class="w-100 mt-auto" style="border-top: 1px solid var(--border);">
-        <div class="container-fluid px-4 py-4" style="max-width:1440px;">
-            <div class="d-flex flex-column align-items-center gap-2" style="opacity:.6;">
-                <p class="m-0" style="font-size:.75rem; color:var(--muted);">© 2026 Crypto Sandbox Protocol. Todos os
-                    direitos reservados.</p>
-            </div>
+      <div class="container-fluid px-4 py-4" style="max-width:1440px;">
+        <div class="d-flex flex-column align-items-center gap-2" style="opacity:.6;">
+          <p class="m-0" style="font-size:.75rem; color:var(--muted);">
+            © 2026 Crypto Sandbox Protocol. Todos os
+            direitos reservados.
+          </p>
         </div>
+      </div>
     </footer>
-</body>
-
+  </body>
 </html>

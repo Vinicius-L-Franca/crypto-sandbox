@@ -4,12 +4,12 @@ import os
 
 screens = {
     "analytics_desempenho.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzU0NzU4ZGNmZDMyOTQzNmZhMDYwOGZjYWM3ZmRiYTc5EgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
-    "portfolio_carteira.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzZjZGNiYTY0ZmEzZDQ2MmU4ZTIxYzc3ODNiNmU1ZjIwEgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
+    "portfolio.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzZjZGNiYTY0ZmEzZDQ2MmU4ZTIxYzc3ODNiNmU1ZjIwEgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
     "transacoes.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sX2E0ZjZkOTNiYjc0NjRhYzNiNWYwMmUzZDM1YzgwZWFiEgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
     "negociacao.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzUzOGM3M2EyODFlMzQzNGY5MTFkNmMzZGYwYzU1OWVjEgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
     "painel_de_controle.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sX2M3NzkxYmM4NTExYTQ0ZTI5MzUyODNlZTkzZjA1YzFkEgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
-    "conf_seguranca_header.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzEwN2JkNmE5OTdiMzQwNTJiZTVhYmRhN2ViYmNhM2JiEgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
-    "analytics_desempenho_header.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sX2I1ZjAyMDgxNmY5NTQwNjhhM2ZkMjFlYjZlNmQ0MWU5EgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
+    "conf_seguranca.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzEwN2JkNmE5OTdiMzQwNTJiZTVhYmRhN2ViYmNhM2JiEgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
+    "analytics_desempenho.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sX2I1ZjAyMDgxNmY5NTQwNjhhM2ZkMjFlYjZlNmQ0MWU5EgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
     "conf_seguranca.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sX2JiZTk3ZmNmNzFjYjQ5YWNiMDdmZGM4MDVjMzMyOGQ4EgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
     "prd.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sX2JmNzk4MzgyODA5YTQwN2Y4ZDgyMjE2ODcwYTI2ZDViEgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
     "conf_sem_icone.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzI2MjI4M2VhZGU0NzQ2Y2ZiYjg4ZDE4M2UxMDk5MzFkEgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
@@ -116,12 +116,12 @@ class_mapping = {
 }
 
 bootstrap_head = """
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link href="custom-bootstrap.css" rel="stylesheet">
+<link href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="../../assets/css/custom-bootstrap.css" rel="stylesheet">
 """
 
 bootstrap_body = """
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmxc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 """
 
 def convert_to_bootstrap(html_content):
@@ -144,13 +144,31 @@ def convert_to_bootstrap(html_content):
     html_content = re.sub(r'class="([^"]*)"', replace_classes, html_content)
     return html_content
 
-os.makedirs('/home/vinicius/Projetos/crypto-sandbox', exist_ok=True)
+repo_root = '/home/vinicius/Projetos/crypto-sandbox'
+
+output_dirs = {
+    'negociacao.html': 'pages/market',
+    'conectar_carteira.html': 'pages/market',
+    'portfolio.html': 'pages/portfolio',
+    'transacoes.html': 'pages/transactions',
+    'conf_seguranca.html': 'pages/settings',
+    'conf_preferencias.html': 'pages/settings',
+    'conf_perfil.html': 'pages/settings'
+}
+
 for filename, url in screens.items():
     print(f"Downloading and converting {filename}...")
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     html = urllib.request.urlopen(req).read().decode('utf-8')
     converted_html = convert_to_bootstrap(html)
-    path = os.path.join('/home/vinicius/Projetos/crypto-sandbox', filename)
+
+    out_dir = output_dirs.get(filename, repo_root)
+    # if out_dir is relative (like pages/...), join with repo_root
+    if not os.path.isabs(out_dir):
+        out_dir = os.path.join(repo_root, out_dir)
+
+    os.makedirs(out_dir, exist_ok=True)
+    path = os.path.join(out_dir, filename)
     with open(path, 'w', encoding='utf-8') as f:
         f.write(converted_html)
 

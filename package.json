@@ -7,7 +7,12 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "sass scss:assets/css --style=compressed",
+    "dev:css": "sass --watch scss:assets/css",
+    "format:html": "python3 scripts/format_html.py",
+    "lint": "eslint . --ext .js",
+    "format": "prettier --write ."
   },
   "repository": {
     "type": "git",
@@ -27,6 +32,9 @@
     "uuid": "^13.0.0"
   },
   "devDependencies": {
-    "gh-pages": "^6.3.0"
+    "gh-pages": "^6.3.0",
+    "sass": "^1.73.0",
+    "eslint": "^8.50.0",
+    "prettier": "^2.8.8"
   }
 }
