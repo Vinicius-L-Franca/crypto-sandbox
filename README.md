@@ -81,14 +81,14 @@ O site usa o bundle oficial do Bootstrap com um tema escuro personalizado em [cu
 ## ✅ Checklist de Funcionalidades
 
 ### 📱 RA1 - Interface e Responsividade
-- [ ] ID 01 - Protótipo no Figma (mobile + desktop)
-- [ ] ID 02 - Layout responsivo com framework CSS
-- [ ] ID 03 - Layout com CSS puro (Flexbox/Grid)
-- [ ] ID 04 - Uso de componentes do framework
-- [ ] ID 05 - Uso de unidades relativas (%, rem, vw)
-- [ ] ID 06 - Aplicação de Design System
-- [ ] ID 07 - Uso de SCSS
-- [ ] ID 08 - Tipografia responsiva
+- [x] ID 01 - Protótipo no Stitch (mobile + desktop)
+- [x] ID 02 - Layout responsivo com framework CSS
+- [x] ID 03 - Layout com CSS puro (Flexbox/Grid)
+- [x] ID 04 - Uso de componentes do framework
+- [x] ID 05 - Uso de unidades relativas (%, rem, vw)
+- [x] ID 06 - Aplicação de Design System
+- [x] ID 07 - Uso de SCSS
+- [x] ID 08 - Tipografia responsiva
 - [ ] ID 09 - Responsividade de imagens
 - [ ] ID 10 - Otimização de imagens
 
@@ -97,17 +97,17 @@ O site usa o bundle oficial do Bootstrap com um tema escuro personalizado em [cu
 ### 📝 RA2 - Formulários e Validações
 - [ ] ID 11 - Validação HTML nativa
 - [ ] ID 12 - Validação com REGEX
-- [ ] ID 13 - Uso de checkbox/radio/select
+- [x] ID 13 - Uso de checkbox/radio/select
 - [ ] ID 14 - Persistência com localStorage
 
 ---
 
 ### ⚙️ RA3 - Desenvolvimento
-- [ ] ID 15 - Configuração com Node/NPM
-- [ ] ID 16 - Versionamento com Git/GitHub
-- [ ] ID 17 - README padronizado
-- [ ] ID 18 - Organização modular do projeto
-- [ ] ID 19 - Uso de ESLint/Prettier
+- [x] ID 15 - Configuração com Node/NPM
+- [x] ID 16 - Versionamento com Git/GitHub
+- [x] ID 17 - README padronizado
+- [x] ID 18 - Organização modular do projeto
+- [x] ID 19 - Uso de ESLint/Prettier
 
 ---
 
