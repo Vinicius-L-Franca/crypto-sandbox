@@ -116,12 +116,12 @@ class_mapping = {
 }
 
 bootstrap_head = """
-<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="assets/css/custom-bootstrap.css" rel="stylesheet">
 """
 
 bootstrap_body = """
-<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 """
 
 def convert_to_bootstrap(html_content):
@@ -135,7 +135,10 @@ def convert_to_bootstrap(html_content):
     html_content = html_content.replace('</body>', bootstrap_body + '</body>')
     
     # Adjust relative links inside downloaded HTML (replace pages subfolders with root)
-    html_content = html_content.replace('../../node_modules/', 'node_modules/')
+    html_content = html_content.replace('../../node_modules/bootstrap/dist/css/bootstrap.min.css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css')
+    html_content = html_content.replace('node_modules/bootstrap/dist/css/bootstrap.min.css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css')
+    html_content = html_content.replace('../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')
+    html_content = html_content.replace('node_modules/bootstrap/dist/js/bootstrap.bundle.min.js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')
     html_content = html_content.replace('../../assets/', 'assets/')
     html_content = html_content.replace('../market/', '')
     html_content = html_content.replace('../portfolio/', '')
