@@ -36,7 +36,7 @@ O objetivo do projeto é proporcionar uma experiência prática de mercado finan
 
 **Bootstrap 5 (v5.x)**
 
-O site usa o bundle oficial do Bootstrap com um tema escuro personalizado em [custom-bootstrap.css](custom-bootstrap.css) para padronizar navbars, cards, botões, formulários e tabelas em todas as telas.
+O site usa o bundle oficial do Bootstrap com um tema escuro personalizado em [custom-bootstrap.css](assets/css/custom-bootstrap.css) para padronizar navbars, cards, botões, formulários e tabelas em todas as telas.
 
 **Por que Bootstrap?**
 
@@ -135,14 +135,14 @@ O sistema contará com pelo menos:
 
 ## 📱 Páginas da Aplicação
 
-1. **Mercado/Negociação** (`negociacao.html`) - Lista de criptomoedas com opções de compra e venda
-2. **Portfólio/Carteira** (`portfolio_carteira.html`) - Carteira do usuário com distribuição de ativos
-3. **Transações** (`transacoes.html`) - Histórico de compras e vendas
-4. **Configurações** - Perfil, segurança e preferências do usuário:
-   - `conf_perfil_header.html`
-   - `conf_seguranca_header.html`
-   - `conf_preferencias_header.html`
-5. **Conectar Carteira** (`conectar_carteira.html`) - Conexão de carteira digital
+1. **Conectar Carteira / Home** (`index.html`) - Página inicial e conexão de carteira digital
+2. **Mercado/Negociação** (`negociacao.html`) - Lista de criptomoedas com opções de compra e venda
+3. **Portfólio/Carteira** (`portfolio.html`) - Carteira do usuário com distribuição de ativos
+4. **Transações** (`transacoes.html`) - Histórico de compras e vendas
+5. **Configurações** - Perfil, segurança e preferências do usuário:
+   - `conf_perfil.html`
+   - `conf_seguranca.html`
+   - `conf_preferencias.html`
 
 ---
 
@@ -164,18 +164,22 @@ git clone https://github.com/Vinicius-L-Franca/crypto-sandbox
 
 ## 🗂 Estrutura Atual do Projeto
 
-Após reorganização, as principais pastas e arquivos estão assim:
+Todos os arquivos HTML estão diretamente na raiz do repositório (estrutura flat):
 
-- `pages/` — todas as páginas HTML do site, organizadas por domínio:
-	- `pages/market/` — páginas do mercado e conexão (`negociacao.html`, `conectar_carteira.html`)
-	- `pages/portfolio/` — página do portfólio (`portfolio.html`)
-	- `pages/transactions/` — página de transações (`transacoes.html`)
-	- `pages/settings/` — páginas de configuração (`conf_perfil.html`, `conf_seguranca.html`, `conf_preferencias.html`)
+- `index.html` — página inicial (Conectar Carteira)
+- `negociacao.html` — página de mercado
+- `portfolio.html` — página de portfólio
+- `transacoes.html` — histórico de transações
+- `conf_perfil.html` — configurações de perfil
+- `conf_seguranca.html` — configurações de segurança
+- `conf_preferencias.html` — preferências do usuário
 - `assets/` — recursos estáticos
-	- `assets/css/custom-bootstrap.css` — tema personalizado (moved)
-	- `assets/js/` — scripts do frontend
-	- `assets/img/` — imagens e ícones
-- `scripts/convert.py` — utilitário que baixa páginas e converte classes para Bootstrap (atualizado para escrever em `pages/`)
+	- `assets/css/custom-bootstrap.css` — tema personalizado do Bootstrap
+	- `assets/css/main.css` — estilos globais compilados (SCSS)
+- `scss/` — arquivos-fonte SCSS
+- `scripts/` — utilitários de manutenção
+	- `scripts/convert.py` — baixa e converte páginas externas para Bootstrap, salvando na raiz
+	- `scripts/format_html.py` — formata todos os HTMLs da raiz
 
 Consulte também a documentação de estrutura: [docs/structure.md](docs/structure.md)
 
@@ -185,10 +189,10 @@ Consulte também a documentação de estrutura: [docs/structure.md](docs/structu
 
 ```bash
 python3 -m http.server --directory . 8000
-# então abra: http://localhost:8000/pages/market/negociacao.html
+# então abra: http://localhost:8000/index.html
 ```
 
-- Executar o conversor (baixa páginas externas e escreve em `pages/`):
+- Executar o conversor (baixa páginas externas e salva na raiz):
 
 ```bash
 python3 scripts/convert.py
@@ -196,10 +200,9 @@ python3 scripts/convert.py
 
 Aviso: `scripts/convert.py` baixa conteúdo da internet — use com cuidado.
 
-## 📄 Atualizações realizadas
+## 📄 Histórico de Mudanças Relevantes
 
-- Páginas movidas para a pasta `pages/` e links atualizados para caminhos relativos.
-- `custom-bootstrap.css` movido para `assets/css/` e referências atualizadas nas páginas.
-- `scripts/convert.py` atualizado para gerar arquivos dentro de `pages/`.
-
-Se quiser que eu também atualize os outros arquivos em `docs/` (PRD, spec, design), diga quais preferências você tem ou eu faço um resumo automático das mudanças.
+- Bootstrap migrado de dependência local (`node_modules/`) para CDN (jsDelivr).
+- Todos os HTMLs movidos da pasta `pages/` para a raiz do projeto.
+- `conectar_carteira.html` renomeado para `index.html` (página de entrada padrão do GitHub Pages).
+- `scripts/convert.py` e `scripts/format_html.py` atualizados para trabalhar com a estrutura flat.

@@ -1,46 +1,47 @@
 # Estrutura do Repositório — Crypto Sandbox
 
-Este arquivo descreve a organização atual do projeto após a reorganização das páginas e assets.
+Este arquivo descreve a organização atual do projeto após a migração dos HTMLs para a raiz.
 
-## Visão geral
+## Visão Geral
 
-- `pages/` — HTML públicos organizados por domínio de funcionalidade.
-- `assets/` — folhas de estilo, scripts e imagens usados pelas páginas.
-- `scripts/` — utilitários e scripts de manutenção (ex: `convert.py`).
-- `docs/` — documentação do produto e arquivos de planejamento.
+Todos os arquivos HTML residem diretamente na raiz do repositório (estrutura flat), sem subpastas de domínio. Isso facilita o deploy no GitHub Pages, que por padrão serve `index.html` na raiz como página inicial.
 
-## Páginas
+## Páginas (raiz)
 
-- `pages/market/`
-  - `negociacao.html` — página principal de mercado (gráficos, book, ordens).
-  - `conectar_carteira.html` — fluxo para conectar carteira.
-
-- `pages/portfolio/`
-  - `portfolio.html` — visão do portfólio do usuário.
-
-- `pages/transactions/`
-  - `transacoes.html` — histórico de transações.
-
-- `pages/settings/`
-  - `conf_perfil.html` — configurações de perfil.
-  - `conf_seguranca.html` — configurações de segurança.
-  - `conf_preferencias.html` — preferências do usuário.
+| Arquivo | Descrição |
+|---------|-----------|
+| `index.html` | Página inicial — Conectar Carteira (entrada da aplicação) |
+| `negociacao.html` | Mercado — gráficos, book de ordens, compra/venda |
+| `portfolio.html` | Portfólio — visão dos ativos do usuário |
+| `transacoes.html` | Histórico de transações |
+| `conf_perfil.html` | Configurações de perfil |
+| `conf_seguranca.html` | Configurações de segurança (2FA, senha) |
+| `conf_preferencias.html` | Preferências do usuário (idioma, moeda base) |
 
 ## Assets
 
-- `assets/css/custom-bootstrap.css` — tema e utilitários específicos do projeto.
-- `assets/js/` — scripts JS do frontend (ainda a povoar).
-- `assets/img/` — imagens e logos usados nas páginas.
+- `assets/css/custom-bootstrap.css` — tema escuro customizado do Bootstrap 5.
+- `assets/css/main.css` — estilos globais compilados a partir do SCSS.
+- `assets/css/main.css.map` — source map do CSS compilado.
 
-## Scripts
+## SCSS
 
-- `scripts/convert.py` — download e conversão de páginas externas. Foi atualizado para:
-  - injetar links relativos para `../../node_modules/...` e `../../assets/css/custom-bootstrap.css` quando gerar páginas dentro de `pages/`;
-  - escrever os arquivos convertidos em `pages/market`, `pages/portfolio`, `pages/transactions`, `pages/settings` conforme mapeamento interno.
+- `scss/` — arquivos-fonte SCSS. Compile com:
 
-## Como validar localmente
+```bash
+npm run build:css
+# ou em modo watch:
+npm run dev:css
+```
 
-1. Instale dependências Node (se necessário para assets):
+## Scripts de Manutenção
+
+- `scripts/convert.py` — baixa páginas externas, converte classes Tailwind para Bootstrap e salva os arquivos **diretamente na raiz**. Injeta links CDN do Bootstrap e normaliza todos os caminhos relativos.
+- `scripts/format_html.py` — formata com indentação todos os HTMLs encontrados na raiz (ignora `node_modules`).
+
+## Como Validar Localmente
+
+1. Instale as dependências Node (para SCSS e ferramentas dev):
 
 ```bash
 npm install
@@ -52,18 +53,19 @@ npm install
 python3 -m http.server --directory . 8000
 ```
 
-3. Acesse uma página exemplo no navegador:
+3. Acesse no navegador:
 
 ```
-http://localhost:8000/pages/market/negociacao.html
+http://localhost:8000/index.html
 ```
 
-## Próximos passos sugeridos
+## Deploy — GitHub Pages
 
-- Atualizar `docs/prd.md` e `docs/spec.md` com referências aos novos caminhos de arquivos (posso fazer isso automaticamente se quiser).
-- Consolidar assets JS em `assets/js/` e ajustar imports.
-- Adicionar um pequeno `README` dentro de `pages/` com instruções específicas de deploy de páginas estáticas.
+O projeto é publicado automaticamente pelo GitHub Pages a partir da branch `main`. Como todos os HTMLs estão na raiz, o `index.html` é servido corretamente como entrada. Nenhum arquivo `CNAME` ou configuração adicional é necessário.
 
 ---
 
-Se quiser que eu atualize também `docs/prd.md` e `docs/spec.md` com um resumo das mudanças, autorizo e executo agora.
+Consulte também:
+- [docs/prd.md](prd.md) — requisitos e histórias de usuário
+- [docs/spec.md](spec.md) — especificação técnica e modelo de dados
+- [docs/design-system.md](design-system.md) — sistema de design e paleta de cores

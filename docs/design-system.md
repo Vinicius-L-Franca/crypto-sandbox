@@ -7,7 +7,7 @@ Este projeto foi inspirado em plataformas reais de trading como Binance, prioriz
 ## 1. Framework Base
 
 - **Framework escolhido:** Bootstrap 5.3.8  
-- **Tema complementar:** [custom-bootstrap.css](../custom-bootstrap.css)
+- **Tema complementar:** [custom-bootstrap.css](../assets/css/custom-bootstrap.css)
 - **Motivação:**  
 Permite construção rápida de interfaces modernas com componentes reutilizáveis, sistema de grid responsivo e suporte nativo a JavaScript interativo — ideal para dashboards financeiros e aplicações data-driven.
 
