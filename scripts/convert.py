@@ -13,7 +13,7 @@ screens = {
     "conf_seguranca.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sX2JiZTk3ZmNmNzFjYjQ5YWNiMDdmZGM4MDVjMzMyOGQ4EgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
     "prd.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sX2JmNzk4MzgyODA5YTQwN2Y4ZDgyMjE2ODcwYTI2ZDViEgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
     "conf_sem_icone.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzI2MjI4M2VhZGU0NzQ2Y2ZiYjg4ZDE4M2UxMDk5MzFkEgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
-    "conectar_carteira.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzI0YzYzOWVkYjE1ZDRkMmJhYjc1YzdmYWUyNTk5NGU3EgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
+    "index.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzI0YzYzOWVkYjE1ZDRkMmJhYjc1YzdmYWUyNTk5NGU3EgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
     "analytics_aba_conf.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sX2ZiYWI5MTEyMDI0ZTRmNDNiNzNkYzRkNmQ4OGQ1MWIzEgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086"
 }
 
@@ -116,12 +116,12 @@ class_mapping = {
 }
 
 bootstrap_head = """
-<link href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="../../assets/css/custom-bootstrap.css" rel="stylesheet">
+<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/css/custom-bootstrap.css" rel="stylesheet">
 """
 
 bootstrap_body = """
-<script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 """
 
 def convert_to_bootstrap(html_content):
@@ -133,6 +133,15 @@ def convert_to_bootstrap(html_content):
     # Add Bootstrap links
     html_content = html_content.replace('</head>', bootstrap_head + '</head>')
     html_content = html_content.replace('</body>', bootstrap_body + '</body>')
+    
+    # Adjust relative links inside downloaded HTML (replace pages subfolders with root)
+    html_content = html_content.replace('../../node_modules/', 'node_modules/')
+    html_content = html_content.replace('../../assets/', 'assets/')
+    html_content = html_content.replace('../market/', '')
+    html_content = html_content.replace('../portfolio/', '')
+    html_content = html_content.replace('../transactions/', '')
+    html_content = html_content.replace('../settings/', '')
+    html_content = html_content.replace('conectar_carteira.html', 'index.html')
     
     # Process classes
     def replace_classes(match):
@@ -147,13 +156,13 @@ def convert_to_bootstrap(html_content):
 repo_root = '/home/vinicius/Projetos/crypto-sandbox'
 
 output_dirs = {
-    'negociacao.html': 'pages/market',
-    'conectar_carteira.html': 'pages/market',
-    'portfolio.html': 'pages/portfolio',
-    'transacoes.html': 'pages/transactions',
-    'conf_seguranca.html': 'pages/settings',
-    'conf_preferencias.html': 'pages/settings',
-    'conf_perfil.html': 'pages/settings'
+    'negociacao.html': '',
+    'index.html': '',
+    'portfolio.html': '',
+    'transacoes.html': '',
+    'conf_seguranca.html': '',
+    'conf_preferencias.html': '',
+    'conf_perfil.html': ''
 }
 
 for filename, url in screens.items():

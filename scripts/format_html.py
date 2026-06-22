@@ -103,19 +103,14 @@ def format_file(path):
 
 
 def main():
-    base = os.path.join(os.path.dirname(__file__), '..')
-    pages_dir = os.path.join(base, 'pages')
-    if not os.path.isdir(pages_dir):
-        print('No pages/ directory found.', file=sys.stderr)
-        sys.exit(1)
-    for root, dirs, files in os.walk(pages_dir):
-        for name in files:
-            if name.lower().endswith('.html'):
-                path = os.path.join(root, name)
-                try:
-                    format_file(path)
-                except Exception as e:
-                    print('Error formatting', path, e, file=sys.stderr)
+    base = os.path.normpath(os.path.join(os.path.dirname(__file__), '..'))
+    for name in os.listdir(base):
+        if name.lower().endswith('.html'):
+            path = os.path.join(base, name)
+            try:
+                format_file(path)
+            except Exception as e:
+                print('Error formatting', path, e, file=sys.stderr)
 
 if __name__ == '__main__':
     main()
