@@ -72,6 +72,7 @@ O site usa o bundle oficial do Bootstrap com um tema escuro personalizado em [cu
 - **jQuery 4.0.0** - Biblioteca JavaScript para manipulação do DOM
 - **uuid 13.0.0** - Geração de identificadores únicos
 - **gh-pages 6.3.0** *(dev)* - Deploy para GitHub Pages
+- **json-server 0.17.4** *(dev)* - API fake para simulação de dados
 - **CoinGecko API (v3)** - Dados reais de criptomoedas em tempo real
 - **Fetch API (nativa)** - Requisições assíncronas
 - **localStorage (nativo)** - Armazenamento local no navegador
@@ -89,16 +90,16 @@ O site usa o bundle oficial do Bootstrap com um tema escuro personalizado em [cu
 - [x] ID 06 - Aplicação de Design System
 - [x] ID 07 - Uso de SCSS
 - [x] ID 08 - Tipografia responsiva
-- [ ] ID 09 - Responsividade de imagens
-- [ ] ID 10 - Otimização de imagens
+- [x] ID 09 - Responsividade de imagens
+- [x] ID 10 - Otimização de imagens
 
 ---
 
 ### 📝 RA2 - Formulários e Validações
-- [ ] ID 11 - Validação HTML nativa
-- [ ] ID 12 - Validação com REGEX
+- [x] ID 11 - Validação HTML nativa
+- [x] ID 12 - Validação com REGEX
 - [x] ID 13 - Uso de checkbox/radio/select
-- [ ] ID 14 - Persistência com localStorage
+- [x] ID 14 - Persistência com localStorage
 
 ---
 
@@ -112,15 +113,15 @@ O site usa o bundle oficial do Bootstrap com um tema escuro personalizado em [cu
 ---
 
 ### 🧠 RA4 - JavaScript e Interatividade
-- [ ] ID 20 - Uso de jQuery
-- [ ] ID 21 - Plugin jQuery (ex: máscara de input)
+- [x] ID 20 - Uso de jQuery
+- [x] ID 21 - Plugin jQuery (ex: máscara de input)
 
 ---
 
 ### 🌐 RA5 - APIs e Requisições
-- [ ] ID 22 - Requisições para API fake (JSON Server)
-- [ ] ID 23 - Exibição de dados da API fake
-- [ ] ID 24 - Integração com API pública (criptomoedas)
+- [x] ID 22 - Requisições para API fake (JSON Server)
+- [x] ID 23 - Exibição de dados da API fake
+- [x] ID 24 - Integração com API pública (criptomoedas)
 
 ---
 
@@ -199,6 +200,42 @@ python3 scripts/convert.py
 ```
 
 Aviso: `scripts/convert.py` baixa conteúdo da internet — use com cuidado.
+
+## 🔌 API Fake (JSON Server)
+
+O projeto usa `json-server` para simular uma API REST com dados de criptomoedas, portfólio e transações.
+
+### Iniciar o servidor fake:
+
+```bash
+npm run api
+# Servidor disponível em http://localhost:3001
+```
+
+### Endpoints disponíveis:
+
+| Endpoint | Descrição |
+|---|---|
+| `GET /assets` | Lista de criptomoedas com preços e saldos |
+| `GET /portfolio` | Resumo do portfólio (valor total, lucro, alocação) |
+| `GET /market` | Dados de mercado do ativo selecionado |
+| `GET /transactions` | Histórico de transações |
+| `GET /summary` | Resumo de compras, vendas e taxas (30d) |
+
+### Servidor completo (API + frontend):
+
+```bash
+npm run dev
+# API em http://localhost:3001
+# Frontend em http://localhost:8000
+```
+
+As páginas com `data-page` (`portfolio.html`, `negociacao.html`, `transacoes.html`) consomem automaticamente os dados da API fake quando o servidor está rodando.
+
+## 🌐 API Pública (CoinGecko)
+
+Além da API fake, o projeto integra a **CoinGecko API v3** para exibir preços reais atualizados de criptomoedas.  
+Os elementos com atributos `data-cg` e `data-cg-field` são preenchidos automaticamente com dados ao vivo quando a página carrega.
 
 ## 📄 Histórico de Mudanças Relevantes
 

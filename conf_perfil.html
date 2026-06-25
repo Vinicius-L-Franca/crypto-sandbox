@@ -539,49 +539,51 @@
             </div>
           </section>
           <section class="panel form-shell">
-            <div class="panel-header">
-              <h2 class="panel-heading">
-                Informações Pessoais
-              </h2>
-              <a class="edit-link" href="#">
-                <span class="material-symbols-outlined" style="font-size:1rem;">
-                  edit
-                </span>
-                Editar Tudo
-              </a>
-            </div>
-            <div class="field-group">
-              <div class="field-label">
-                Nome Completo
+            <form novalidate>
+              <div class="panel-header">
+                <h2 class="panel-heading">
+                  Informações Pessoais
+                </h2>
+                <a class="edit-link" href="#">
+                  <span class="material-symbols-outlined" style="font-size:1rem;">
+                    edit
+                  </span>
+                  Editar Tudo
+                </a>
               </div>
-              <input class="input-cs" type="text" value="Alexandre Silva" aria-label="Nome completo" />
-            </div>
-            <div class="row g-3">
-              <div class="col-12 col-md-6">
-                <div class="field-group mb-0">
-                  <div class="field-label">
-                    E-mail
+              <div class="field-group">
+                <div class="field-label">
+                  Nome Completo
+                </div>
+                <input class="input-cs" type="text" name="nome" id="nome" value="Alexandre Silva" aria-label="Nome completo" required minlength="3" maxlength="100" />
+              </div>
+              <div class="row g-3">
+                <div class="col-12 col-md-6">
+                  <div class="field-group mb-0">
+                    <div class="field-label">
+                      E-mail
+                    </div>
+                    <input class="input-cs" type="email" name="email" id="email" value="alexandre.silva@cryptosandbox.io" aria-label="E-mail" required />
                   </div>
-                  <input class="input-cs" type="email" value="alexandre.silva@cryptosandbox.io" aria-label="E-mail" />
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="field-group mb-0">
+                    <div class="field-label">
+                      Telefone
+                    </div>
+                    <input class="input-cs" type="tel" name="telefone" id="telefone" value="+55 11 99999-0000" aria-label="Telefone" required pattern="[\+\d\s()-]{8,}" />
+                  </div>
                 </div>
               </div>
-              <div class="col-12 col-md-6">
-                <div class="field-group mb-0">
-                  <div class="field-label">
-                    Telefone
-                  </div>
-                  <input class="input-cs" type="text" value="+55 11 99999-0000" aria-label="Telefone" />
-                </div>
+              <div class="actions-row">
+                <a class="link-cs" href="#">
+                  Cancelar
+                </a>
+                <button type="submit" class="btn-primary-cs">
+                  Salvar Alterações
+                </button>
               </div>
-            </div>
-            <div class="actions-row">
-              <a class="link-cs" href="#">
-                Cancelar
-              </a>
-              <button class="btn-primary-cs">
-                Salvar Alterações
-              </button>
-            </div>
+            </form>
           </section>
         </div>
       </div>
@@ -629,11 +631,14 @@
         </div>
       </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-
-
-    
-    
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js">
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="scripts/validacao.js"></script>
+    <script src="scripts/storage.js"></script>
+    <script src="scripts/jquery-init.js"></script>
   </body>
 </html>

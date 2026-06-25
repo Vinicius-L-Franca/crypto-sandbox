@@ -932,3 +932,16 @@ h1, h2, h3, h4, h5, h6,
 .backdrop-blur-xl { backdrop-filter: blur(24px); }
 .hover\:opacity-100:hover { opacity: 1 !important; }
 .hover\:bg-surface-high:hover { background-color: var(--cs-surface-high) !important; }
+
+.error-message {
+  display: block;
+  color: #f87171;
+  font-size: 0.7rem;
+  margin-top: 0.25rem;
+}
+
+input.invalid,
+select.invalid {
+  border-color: #f87171 !important;
+  box-shadow: 0 0 0 1px #f87171 !important;
+}

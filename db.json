@@ -1,0 +1,185 @@
+{
+  "assets": [
+    {
+      "id": "bitcoin",
+      "rank": 1,
+      "symbol": "BTC",
+      "name": "Bitcoin",
+      "image": "https://assets.coingecko.com/coins/images/1/small/bitcoin.png",
+      "current_price": 64231.50,
+      "price_change_24h": 1502.45,
+      "price_change_percentage_24h": 2.4,
+      "market_cap": 1250000000000,
+      "total_volume": 42000000000,
+      "high_24h": 65100.00,
+      "low_24h": 62700.00,
+      "balance": 0.3304,
+      "avg_cost": 58420.00,
+      "profit_loss": 1940.21,
+      "profit_loss_percent": 10.05
+    },
+    {
+      "id": "ethereum",
+      "rank": 2,
+      "symbol": "ETH",
+      "name": "Ethereum",
+      "image": "https://assets.coingecko.com/coins/images/279/small/ethereum.png",
+      "current_price": 3452.80,
+      "price_change_24h": 89.50,
+      "price_change_percentage_24h": 2.65,
+      "market_cap": 415000000000,
+      "total_volume": 18500000000,
+      "high_24h": 3490.00,
+      "low_24h": 3360.00,
+      "balance": 3.6923,
+      "avg_cost": 3120.45,
+      "profit_loss": 1230.15,
+      "profit_loss_percent": 10.68
+    },
+    {
+      "id": "solana",
+      "rank": 5,
+      "symbol": "SOL",
+      "name": "Solana",
+      "image": "https://assets.coingecko.com/coins/images/4128/small/solana.png",
+      "current_price": 140.05,
+      "price_change_24h": -4.20,
+      "price_change_percentage_24h": -2.91,
+      "market_cap": 62000000000,
+      "total_volume": 3200000000,
+      "high_24h": 146.50,
+      "low_24h": 138.20,
+      "balance": 60.89,
+      "avg_cost": 155.20,
+      "profit_loss": -924.76,
+      "profit_loss_percent": -9.81
+    },
+    {
+      "id": "cardano",
+      "rank": 8,
+      "symbol": "ADA",
+      "name": "Cardano",
+      "image": "https://assets.coingecko.com/coins/images/975/small/cardano.png",
+      "current_price": 0.62,
+      "price_change_24h": 0.03,
+      "price_change_percentage_24h": 5.08,
+      "market_cap": 22000000000,
+      "total_volume": 1200000000,
+      "high_24h": 0.64,
+      "low_24h": 0.59,
+      "balance": 0,
+      "avg_cost": 0,
+      "profit_loss": 0,
+      "profit_loss_percent": 0
+    },
+    {
+      "id": "polkadot",
+      "rank": 10,
+      "symbol": "DOT",
+      "name": "Polkadot",
+      "image": "https://assets.coingecko.com/coins/images/12171/small/polkadot.png",
+      "current_price": 7.85,
+      "price_change_24h": -0.12,
+      "price_change_percentage_24h": -1.51,
+      "market_cap": 10500000000,
+      "total_volume": 580000000,
+      "high_24h": 8.10,
+      "low_24h": 7.72,
+      "balance": 0,
+      "avg_cost": 0,
+      "profit_loss": 0,
+      "profit_loss_percent": 0
+    }
+  ],
+  "portfolio": {
+    "total_value": 42500.24,
+    "total_cost": 38124.56,
+    "profit_loss": 4375.68,
+    "profit_loss_percent": 11.48,
+    "allocation": [
+      { "symbol": "BTC", "name": "Bitcoin", "percentage": 50, "color": "#17c6f8" },
+      { "symbol": "ETH", "name": "Ethereum", "percentage": 30, "color": "#47d9b3" },
+      { "symbol": "SOL", "name": "Solana", "percentage": 20, "color": "#f0c7cf" }
+    ]
+  },
+  "market": {
+    "asset": "bitcoin",
+    "symbol": "BTC",
+    "name": "Bitcoin",
+    "price": 64231.50,
+    "change_24h": 1502.45,
+    "change_percent": 2.4,
+    "chart": {
+      "labels": ["08:00 AM", "12:00 PM", "04:00 PM", "08:00 PM", "12:00 AM", "04:00 AM"],
+      "prices": [63800, 64100, 64350, 64000, 64200, 64231.50],
+      "avg_24h": [63500, 63700, 63900, 63800, 64000, 64100]
+    },
+    "max_amount": 42500.24
+  },
+  "transactions": [
+    {
+      "id": 1,
+      "date": "Out 24, 2023",
+      "time": "14:22:10",
+      "asset": "Bitcoin",
+      "symbol": "BTC",
+      "type": "Compra",
+      "quantity": 0.0425,
+      "value_usd": 1452.12,
+      "status": "Concluido"
+    },
+    {
+      "id": 2,
+      "date": "Out 23, 2023",
+      "time": "09:15:30",
+      "asset": "Ethereum",
+      "symbol": "ETH",
+      "type": "Venda",
+      "quantity": 1.25,
+      "value_usd": 2240.50,
+      "status": "Concluido"
+    },
+    {
+      "id": 3,
+      "date": "Out 22, 2023",
+      "time": "16:45:00",
+      "asset": "Solana",
+      "symbol": "SOL",
+      "type": "Compra",
+      "quantity": 45,
+      "value_usd": 1080.00,
+      "status": "Pendente"
+    },
+    {
+      "id": 4,
+      "date": "Out 20, 2023",
+      "time": "11:30:22",
+      "asset": "Cardano",
+      "symbol": "ADA",
+      "type": "Compra",
+      "quantity": 2500,
+      "value_usd": 625.00,
+      "status": "Concluido"
+    },
+    {
+      "id": 5,
+      "date": "Out 18, 2023",
+      "time": "08:05:45",
+      "asset": "Polkadot",
+      "symbol": "DOT",
+      "type": "Venda",
+      "quantity": 120,
+      "value_usd": 480.00,
+      "status": "Concluido"
+    }
+  ],
+  "summary": {
+    "total_bought_30d": 12450.00,
+    "total_sold_30d": 8210.45,
+    "total_fees_30d": 142.20,
+    "bought_change": 12,
+    "sold_change": -4,
+    "fee_savings": 22.00,
+    "total_transactions": 1240
+  }
+}

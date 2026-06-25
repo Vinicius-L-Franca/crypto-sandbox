@@ -12,7 +12,9 @@
     "dev:css": "sass --watch scss:assets/css",
     "format:html": "python3 scripts/format_html.py",
     "lint": "eslint . --ext .js",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "api": "json-server --watch db.json --port 3001",
+    "dev": "json-server --watch db.json --port 3001 & sleep 1 && python3 -m http.server --directory . 8000"
   },
   "repository": {
     "type": "git",
@@ -32,9 +34,10 @@
     "uuid": "^13.0.0"
   },
   "devDependencies": {
-    "gh-pages": "^6.3.0",
-    "sass": "^1.73.0",
     "eslint": "^8.50.0",
-    "prettier": "^2.8.8"
+    "gh-pages": "^6.3.0",
+    "json-server": "^0.17.4",
+    "prettier": "^2.8.8",
+    "sass": "^1.73.0"
   }
 }

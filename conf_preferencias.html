@@ -410,97 +410,105 @@
           </a>
         </div>
         <div class="prefs-grid">
-          <section class="panel">
-            <h2 class="panel-heading">
-              Configurações Gerais
-            </h2>
-            <div class="stack-gap">
-              <div>
-                <div class="field-label">
-                  Moeda Principal
-                </div>
-                <select class="select-cs" aria-label="Moeda principal">
-                  <option>
-                    USD (Dólar Americano)
-                  </option>
-                  <option>
-                    BRL (Real Brasileiro)
-                  </option>
-                  <option>
-                    EUR (Euro)
-                  </option>
-                </select>
-              </div>
-              <div>
-                <div class="field-label">
-                  Idioma
-                </div>
-                <select class="select-cs" aria-label="Idioma">
-                  <option>
-                    Português (Brasil)
-                  </option>
-                  <option>
-                    English
-                  </option>
-                  <option>
-                    Español
-                  </option>
-                </select>
-              </div>
-            </div>
-          </section>
-          <section class="stack-gap">
-            <div class="panel">
+          <form novalidate>
+            <section class="panel">
               <h2 class="panel-heading">
-                Aparência
+                Configurações Gerais
               </h2>
-              <div class="field-label">
-                Tema
+              <div class="stack-gap">
+                <div>
+                  <div class="field-label">
+                    Moeda Principal
+                  </div>
+                  <select class="select-cs" name="moeda" id="moeda" aria-label="Moeda principal" required>
+                    <option value="">
+                      Selecione...
+                    </option>
+                    <option value="USD">
+                      USD (Dólar Americano)
+                    </option>
+                    <option value="BRL">
+                      BRL (Real Brasileiro)
+                    </option>
+                    <option value="EUR">
+                      EUR (Euro)
+                    </option>
+                  </select>
+                </div>
+                <div>
+                  <div class="field-label">
+                    Idioma
+                  </div>
+                  <select class="select-cs" name="idioma" id="idioma" aria-label="Idioma" required>
+                    <option value="">
+                      Selecione...
+                    </option>
+                    <option value="pt-BR">
+                      Português (Brasil)
+                    </option>
+                    <option value="en">
+                      English
+                    </option>
+                    <option value="es">
+                      Español
+                    </option>
+                  </select>
+                </div>
               </div>
-              <div class="theme-grid">
-                <div class="theme-card active">
-                  <span class="material-symbols-outlined">
-                    dark_mode
-                  </span>
+            </section>
+            <section class="stack-gap">
+              <div class="panel">
+                <h2 class="panel-heading">
+                  Aparência
+                </h2>
+                <div class="field-label">
+                  Tema
+                </div>
+                <div class="theme-grid">
+                  <div class="theme-card active">
+                    <span class="material-symbols-outlined">
+                      dark_mode
+                    </span>
+                    <span>
+                      Escuro
+                    </span>
+                  </div>
+                  <div class="theme-card">
+                    <span class="material-symbols-outlined">
+                      light_mode
+                    </span>
+                    <span>
+                      Claro
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="panel">
+                <h2 class="panel-heading">
+                  Notificações
+                </h2>
+                <div class="toggle-row">
                   <span>
-                    Escuro
+                    Alertas por Email
+                  </span>
+                  <span class="switch on" aria-hidden="true">
                   </span>
                 </div>
-                <div class="theme-card">
-                  <span class="material-symbols-outlined">
-                    light_mode
-                  </span>
+                <div class="toggle-row">
                   <span>
-                    Claro
+                    Notificações Push (Web)
+                  </span>
+                  <span class="switch" aria-hidden="true">
                   </span>
                 </div>
               </div>
-            </div>
-            <div class="panel">
-              <h2 class="panel-heading">
-                Notificações
-              </h2>
-              <div class="toggle-row">
-                <span>
-                  Alertas por Email
-                </span>
-                <span class="switch on" aria-hidden="true">
-                </span>
+              <div class="save-row">
+                <button type="submit" class="btn-primary-cs">
+                  Salvar Alterações
+                </button>
               </div>
-              <div class="toggle-row">
-                <span>
-                  Notificações Push (Web)
-                </span>
-                <span class="switch" aria-hidden="true">
-                </span>
-              </div>
-            </div>
-            <div class="save-row">
-              <button class="btn-primary-cs">
-                Salvar Alterações
-              </button>
-            </div>
-          </section>
+            </section>
+          </form>
         </div>
       </div>
     </main>
@@ -547,11 +555,12 @@
         </div>
       </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-
-
-    
-    
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="scripts/validacao.js"></script>
+    <script src="scripts/storage.js"></script>
+    <script src="scripts/jquery-init.js"></script>
   </body>
 </html>
