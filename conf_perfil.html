@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html class="dark" lang="pt-BR">
+<html class="dark" lang="pt-BR" data-bs-theme="dark">
   <head>
     <meta charset="utf-8" />
+    <script>(function(){try{var p=JSON.parse(localStorage.getItem('cs_preferences')||'{}');if(p.tema==='light'){document.documentElement.className='light';document.documentElement.dataset.bsTheme='light';}}catch(e){}})();</script>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>
       Perfil - Crypto Sandbox
     </title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="assets/css/tema.css" rel="stylesheet" />
     <style>
 
 
@@ -385,6 +387,13 @@
 
     .input-cs::placeholder { color: #8494af; }
 
+    .input-cs[readonly] {
+        opacity: .45;
+        cursor: not-allowed;
+    }
+
+    .avatar-edit { cursor: pointer; }
+
     .actions-row {
         display: flex;
         justify-content: flex-end;
@@ -410,6 +419,12 @@
         box-shadow: 0 0 18px rgba(0,212,255,.18);
     }
 
+    .btn-primary-cs:disabled {
+        opacity: .35;
+        cursor: not-allowed;
+        box-shadow: none;
+    }
+
     @media (max-width: 767.98px) {
         .page-shell { padding-left: .75rem; padding-right: .75rem; }
         .profile-card { min-height: auto; }
@@ -431,7 +446,7 @@
           <a href="index.html" class="brand flex-shrink-0">
             Crypto Sandbox
           </a>
-          <nav class="d-none d-lg-flex align-items-center gap-1 mx-3">
+          <nav class="d-none d-md-flex align-items-center gap-1 mx-3">
             <a href="negociacao.html" class="nav-pill">
               Mercado
             </a>
@@ -451,17 +466,28 @@
                 Patrimônio Total
               </span>
               <span class="patrimony-value">
-                $42,500.24
+                $0.00
               </span>
             </div>
-            <button class="icon-btn">
-              <span class="material-symbols-outlined" style="font-size:1.25rem;">
-                notifications
-              </span>
-            </button>
-            <a href="index.html" class="btn-connect">
-              Conectar Carteira
-            </a>
+            <span class="patrimony-value d-none d-sm-flex d-md-none me-2">$0.00</span>
+            <div class="position-relative d-inline-block" id="notif-wrap">
+              <button class="icon-btn" id="notif-btn">
+                <span class="material-symbols-outlined" style="font-size:1.25rem;">
+                  notifications
+                </span>
+              </button>
+              <div id="notif-panel" class="notif-panel d-none">
+                <div class="notif-header d-flex align-items-center justify-content-between px-3 py-2">
+                  <span style="font-weight:600;font-size:.82rem;">Notificações</span>
+                </div>
+                <div class="notif-body px-3 py-3" id="notif-body" style="max-height:300px;overflow-y:auto;">
+                  <div class="notif-empty" style="text-align:center;color:var(--muted);font-size:.82rem;padding:1.5rem 0;">
+                    Nenhuma notificação
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a href="index.html" class="btn-connect" id="wallet-btn">Conectar Carteira</a>
           </div>
         </div>
       </div>
@@ -499,7 +525,7 @@
         <div class="profile-grid">
           <section class="panel profile-card">
             <div class="avatar-wrap">
-              <div class="avatar">
+              <div class="avatar" id="avatarPreview">
                 <svg viewbox="0 0 100 100" aria-hidden="true">
                   <circle cx="50" cy="37" r="16" fill="#ffcfa8">
                   </circle>
@@ -515,17 +541,18 @@
                   </circle>
                 </svg>
               </div>
-              <div class="avatar-edit">
+              <div class="avatar-edit" id="avatarEditBtn">
                 <span class="material-symbols-outlined" style="font-size:1rem;">
                   edit
                 </span>
               </div>
+              <input type="file" id="avatarInput" accept="image/*" style="display:none" />
             </div>
             <div class="profile-name">
-              Alexandre Silva
+              Usuário
             </div>
             <div class="profile-level">
-              Nível: Explorer
+              Nível: Iniciante
             </div>
             <div class="divider">
             </div>
@@ -534,7 +561,7 @@
                 Membro desde
               </span>
               <span>
-                Out 2023
+                —
               </span>
             </div>
           </section>
@@ -548,14 +575,14 @@
                   <span class="material-symbols-outlined" style="font-size:1rem;">
                     edit
                   </span>
-                  Editar Tudo
+                  Editar
                 </a>
               </div>
               <div class="field-group">
                 <div class="field-label">
                   Nome Completo
                 </div>
-                <input class="input-cs" type="text" name="nome" id="nome" value="Alexandre Silva" aria-label="Nome completo" required minlength="3" maxlength="100" />
+                <input class="input-cs" type="text" name="nome" id="nome" value="" placeholder="Seu nome completo" aria-label="Nome completo" required minlength="3" maxlength="100" readonly />
               </div>
               <div class="row g-3">
                 <div class="col-12 col-md-6">
@@ -563,7 +590,7 @@
                     <div class="field-label">
                       E-mail
                     </div>
-                    <input class="input-cs" type="email" name="email" id="email" value="alexandre.silva@cryptosandbox.io" aria-label="E-mail" required />
+                    <input class="input-cs" type="email" name="email" id="email" value="" placeholder="seu@email.com" aria-label="E-mail" required readonly />
                   </div>
                 </div>
                 <div class="col-12 col-md-6">
@@ -571,15 +598,15 @@
                     <div class="field-label">
                       Telefone
                     </div>
-                    <input class="input-cs" type="tel" name="telefone" id="telefone" value="+55 11 99999-0000" aria-label="Telefone" required pattern="[\+\d\s()-]{8,}" />
+                    <input class="input-cs" type="tel" name="telefone" id="telefone" value="" placeholder="+55 11 99999-9999" aria-label="Telefone" required pattern="[\+\d\s()-]{8,}" readonly />
                   </div>
                 </div>
               </div>
               <div class="actions-row">
-                <a class="link-cs" href="#">
+                <a class="link-cs" href="#" id="cancelBtn">
                   Cancelar
                 </a>
-                <button type="submit" class="btn-primary-cs">
+                <button type="submit" class="btn-primary-cs" disabled>
                   Salvar Alterações
                 </button>
               </div>
@@ -626,7 +653,7 @@
       <div class="container-fluid px-4 py-4" style="max-width:1440px;">
         <div class="d-flex flex-column align-items-center gap-2" style="opacity:.6;">
           <p class="m-0" style="font-size:.75rem; color:var(--muted);">
-            © 2026 Crypto Sandbox Protocol. Todos os direitos reservados.
+            © 2026 Crypto Sandbox. Todos os direitos reservados.
           </p>
         </div>
       </div>
@@ -639,6 +666,43 @@
     </script>
     <script src="scripts/validacao.js"></script>
     <script src="scripts/storage.js"></script>
+    <script src="scripts/api.js"></script>
     <script src="scripts/jquery-init.js"></script>
+    <script>
+      (function () {
+        var avatarInput = document.getElementById('avatarInput');
+        var avatarPreview = document.getElementById('avatarPreview');
+        var editBtn = document.getElementById('avatarEditBtn');
+        var cancelBtn = document.getElementById('cancelBtn');
+
+        var savedAvatar = localStorage.getItem('cs_avatar');
+        if (savedAvatar) {
+          avatarPreview.style.background = 'url(' + savedAvatar + ') center/cover no-repeat';
+          avatarPreview.querySelector('svg').style.display = 'none';
+        }
+
+        editBtn.addEventListener('click', function () {
+          avatarInput.click();
+        });
+
+        avatarInput.addEventListener('change', function () {
+          var file = avatarInput.files[0];
+          if (!file) return;
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            var dataUrl = e.target.result;
+            avatarPreview.style.background = 'url(' + dataUrl + ') center/cover no-repeat';
+            avatarPreview.querySelector('svg').style.display = 'none';
+            localStorage.setItem('cs_avatar', dataUrl);
+          };
+          reader.readAsDataURL(file);
+        });
+
+        cancelBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          location.reload();
+        });
+      })();
+    </script>
   </body>
 </html>

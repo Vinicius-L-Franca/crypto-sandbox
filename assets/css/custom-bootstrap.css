@@ -945,3 +945,70 @@ select.invalid {
   border-color: #f87171 !important;
   box-shadow: 0 0 0 1px #f87171 !important;
 }
+
+.notif-panel {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 320px;
+  background: #131e34;
+  border: 1px solid rgba(255, 255, 255, .06);
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, .5);
+  z-index: 350;
+  margin-top: 8px;
+}
+
+.notif-panel::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: 18px;
+  width: 12px;
+  height: 12px;
+  background: #131e34;
+  border-top: 1px solid rgba(255, 255, 255, .06);
+  border-left: 1px solid rgba(255, 255, 255, .06);
+  transform: rotate(45deg);
+}
+
+.notif-header {
+  border-bottom: 1px solid rgba(255, 255, 255, .06);
+}
+
+html.light .notif-panel {
+  background: #fff;
+  border-color: rgba(0, 0, 0, .08);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, .12);
+}
+
+html.light .notif-panel::before {
+  background: #fff;
+  border-color: rgba(0, 0, 0, .08);
+}
+
+html.light .notif-header {
+  border-color: rgba(0, 0, 0, .06);
+}
+
+@media (max-width: 767.98px) {
+  .notif-panel {
+    position: fixed;
+    top: 62px;
+    right: 12px;
+    left: 12px;
+    width: auto;
+    margin-top: 0;
+  }
+
+  .notif-panel::before {
+    right: 26px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .nav-pill {
+    padding: 0.3rem 0.4rem;
+    font-size: 0.7rem;
+  }
+}

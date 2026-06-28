@@ -1,0 +1,242 @@
+html.light {
+  --bg: #f0f2f5;
+  --surface: #ffffff;
+  --surface2: #f5f7fa;
+  --surface3: #eef0f4;
+  --border: rgba(0, 0, 0, 0.08);
+  --text: #1a1d24;
+  --muted: rgba(0, 0, 0, 0.45);
+  --cyan-glow: rgba(0, 212, 255, 0.35);
+}
+
+html.light body {
+  color: var(--text);
+}
+
+html.light .topbar {
+  background: rgba(255, 255, 255, 0.88);
+}
+
+html.light .brand {
+  text-shadow: 0 0 18px rgba(0, 212, 255, 0.35);
+}
+
+html.light .nav-pill {
+  --muted: rgba(0, 0, 0, 0.5);
+}
+
+html.light .nav-pill:hover {
+  color: #000;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+html.light .nav-pill.active {
+  color: #009fc0;
+}
+
+html.light .patrimony-value {
+  color: #009fc0;
+  text-shadow: 0 0 12px rgba(0, 212, 255, 0.2);
+}
+
+html.light .mobile-nav {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+html.light .mnav-link.active {
+  color: #009fc0;
+}
+
+html.light .section-title {
+  color: #1a1d24;
+}
+
+html.light .section-subtitle {
+  color: #5a6a7d;
+}
+
+html.light .tab-link {
+  color: #5a6a7d;
+}
+
+html.light .tab-link.active {
+  color: #009fc0;
+  border-bottom-color: #009fc0;
+}
+
+html.light .panel {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.07);
+}
+
+html.light .panel-heading {
+  color: #1a1d24;
+}
+
+html.light .field-label {
+  color: #5a6a7d;
+}
+
+html.light .select-cs {
+  background: #f0f2f5;
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #1a1d24;
+}
+
+html.light .theme-card {
+  background: #f0f2f5;
+  border-color: rgba(0, 0, 0, 0.07);
+  color: #5a6a7d;
+}
+
+html.light .theme-card.active {
+  border-color: #009fc0;
+  color: #1a1d24;
+  box-shadow: inset 0 0 0 1px rgba(0, 159, 192, 0.25);
+}
+
+html.light .toggle-row {
+  color: #1a1d24;
+}
+
+html.light .icon-btn:hover {
+  color: #000;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+html.light .btn-connect {
+  color: #fff;
+}
+
+.btn-connect.connected {
+  background: rgba(0, 212, 255, 0.12) !important;
+  color: var(--cyan) !important;
+  box-shadow: none !important;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: .8rem;
+  letter-spacing: 0;
+}
+
+html.light .btn-primary-cs {
+  color: #fff;
+}
+
+html.light .patrimony-label {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+html.light .switch {
+  background: #c0c8d0;
+}
+
+html.light .switch::after {
+  background: #ffffff;
+}
+
+html.light .switch.on {
+  background: #17c6f8;
+}
+
+html.light .switch.on::after {
+  background: #ffffff;
+}
+
+html.light footer {
+  border-top-color: var(--border) !important;
+}
+
+html.light .wallet-overlay {
+  background: rgba(240, 242, 245, 0.85);
+}
+
+html.light .wallet-overlay .status-text {
+  color: #1a1d24;
+}
+
+html.light .connected-state .wallet-badge {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.07);
+}
+
+html.light .connected-state .wallet-badge span {
+  color: #1a1d24 !important;
+}
+
+html.light .connected-state .full-addr {
+  background: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.5);
+}
+
+html.light .asset-dropdown {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+html.light .asset-option {
+  color: #1a1d24;
+}
+
+html.light .asset-option:hover {
+  background: rgba(0, 212, 255, 0.08);
+}
+
+html.light .chart-pin {
+  background: #ffffff;
+  color: #1a1d24;
+  border-color: rgba(0, 212, 255, 0.5);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+html.light .chart-wrap {
+  background: #f0f2f5;
+  border-radius: 6px;
+}
+
+html.light .asset-btn {
+  background: #f0f2f5;
+  border-color: rgba(0, 0, 0, 0.07);
+}
+
+html.light .change-badge {
+  color: #1a1d24;
+}
+
+html.light .tf-btn {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+html.light .tf-btn.active {
+  color: #009fc0;
+}
+
+html.light .tx-row:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+html.light .cs-card-dark {
+  background: #f5f7fa;
+}
+
+html.light .info-row .label {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+html.light .info-row .value {
+  color: #1a1d24;
+}
+
+html.light .amount-input {
+  background: #f0f2f5;
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #1a1d24;
+}
+
+html.light .btn-confirm {
+  color: #fff;
+}
+
+html.light .error-alert {
+  background: rgba(220, 53, 69, 0.08);
+  color: #b02a37;
+  border-color: rgba(220, 53, 69, 0.2);
+}

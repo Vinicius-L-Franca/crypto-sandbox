@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html class="dark" lang="pt-br">
+<html class="dark" lang="pt-br" data-bs-theme="dark">
   <head>
     <meta charset="utf-8" />
+    <script>(function(){try{var p=JSON.parse(localStorage.getItem('cs_preferences')||'{}');if(p.tema==='light'){document.documentElement.className='light';document.documentElement.dataset.bsTheme='light';}}catch(e){}})();</script>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>
       Portfólio | Crypto Sandbox
     </title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="assets/css/tema.css" rel="stylesheet" />
     <style>
 
 
@@ -334,7 +336,7 @@
             width: 132px;
             height: 132px;
             border-radius: 50%;
-            background: conic-gradient(#17c6f8 0 50%, #47d9b3 50% 80%, #f0c7cf 80% 100%);
+            background: #1b2742;
             position: relative;
             flex-shrink: 0;
         }
@@ -374,7 +376,8 @@
             margin-right: .45rem;
         }
 
-        .table-wrap {
+        .table-wrap,
+        .table-scroll {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
         }
@@ -609,7 +612,7 @@
           <a href="index.html" class="brand flex-shrink-0">
             Crypto Sandbox
           </a>
-          <nav class="d-none d-lg-flex align-items-center gap-1 mx-3">
+          <nav class="d-none d-md-flex align-items-center gap-1 mx-3">
             <a href="negociacao.html" class="nav-pill">
               Mercado
             </a>
@@ -629,443 +632,158 @@
                 Patrimônio Total
               </span>
               <span class="patrimony-value">
-                $42,500.24
+                $0.00
               </span>
             </div>
-            <button class="icon-btn">
-              <span class="material-symbols-outlined" style="font-size:1.25rem;">
-                notifications
-              </span>
-            </button>
-            <a href="index.html" class="btn-connect">
-              Conectar Carteira
-            </a>
+            <span class="patrimony-value d-none d-sm-flex d-md-none me-2">$0.00</span>
+            <div class="position-relative d-inline-block" id="notif-wrap">
+              <button class="icon-btn" id="notif-btn">
+                <span class="material-symbols-outlined" style="font-size:1.25rem;">
+                  notifications
+                </span>
+              </button>
+              <div id="notif-panel" class="notif-panel d-none">
+                <div class="notif-header d-flex align-items-center justify-content-between px-3 py-2">
+                  <span style="font-weight:600;font-size:.82rem;">Notificações</span>
+                </div>
+                <div class="notif-body px-3 py-3" id="notif-body" style="max-height:300px;overflow-y:auto;">
+                  <div class="notif-empty" style="text-align:center;color:var(--muted);font-size:.82rem;padding:1.5rem 0;">
+                    Nenhuma notificação
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a href="index.html" class="btn-connect" id="wallet-btn">Conectar Carteira</a>
           </div>
         </div>
       </div>
     </header>
     <main class="portfolio-main">
       <div class="portfolio-container">
-        <section class="hero-grid mb-4 mb-md-5">
-          <article class="card-soft p-4 p-md-5">
+        <section class="hero-grid mb-3">
+          <article class="card-soft p-3 p-md-4">
             <div class="kicker">
               Patrimônio Líquido
             </div>
-            <div class="balance-big">
-              $42,500.24
+            <div class="d-flex align-items-center gap-2">
+              <div class="balance-big">
+                $0.00
+              </div>
+              <span class="material-symbols-outlined" style="font-size:1.4rem; color:var(--muted); cursor:pointer; margin-top:.4rem;" title="Clique para editar" id="edit-balance-icon">
+                edit
+              </span>
             </div>
             <div class="d-flex align-items-center gap-2 gap-md-3 flex-wrap">
-              <span class="gain-badge">
-                <span class="material-symbols-outlined" style="font-size:.9rem; font-variation-settings:'FILL' 1;">
-                  trending_up
+              <span class="gain-badge" id="gainBadge">
+                <span class="material-symbols-outlined" style="font-size:.9rem; font-variation-settings:'FILL' 1;" id="gainIcon">
+                  trending_flat
                 </span>
-                +12.4%
+                <span id="gainPct">0.0%</span>
               </span>
-              <span class="gain-note">
+              <span class="gain-note" id="gainNote">
                 Lucro nos últimos 30 dias:
-                <b>
-                  +$4,680.12
+                <b id="gainVal">
+                  $0.00
                 </b>
               </span>
             </div>
-            <div class="d-flex gap-2 mt-4">
-              <button class="mini-btn">
-                Depositar
-              </button>
-              <button class="mini-btn">
-                Sacar
-              </button>
-            </div>
           </article>
-          <article class="card-soft p-4 p-md-5">
-            <h3 class="font-headline fw-bold mb-4" style="font-size:1.35rem;">
+          <article class="card-soft p-3 p-md-4">
+            <div class="kicker mb-2">
               Distribuição de Ativos
-            </h3>
-            <div class="alloc-wrap">
-              <div class="alloc-donut">
-              </div>
-              <div class="alloc-list">
-                <div class="alloc-row">
-                  <span>
-                    <span class="alloc-dot" style="background:#17c6f8;">
-                    </span>
-                    Bitcoin
-                  </span>
-                  <strong>
-                    50%
-                  </strong>
-                </div>
-                <div class="alloc-row">
-                  <span>
-                    <span class="alloc-dot" style="background:#47d9b3;">
-                    </span>
-                    Ethereum
-                  </span>
-                  <strong>
-                    30%
-                  </strong>
-                </div>
-                <div class="alloc-row" style="margin-bottom:0;">
-                  <span>
-                    <span class="alloc-dot" style="background:#f0c7cf;">
-                    </span>
-                    Solana
-                  </span>
-                  <strong>
-                    20%
-                  </strong>
-                </div>
-              </div>
             </div>
+            <div class="alloc-wrap"></div>
           </article>
         </section>
-        <section class="mb-4 mb-md-5">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2 class="section-title">
-              Ativos Atuais
-            </h2>
-            <a href="#" class="text-link-cyan">
-              Ver Todos os Ativos
-            </a>
+
+        <section>
+          <div class="kicker mb-2">
+            Resumo de Performance
           </div>
-          <div class="table-wrap">
+          <div class="row g-2" id="perfCards">
+            <div class="col-6 col-md-3">
+              <div class="card-soft p-3 text-center">
+                <div class="kicker">Total Investido</div>
+                <div class="fs-5 fw-bold font-headline mt-1" id="perfInvested">$0.00</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="card-soft p-3 text-center">
+                <div class="kicker">Qtd. de Ativos</div>
+                <div class="fs-5 fw-bold font-headline mt-1" id="perfCount">0</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="card-soft p-3 text-center">
+                <div class="kicker">Lucro/Prejuízo</div>
+                <div class="fs-5 fw-bold font-headline mt-1" id="perfPL">$0.00</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="card-soft p-3 text-center">
+                <div class="kicker">Retorno</div>
+                <div class="fs-5 fw-bold font-headline mt-1" id="perfReturn">0.0%</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="kicker mb-2">
+            Carteira de Ativos
+          </div>
+          <div class="table-scroll">
             <table class="cs-table">
               <thead>
                 <tr>
-                  <th>
-                    Ativo
-                  </th>
-                  <th>
-                    Saldo
-                  </th>
-                  <th>
-                    Valor Atual
-                  </th>
-                  <th>
-                    Média de Compra
-                  </th>
-                  <th>
-                    Lucro/Prejuízo
-                  </th>
-                  <th>
-                    Ação
-                  </th>
+                  <th>Ativo</th>
+                  <th>Saldo</th>
+                  <th>Valor</th>
+                  <th>Preço Médio</th>
+                  <th>P&L</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>
-                    <div class="coin-cell">
-                      <span class="coin-icon btc">
-                        B
-                      </span>
-                      <div>
-                        <div class="coin-main">
-                          Bitcoin
-                        </div>
-                        <div class="coin-sub">
-                          BTC
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    0.3304 BTC
-                  </td>
-                  <td>
-                    <strong>
-                      $21,225.12
-                    </strong>
-                  </td>
-                  <td style="color:#90a3c0;">
-                    $58,420.00
-                  </td>
-                  <td>
-                    <div class="pnl-up">
-                      +$1,940.21
-                    </div>
-                    <div class="tiny-sub pnl-up">
-                      +10.05%
-                    </div>
-                  </td>
-                  <td>
-                    <a href="#" class="trade-link">
-                      Negociar
-                    </a>
-                  </td>
+                  <td><div class="coin-cell"><span class="coin-icon btc">₿</span><div><div class="coin-main">Bitcoin</div><div class="coin-sub">BTC</div></div></div></td>
+                  <td>0 BTC</td>
+                  <td><strong>$0.00</strong></td>
+                  <td>$0.00</td>
+                  <td>—</td>
                 </tr>
                 <tr>
-                  <td>
-                    <div class="coin-cell">
-                      <span class="coin-icon eth">
-                        E
-                      </span>
-                      <div>
-                        <div class="coin-main">
-                          Ethereum
-                        </div>
-                        <div class="coin-sub">
-                          ETH
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    3.6923 ETH
-                  </td>
-                  <td>
-                    <strong>
-                      $12,750.07
-                    </strong>
-                  </td>
-                  <td style="color:#90a3c0;">
-                    $3,120.45
-                  </td>
-                  <td>
-                    <div class="pnl-up">
-                      +$1,230.15
-                    </div>
-                    <div class="tiny-sub pnl-up">
-                      +10.68%
-                    </div>
-                  </td>
-                  <td>
-                    <a href="#" class="trade-link">
-                      Negociar
-                    </a>
-                  </td>
+                  <td><div class="coin-cell"><span class="coin-icon eth">◆</span><div><div class="coin-main">Ethereum</div><div class="coin-sub">ETH</div></div></div></td>
+                  <td>0 ETH</td>
+                  <td><strong>$0.00</strong></td>
+                  <td>$0.00</td>
+                  <td>—</td>
                 </tr>
                 <tr>
-                  <td>
-                    <div class="coin-cell">
-                      <span class="coin-icon sol">
-                        S
-                      </span>
-                      <div>
-                        <div class="coin-main">
-                          Solana
-                        </div>
-                        <div class="coin-sub">
-                          SOL
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    60.89 SOL
-                  </td>
-                  <td>
-                    <strong>
-                      $8,525.05
-                    </strong>
-                  </td>
-                  <td style="color:#90a3c0;">
-                    $155.20
-                  </td>
-                  <td>
-                    <div class="pnl-down">
-                      -$924.76
-                    </div>
-                    <div class="tiny-sub pnl-down">
-                      -9.81%
-                    </div>
-                  </td>
-                  <td>
-                    <a href="#" class="trade-link">
-                      Negociar
-                    </a>
-                  </td>
+                  <td><div class="coin-cell"><span class="coin-icon sol">◎</span><div><div class="coin-main">Solana</div><div class="coin-sub">SOL</div></div></div></td>
+                  <td>0 SOL</td>
+                  <td><strong>$0.00</strong></td>
+                  <td>$0.00</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td><div class="coin-cell"><span class="coin-icon" style="background:rgba(55,134,237,.2);color:#3786ed;">A</span><div><div class="coin-main">Cardano</div><div class="coin-sub">ADA</div></div></div></td>
+                  <td>0 ADA</td>
+                  <td><strong>$0.00</strong></td>
+                  <td>$0.00</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td><div class="coin-cell"><span class="coin-icon" style="background:rgba(230,55,135,.2);color:#e63787;">D</span><div><div class="coin-main">Polkadot</div><div class="coin-sub">DOT</div></div></div></td>
+                  <td>0 DOT</td>
+                  <td><strong>$0.00</strong></td>
+                  <td>$0.00</td>
+                  <td>—</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </section>
-        <section>
-          <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-            <h2 class="section-title">
-              Histórico de Transações
-            </h2>
-            <div class="filter-group">
-              <button class="filter-pill active">
-                Todos
-              </button>
-              <button class="filter-pill">
-                Compra
-              </button>
-              <button class="filter-pill">
-                Venda
-              </button>
-            </div>
-          </div>
-          <div class="history-box table-wrap">
-            <table class="history-table">
-              <thead>
-                <tr>
-                  <th>
-                    Data e Hora
-                  </th>
-                  <th>
-                    Ativo
-                  </th>
-                  <th>
-                    Tipo
-                  </th>
-                  <th>
-                    Quantidade
-                  </th>
-                  <th>
-                    Valor
-                  </th>
-                  <th>
-                    Status
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    24 de Mai, 2024 • 14:32
-                  </td>
-                  <td>
-                    <div class="coin-cell">
-                      <span class="coin-icon btc">
-                        B
-                      </span>
-                      <span class="coin-main" style="font-size:.88rem;">
-                        Bitcoin
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <span class="badge-type badge-buy">
-                      Compra
-                    </span>
-                  </td>
-                  <td>
-                    0.024 BTC
-                  </td>
-                  <td>
-                    <strong>
-                      $1,540.20
-                    </strong>
-                  </td>
-                  <td>
-                    <span class="status-dot" style="background:#49e0ad;">
-                    </span>
-                    <span class="status-ok">
-                      Concluído
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    22 de Mai, 2024 • 09:15
-                  </td>
-                  <td>
-                    <div class="coin-cell">
-                      <span class="coin-icon eth">
-                        E
-                      </span>
-                      <span class="coin-main" style="font-size:.88rem;">
-                        Ethereum
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <span class="badge-type badge-sell">
-                      Venda
-                    </span>
-                  </td>
-                  <td>
-                    1.50 ETH
-                  </td>
-                  <td>
-                    <strong>
-                      $5,178.00
-                    </strong>
-                  </td>
-                  <td>
-                    <span class="status-dot" style="background:#49e0ad;">
-                    </span>
-                    <span class="status-ok">
-                      Concluído
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    20 de Mai, 2024 • 18:45
-                  </td>
-                  <td>
-                    <div class="coin-cell">
-                      <span class="coin-icon sol">
-                        S
-                      </span>
-                      <span class="coin-main" style="font-size:.88rem;">
-                        Solana
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <span class="badge-type badge-buy">
-                      Compra
-                    </span>
-                  </td>
-                  <td>
-                    10.00 SOL
-                  </td>
-                  <td>
-                    <strong>
-                      $1,642.50
-                    </strong>
-                  </td>
-                  <td>
-                    <span class="status-dot" style="background:#b7c4da;">
-                    </span>
-                    <span class="status-pending">
-                      Pendente
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    18 de Mai, 2024 • 11:10
-                  </td>
-                  <td>
-                    <div class="coin-cell">
-                      <span class="coin-icon btc">
-                        B
-                      </span>
-                      <span class="coin-main" style="font-size:.88rem;">
-                        Bitcoin
-                      </span>
-                    </div>
-                  </td>
-                  <td>
-                    <span class="badge-type badge-buy">
-                      Compra
-                    </span>
-                  </td>
-                  <td>
-                    0.050 BTC
-                  </td>
-                  <td>
-                    <strong>
-                      $3,210.15
-                    </strong>
-                  </td>
-                  <td>
-                    <span class="status-dot" style="background:#49e0ad;">
-                    </span>
-                    <span class="status-ok">
-                      Concluído
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
+
       </div>
     </main>
     <nav class="mobile-nav">
@@ -1107,11 +825,70 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
     </script>
     <script src="scripts/api.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var balanceEl = document.querySelector('.balance-big');
+      var editIcon = document.getElementById('edit-balance-icon');
+      if (!balanceEl) return;
+
+      function makeEditable() {
+        var parent = balanceEl.parentElement;
+        var currentText = balanceEl.textContent;
+        var currentVal = currentText.replace(/[^0-9.,]/g, '').replace(',', '');
+        var input = document.createElement('input');
+        input.type = 'number';
+        input.step = '0.01';
+        input.min = '0';
+        input.value = currentVal;
+        input.style.background = 'transparent';
+        input.style.border = '1px solid rgba(0,212,255,.3)';
+        input.style.color = '#dbe7f8';
+        input.style.font = window.getComputedStyle(balanceEl).font;
+        input.style.width = '100%';
+        input.style.maxWidth = '320px';
+        input.style.outline = 'none';
+        input.style.borderRadius = '4px';
+        input.style.padding = '.2rem .4rem';
+        input.style.fontSize = window.getComputedStyle(balanceEl).fontSize;
+
+        balanceEl.replaceWith(input);
+        if (editIcon) editIcon.style.display = 'none';
+        input.focus();
+        input.select();
+
+        function save() {
+          var val = input.value.trim();
+          if (val === '') val = '0';
+          var raw = parseFloat(val.replace(/[^0-9.,]/g, '').replace(',', '.'));
+          var rate = (window.CURRENCY_RATES && window.CURRENCY_RATES[window.getCurrency()]) || 1;
+          var usdVal = isNaN(raw) ? 0 : raw / rate;
+          var saved = window.updateBalance(usdVal);
+          var div = document.createElement('div');
+          div.className = 'balance-big';
+          div.textContent = window.fmtCurrency(saved);
+          input.replaceWith(div);
+          if (editIcon) editIcon.style.display = '';
+          balanceEl = div;
+          balanceEl.addEventListener('click', makeEditable);
+          if (editIcon) editIcon.addEventListener('click', makeEditable);
+        }
+
+        input.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') { e.preventDefault(); save(); }
+          if (e.key === 'Escape') { save(); }
+        });
+        input.addEventListener('blur', save);
+      }
+
+      balanceEl.addEventListener('click', makeEditable);
+      if (editIcon) editIcon.addEventListener('click', makeEditable);
+    });
+    </script>
     <footer class="w-100 mt-auto" style="border-top: 1px solid var(--border);">
       <div class="container-fluid px-4 py-4" style="max-width:1440px;">
         <div class="d-flex flex-column align-items-center gap-2" style="opacity:.6;">
           <p class="m-0" style="font-size:.75rem; color:var(--muted);">
-            © 2026 Crypto Sandbox Protocol. Todos os direitos reservados.
+            © 2026 Crypto Sandbox. Todos os direitos reservados.
           </p>
         </div>
       </div>

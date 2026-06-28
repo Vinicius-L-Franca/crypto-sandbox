@@ -11,18 +11,19 @@ Todos os arquivos HTML residem diretamente na raiz do repositório (estrutura fl
 | Arquivo | Descrição |
 |---------|-----------|
 | `index.html` | Página inicial — Conectar Carteira (entrada da aplicação) |
-| `negociacao.html` | Mercado — gráficos, book de ordens, compra/venda |
-| `portfolio.html` | Portfólio — visão dos ativos do usuário |
+| `negociacao.html` | Mercado — gráfico, seletor de ativos, compra/venda |
+| `portfolio.html` | Portfólio — visão dos ativos e saldo do usuário |
 | `transacoes.html` | Histórico de transações |
 | `conf_perfil.html` | Configurações de perfil |
 | `conf_seguranca.html` | Configurações de segurança (2FA, senha) |
-| `conf_preferencias.html` | Preferências do usuário (idioma, moeda base) |
+| `conf_preferencias.html` | Preferências do usuário (idioma, moeda base, tema) |
 
 ## Assets
 
 - `assets/css/custom-bootstrap.css` — tema escuro customizado do Bootstrap 5.
 - `assets/css/main.css` — estilos globais compilados a partir do SCSS.
 - `assets/css/main.css.map` — source map do CSS compilado.
+- `assets/css/tema.css` — tema claro (overrides .light).
 
 ## SCSS
 
@@ -34,10 +35,26 @@ npm run build:css
 npm run dev:css
 ```
 
+## Scripts JavaScript (lógica da aplicação)
+
+- `scripts/api.js` — lógica principal: mercado interativo, trades, portfólio, conexão de carteira, balance, requisições API (JSON Server + CoinGecko).
+- `scripts/validacao.js` — validação de formulários com REGEX (nome, email, telefone, valor).
+- `scripts/jquery-init.js` — máscaras de input (telefone, valor) e comportamentos jQuery.
+
 ## Scripts de Manutenção
 
 - `scripts/convert.py` — baixa páginas externas, converte classes Tailwind para Bootstrap e salva os arquivos **diretamente na raiz**. Injeta links CDN do Bootstrap e normaliza todos os caminhos relativos.
 - `scripts/format_html.py` — formata com indentação todos os HTMLs encontrados na raiz (ignora `node_modules`).
+
+## Dados
+
+- `db.json` — base de dados da API fake (JSON Server), contendo assets, portfolio, market, transactions e summary.
+
+## Configuração
+
+- `package.json` — dependências e scripts npm.
+- `.eslintrc.json` — configuração do ESLint.
+- `.prettierrc` — configuração do Prettier.
 
 ## Como Validar Localmente
 

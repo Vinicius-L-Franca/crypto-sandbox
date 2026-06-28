@@ -72,12 +72,12 @@ erDiagram
 ### 🔧 Tecnologias e Dependências (Versões Exatas)
 
 **Frontend:**
-- Bootstrap 5.3.8 - Framework CSS responsivo com componentes prontos
+- Bootstrap 5.3.3 - Framework CSS responsivo com componentes prontos
 - jQuery 4.0.0 - Biblioteca JavaScript para manipulação do DOM
-- uuid 13.0.0 - Geração de identificadores únicos
 
 **APIs e Serviços:**
 - CoinGecko API v3 - Dados reais de criptomoedas em tempo real
+- ExchangeRate-API - Taxas de câmbio USD/BRL e USD/EUR em tempo real
 - Fetch API - Requisições assíncronas (suporte nativo JavaScript)
 
 **Deploy:**
@@ -85,3 +85,8 @@ erDiagram
 
 **Persistência de Dados:**
 - Web Storage (localStorage) - Armazenamento local no navegador
+- JSON Server 0.17.4 (dev) - API fake REST para simulação de dados
+
+**Qualidade:**
+- ESLint 8.x - Linter JavaScript
+- Prettier 2.x - Formatador de código

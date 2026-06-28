@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html class="dark" lang="pt-BR">
+<html class="dark" lang="pt-BR" data-bs-theme="dark">
   <head>
     <meta charset="utf-8" />
+    <script>(function(){try{var p=JSON.parse(localStorage.getItem('cs_preferences')||'{}');if(p.tema==='light'){document.documentElement.className='light';document.documentElement.dataset.bsTheme='light';}}catch(e){}})();</script>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>
       Segurança - Crypto Sandbox
@@ -9,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="assets/css/tema.css" rel="stylesheet" />
     <style>
 
 
@@ -317,6 +319,27 @@
             color: #eafcff;
         }
 
+        .btn-toggle-2fa {
+            background: transparent;
+            border: 1px solid rgba(139,220,255,.22);
+            border-radius: 4px;
+            color: #8bdcff;
+            font-weight: 600;
+            padding: .3rem .6rem;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: background .2s, border-color .2s, color .2s;
+        }
+        .btn-toggle-2fa:hover {
+            background: rgba(0, 212, 255, .08);
+            border-color: rgba(139,220,255,.38);
+        }
+        .btn-toggle-2fa.active {
+            background: rgba(15, 255, 163, .12);
+            border-color: rgba(15, 255, 163, .3);
+            color: #0fffa3;
+        }
+
         .text-link-cs,
         .danger-link-cs {
             background: transparent;
@@ -357,6 +380,8 @@
             background: rgba(45, 52, 73, 0.6);
             backdrop-filter: blur(12px);
         }
+
+        .x-small { font-size: .72rem; }
     
     
     
@@ -371,7 +396,7 @@
           <a href="index.html" class="brand flex-shrink-0">
             Crypto Sandbox
           </a>
-          <nav class="d-none d-lg-flex align-items-center gap-1 mx-3">
+          <nav class="d-none d-md-flex align-items-center gap-1 mx-3">
             <a href="negociacao.html" class="nav-pill">
               Mercado
             </a>
@@ -391,17 +416,28 @@
                 Patrimônio Total
               </span>
               <span class="patrimony-value">
-                $42,500.24
+                $0.00
               </span>
             </div>
-            <button class="icon-btn">
-              <span class="material-symbols-outlined" style="font-size:1.25rem;">
-                notifications
-              </span>
-            </button>
-            <a href="index.html" class="btn-connect">
-              Conectar Carteira
-            </a>
+            <span class="patrimony-value d-none d-sm-flex d-md-none me-2">$0.00</span>
+            <div class="position-relative d-inline-block" id="notif-wrap">
+              <button class="icon-btn" id="notif-btn">
+                <span class="material-symbols-outlined" style="font-size:1.25rem;">
+                  notifications
+                </span>
+              </button>
+              <div id="notif-panel" class="notif-panel d-none">
+                <div class="notif-header d-flex align-items-center justify-content-between px-3 py-2">
+                  <span style="font-weight:600;font-size:.82rem;">Notificações</span>
+                </div>
+                <div class="notif-body px-3 py-3" id="notif-body" style="max-height:300px;overflow-y:auto;">
+                  <div class="notif-empty" style="text-align:center;color:var(--muted);font-size:.82rem;padding:1.5rem 0;">
+                    Nenhuma notificação
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a href="index.html" class="btn-connect" id="wallet-btn">Conectar Carteira</a>
           </div>
         </div>
       </div>
@@ -450,40 +486,42 @@
                 </p>
               </div>
               <div class="d-flex align-items-center bg-surface-container-high px-3 py-2 rounded-3 shadow-sm border border-outline-variant/10">
-                <span class="x-small font-label text-uppercase tracking-widest text-secondary fw-bold">
-                  Ativado
+                <span class="x-small font-label text-uppercase tracking-widest fw-bold" id="status2fa">
+                  Desativado
                 </span>
               </div>
             </div>
             <div class="row g-3">
               <div class="col-12 col-md-6">
-                <div class="bg-surface-container-lowest p-3 rounded-3 d-flex align-items-start gap-3 border border-outline-variant/5">
+                <div class="bg-surface-container-lowest p-3 rounded-3 d-flex align-items-start gap-3 border border-outline-variant/5" data-2fa="app">
                   <span class="material-symbols-outlined text-primary-container mt-1">
                     smartphone
                   </span>
-                  <div>
+                  <div class="flex-grow-1">
                     <p class="small fw-medium text-on-surface">
                       App de Autenticação
                     </p>
-                    <p class="x-small text-on-surface-variant">
-                      Google Authenticator ou Authy configurado.
+                    <p class="x-small text-on-surface-variant status-text">
+                      Não configurado.
                     </p>
                   </div>
+                  <button class="btn-toggle-2fa x-small">Ativar</button>
                 </div>
               </div>
               <div class="col-12 col-md-6">
-                <div class="bg-surface-container-lowest p-3 rounded-3 d-flex align-items-start gap-3 border border-outline-variant/5 opacity-50">
+                <div class="bg-surface-container-lowest p-3 rounded-3 d-flex align-items-start gap-3 border border-outline-variant/5" data-2fa="sms">
                   <span class="material-symbols-outlined text-on-surface-variant mt-1">
                     sms
                   </span>
-                  <div>
+                  <div class="flex-grow-1">
                     <p class="small fw-medium text-on-surface">
                       Mensagem de Texto (SMS)
                     </p>
-                    <p class="x-small text-on-surface-variant">
-                      Não configurado (menos seguro).
+                    <p class="x-small text-on-surface-variant status-text">
+                      Não configurado.
                     </p>
                   </div>
+                  <button class="btn-toggle-2fa x-small">Ativar</button>
                 </div>
               </div>
             </div>
@@ -504,7 +542,7 @@
                   <p class="small text-on-surface-variant">
                     Última alteração:
                     <span class="text-on-surface">
-                      há 45 dias (12 Out 2026)
+                      Nunca alterada
                     </span>
                   </p>
                 </div>
@@ -515,85 +553,53 @@
             </div>
           </section>
           <!-- Active Sessions -->
-          <section class="panel">
+          <section class="panel" data-empty-section>
             <h2 class="panel-heading mb-4">
               Sessões Ativas
               &amp;
               Log de Acesso
             </h2>
             <div class="d-grid gap-3">
-              <!-- Current Session -->
-              <div class="d-flex align-items-center justify-content-between p-3 bg-surface-container-high rounded-3 border-start-4 border-secondary">
-                <div class="d-flex align-items-center gap-3">
-                  <span class="material-symbols-outlined text-on-surface-variant">
-                    laptop_mac
-                  </span>
-                  <div>
-                    <p class="small fw-medium text-on-surface">
-                      MacBook Pro — Chrome
-                    </p>
-                    <p class="x-small text-on-surface-variant">
-                      São Paulo, Brasil •
-                      <span class="text-secondary fw-medium">
-                        Esta sessão
-                      </span>
-                    </p>
-                  </div>
+              <div class="empty-state">
+                <div class="p-4 text-center text-on-surface-variant small">
+                  Nenhuma sessão ativa no momento.
                 </div>
-                <span class="text-[10px] font-label text-on-surface-variant/60 text-uppercase tracking-tighter">
-                  IP: 189.122.45.10
-                </span>
+                <div class="d-flex align-items-center justify-content-between p-3 rounded-3 border border-outline-variant/5 opacity-25" style="pointer-events:none; user-select:none;">
+                  <div class="d-flex align-items-center gap-3">
+                    <span class="material-symbols-outlined text-on-surface-variant">
+                      laptop_mac
+                    </span>
+                    <div>
+                      <p class="small fw-medium text-on-surface">
+                        MacBook Pro — Chrome
+                      </p>
+                      <p class="x-small text-on-surface-variant">
+                        São Paulo, Brasil •
+                        <span class="text-secondary fw-medium">
+                          Esta sessão
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                  <span class="text-[10px] text-on-surface-variant/60 text-uppercase">
+                    IP: 189.122.45.10
+                  </span>
+                </div>
               </div>
-              <!-- Other Sessions -->
-              <div class="d-flex align-items-center justify-content-between p-3 hover:bg-surface-container-highest/40 transition-colors rounded-3">
-                <div class="d-flex align-items-center gap-3">
-                  <span class="material-symbols-outlined text-on-surface-variant">
-                    smartphone
-                  </span>
-                  <div>
-                    <p class="small fw-medium text-on-surface">
-                      iPhone 14 Pro — App Mobile
-                    </p>
-                    <p class="x-small text-on-surface-variant">
-                      Rio de Janeiro, Brasil • Ativo há 2h
-                    </p>
-                  </div>
-                </div>
-                <button class="danger-link-cs x-small">
-                  Encerrar
-                </button>
-              </div>
-              <div class="d-flex align-items-center justify-content-between p-3 hover:bg-surface-container-highest/40 transition-colors rounded-3">
-                <div class="d-flex align-items-center gap-3">
-                  <span class="material-symbols-outlined text-on-surface-variant">
-                    desktop_windows
-                  </span>
-                  <div>
-                    <p class="small fw-medium text-on-surface">
-                      Windows Desktop — Firefox
-                    </p>
-                    <p class="x-small text-on-surface-variant">
-                      Curitiba, Brasil • Ativo há 3 dias
-                    </p>
-                  </div>
-                </div>
-                <button class="danger-link-cs x-small">
-                  Encerrar
-                </button>
+              <div class="sessions-list">
               </div>
             </div>
-            <button class="mt-4 text-link-cs x-small font-label text-uppercase tracking-widest history-link align-self-start">
-              Ver histórico completo de atividades
-              <span class="material-symbols-outlined small">
-                arrow_forward
-              </span>
-            </button>
+            <div class="d-flex gap-2 mt-3">
+              <button class="btn-secondary-cs x-small" id="addSessionBtn">
+                Adicionar Sessão
+              </button>
+            </div>
           </section>
         </div>
         <!-- Sidebar / API Keys & Help -->
         <div class="col-12 col-lg-4 d-grid gap-4">
           <!-- API Keys Card -->
-          <section class="panel p-0 overflow-hidden">
+          <section class="panel p-0 overflow-hidden" data-empty-section id="apiKeysSection">
             <div class="p-4">
               <div class="d-flex align-items-center gap-3 mb-3">
                 <span class="material-symbols-outlined text-primary-container">
@@ -606,26 +612,27 @@
               <p class="small text-on-surface-variant mb-4 leading-relaxed">
                 Conecte sua conta a bots de trading ou serviços externos com segurança.
               </p>
-              <div class="d-grid gap-3 mb-4">
-                <div class="p-3 bg-surface-container-lowest rounded border border-outline-variant/5 d-flex justify-content-between align-items-center">
-                  <div class="truncate pr-4">
-                    <p class="text-[10px] font-label text-on-surface-variant text-uppercase tracking-widest mb-1">
-                      Trading Bot V1
-                    </p>
-                    <code class="x-small text-on-surface opacity-70">
-
-
-sk_live_••••••••3491
-                    
-                    
-                    </code>
-                  </div>
-                  <span class="material-symbols-outlined text-on-surface-variant/40 small">
-                    settings
-                  </span>
-                </div>
+              <div class="empty-state">
+              <div class="p-4 text-center text-on-surface-variant small">
+                Nenhuma chave de API cadastrada.
               </div>
-              <button class="btn-secondary-cs w-100 small">
+              <div class="d-flex justify-content-between align-items-center p-3 rounded border border-outline-variant/5 opacity-25 mb-4" style="pointer-events:none; user-select:none;">
+                <div>
+                  <p class="text-[10px] text-on-surface-variant text-uppercase tracking-widest mb-1">
+                    Trading Bot V1
+                  </p>
+                  <code class="x-small text-on-surface opacity-70">
+                    sk_live_••••••••3491
+                  </code>
+                </div>
+                <span class="material-symbols-outlined text-on-surface-variant/40 small">
+                  settings
+                </span>
+              </div>
+              </div>
+              <div class="api-keys-list">
+              </div>
+              <button class="btn-secondary-cs w-100 small" id="gerarChaveBtn">
                 Gerar Nova Chave
               </button>
             </div>
@@ -645,28 +652,26 @@ sk_live_••••••••3491
             </p>
           </div>
           <!-- Trusted Devices -->
-          <div class="panel">
+          <div class="panel" data-empty-section id="devicesSection">
             <h3 class="small font-headline fw-semibold text-on-surface mb-3">
               Dispositivos Confiáveis
             </h3>
-            <ul class="space-y-4">
-              <li class="d-flex align-items-center gap-3">
+            <div class="empty-state">
+            <p class="small text-on-surface-variant">
+              Nenhum dispositivo confiável.
+            </p>
+            <div class="opacity-25" style="pointer-events:none; user-select:none;">
+              <div class="d-flex align-items-center gap-3 mt-2">
                 <div class="w-2 h-2 rounded-pill bg-secondary">
                 </div>
                 <span class="small text-on-surface-variant">
                   MacBook do Trabalho
                 </span>
-              </li>
-              <li class="d-flex align-items-center gap-3">
-                <div class="w-2 h-2 rounded-pill bg-secondary">
-                </div>
-                <span class="small text-on-surface-variant">
-                  iPhone de Uso Pessoal
-                </span>
-              </li>
-            </ul>
-            <button class="danger-link-cs x-small mt-2">
-              Revogar dispositivo
+              </div>
+            </div>
+            </div>
+            <button class="btn-secondary-cs x-small mt-3" id="addDeviceBtn">
+              Adicionar Dispositivo
             </button>
           </div>
         </div>
@@ -710,7 +715,7 @@ sk_live_••••••••3491
       <div class="container-fluid px-4 py-4" style="max-width:1440px;">
         <div class="d-flex flex-column align-items-center gap-2" style="opacity:.6;">
           <p class="m-0" style="font-size:.75rem; color:var(--muted);">
-            © 2026 Crypto Sandbox Protocol. Todos os direitos reservados.
+            © 2026 Crypto Sandbox. Todos os direitos reservados.
           </p>
         </div>
       </div>
@@ -718,6 +723,224 @@ sk_live_••••••••3491
     <script src="https://code.jquery.com/jquery-4.0.0.min.js">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="scripts/api.js"></script>
+    <script>
+      document.querySelectorAll('[data-empty-section]').forEach(function (section) {
+        if (section.querySelectorAll('.real-item, .session-item, .api-key-item').length > 0) {
+          var empty = section.querySelector('.empty-state');
+          if (empty) empty.style.display = 'none';
+        }
+      });
+
+      (function () {
+        var KEY = 'cs_api_keys';
+        var listEl = document.querySelector('.api-keys-list');
+        var emptyState = document.querySelector('#apiKeysSection .empty-state');
+        var btn = document.getElementById('gerarChaveBtn');
+        if (!listEl || !btn) return;
+
+        function generateKey() {
+          var chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+          var r = function (len) {
+            var s = '';
+            for (var i = 0; i < len; i++) s += chars[Math.floor(Math.random() * chars.length)];
+            return s;
+          };
+          return 'sk_live_' + r(8) + '••••' + r(4);
+        }
+
+        function renderKeys(keys) {
+          listEl.innerHTML = '';
+          if (keys.length === 0) {
+            emptyState.style.display = '';
+            return;
+          }
+          emptyState.style.display = 'none';
+          keys.forEach(function (k, idx) {
+            var div = document.createElement('div');
+            div.className = 'p-3 bg-surface-container-lowest rounded border border-outline-variant/5 d-flex justify-content-between align-items-center mb-3 api-key-item';
+            div.innerHTML =
+              '<div>' +
+                '<p class="text-[10px] text-on-surface-variant text-uppercase tracking-widest mb-1">Chave ' + (idx + 1) + '</p>' +
+                '<code class="x-small text-on-surface opacity-70">' + k + '</code>' +
+              '</div>' +
+              '<button class="danger-link-cs x-small" data-remove="' + idx + '">Remover</button>';
+            listEl.appendChild(div);
+          });
+          listEl.querySelectorAll('[data-remove]').forEach(function (bt) {
+            bt.addEventListener('click', function () {
+              var i = parseInt(bt.getAttribute('data-remove'));
+              var keys = JSON.parse(localStorage.getItem(KEY) || '[]');
+              keys.splice(i, 1);
+              localStorage.setItem(KEY, JSON.stringify(keys));
+              renderKeys(keys);
+            });
+          });
+        }
+
+        var saved = JSON.parse(localStorage.getItem(KEY) || '[]');
+        renderKeys(saved);
+
+        btn.addEventListener('click', function () {
+          var keys = JSON.parse(localStorage.getItem(KEY) || '[]');
+          keys.push(generateKey());
+          localStorage.setItem(KEY, JSON.stringify(keys));
+          renderKeys(keys);
+        });
+      })();
+
+      (function () {
+        var statusEl = document.getElementById('status2fa');
+        var cards = document.querySelectorAll('[data-2fa]');
+        if (!statusEl || !cards.length) return;
+
+        function updateStatus() {
+          var ativo = false;
+          cards.forEach(function (card) {
+            if (card.classList.contains('ativo')) ativo = true;
+          });
+          statusEl.textContent = ativo ? 'Ativado' : 'Desativado';
+          statusEl.style.color = ativo ? '#0fffa3' : '';
+        }
+
+        cards.forEach(function (card) {
+          var btn = card.querySelector('.btn-toggle-2fa');
+          if (!btn) return;
+          btn.addEventListener('click', function () {
+            card.classList.toggle('ativo');
+            var active = card.classList.contains('ativo');
+            var icon = card.querySelector('.material-symbols-outlined');
+            var statusText = card.querySelector('.status-text');
+            btn.textContent = active ? 'Desativar' : 'Ativar';
+            btn.classList.toggle('active', active);
+            statusText.textContent = active ? 'Configurado.' : 'Não configurado.';
+            if (icon) {
+              icon.style.color = active ? '#0fffa3' : '';
+            }
+            updateStatus();
+          });
+        });
+      })();
+
+      (function () {
+        var KEY = 'cs_sessions';
+        var listEl = document.querySelector('.sessions-list');
+        var emptyState = document.querySelector('[data-empty-section] .empty-state');
+        var btn = document.getElementById('addSessionBtn');
+        if (!listEl || !btn || !emptyState) return;
+
+        var devices = ['MacBook Pro', 'iPhone 15', 'Windows Desktop', 'Pixel 8', 'iPad Air', 'Linux Laptop'];
+        var browsers = ['Chrome', 'Firefox', 'Safari', 'Edge', 'App Mobile'];
+        var cities = ['São Paulo', 'Rio de Janeiro', 'Curitiba', 'Belo Horizonte', 'Brasília', 'Salvador'];
+
+        function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+        function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+        function randIP() { return randInt(1, 254) + '.' + randInt(1, 254) + '.' + randInt(1, 254) + '.' + randInt(1, 254); }
+
+        function renderSessions(sessions) {
+          listEl.innerHTML = '';
+          if (sessions.length === 0) {
+            emptyState.style.display = '';
+            return;
+          }
+          emptyState.style.display = 'none';
+          sessions.forEach(function (s, idx) {
+            var div = document.createElement('div');
+            div.className = 'd-flex align-items-center justify-content-between p-3 rounded-3 border border-outline-variant/5 mb-2 session-item';
+            div.innerHTML =
+              '<div class="d-flex align-items-center gap-3">' +
+                '<span class="material-symbols-outlined text-on-surface-variant">' + (s.icon || 'laptop_mac') + '</span>' +
+                '<div>' +
+                  '<p class="small fw-medium text-on-surface">' + s.device + ' — ' + s.browser + '</p>' +
+                  '<p class="x-small text-on-surface-variant">' + s.city + ', Brasil • <span class="text-secondary fw-medium">Há ' + s.time + '</span></p>' +
+                '</div>' +
+              '</div>' +
+              '<button class="danger-link-cs x-small" data-remove-session="' + idx + '">Encerrar</button>';
+            listEl.appendChild(div);
+          });
+          listEl.querySelectorAll('[data-remove-session]').forEach(function (bt) {
+            bt.addEventListener('click', function () {
+              var i = parseInt(bt.getAttribute('data-remove-session'));
+              var sessions = JSON.parse(localStorage.getItem(KEY) || '[]');
+              sessions.splice(i, 1);
+              localStorage.setItem(KEY, JSON.stringify(sessions));
+              renderSessions(sessions);
+            });
+          });
+        }
+
+        var saved = JSON.parse(localStorage.getItem(KEY) || '[]');
+        renderSessions(saved);
+
+        btn.addEventListener('click', function () {
+          var sessions = JSON.parse(localStorage.getItem(KEY) || '[]');
+          var hours = ['2h', '30min', '1h', '5h', '12h', '3 dias', '1 dia'];
+          sessions.push({
+            device: rand(devices),
+            browser: rand(browsers),
+            city: rand(cities),
+            ip: randIP(),
+            time: rand(hours),
+            icon: rand(['laptop_mac', 'smartphone', 'desktop_windows', 'tablet_mac'])
+          });
+          localStorage.setItem(KEY, JSON.stringify(sessions));
+          renderSessions(sessions);
+        });
+      })();
+
+      (function () {
+        var KEY = 'cs_devices';
+        var listEl = document.querySelector('#devicesSection');
+        var emptyState = listEl ? listEl.querySelector('.empty-state') : null;
+        var btn = document.getElementById('addDeviceBtn');
+        if (!listEl || !btn || !emptyState) return;
+
+        var deviceNames = ['MacBook do Trabalho', 'iPhone Pessoal', 'PC Gamer', 'Notebook da Faculdade', 'Tablet'];
+
+        function renderDevices(devices) {
+          var existing = listEl.querySelectorAll('.real-item');
+          existing.forEach(function (el) { el.remove(); });
+          if (devices.length === 0) {
+            emptyState.style.display = '';
+            return;
+          }
+          emptyState.style.display = 'none';
+          var container = document.createElement('div');
+          container.className = 'devices-list';
+          devices.forEach(function (d, idx) {
+            var div = document.createElement('div');
+            div.className = 'd-flex align-items-center justify-content-between real-item mt-2';
+            div.innerHTML =
+              '<div class="d-flex align-items-center gap-3">' +
+                '<div class="w-2 h-2 rounded-pill bg-secondary"></div>' +
+                '<span class="small text-on-surface-variant">' + d + '</span>' +
+              '</div>' +
+              '<button class="danger-link-cs x-small" data-remove-device="' + idx + '">Remover</button>';
+            container.appendChild(div);
+          });
+          listEl.insertBefore(container, btn);
+          listEl.querySelectorAll('[data-remove-device]').forEach(function (bt) {
+            bt.addEventListener('click', function () {
+              var i = parseInt(bt.getAttribute('data-remove-device'));
+              var devices = JSON.parse(localStorage.getItem(KEY) || '[]');
+              devices.splice(i, 1);
+              localStorage.setItem(KEY, JSON.stringify(devices));
+              renderDevices(devices);
+            });
+          });
+        }
+
+        var saved = JSON.parse(localStorage.getItem(KEY) || '[]');
+        renderDevices(saved);
+
+        btn.addEventListener('click', function () {
+          var devices = JSON.parse(localStorage.getItem(KEY) || '[]');
+          devices.push(deviceNames[Math.floor(Math.random() * deviceNames.length)]);
+          localStorage.setItem(KEY, JSON.stringify(devices));
+          renderDevices(devices);
+        });
+      })();
     </script>
   </body>
 </html>

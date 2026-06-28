@@ -6,7 +6,7 @@ $(function () {
   }
 
   var $valor = $('#valor');
-  if ($valor.length) {
+  if ($valor.length && $valor.attr('type') !== 'number') {
     $valor.mask('#.##0,00', { reverse: true });
   }
 
@@ -19,7 +19,8 @@ $(function () {
 
   $('.edit-link').on('click', function (e) {
     e.preventDefault();
-    $(this).closest('form').find('input, select').prop('disabled', false).focus();
+    $(this).closest('form').find('input, select').prop('readonly', false).first().focus();
+    $(this).closest('form').find('button[type="submit"]').prop('disabled', false);
   });
 
   $('.toggle-row .switch').on('click', function () {

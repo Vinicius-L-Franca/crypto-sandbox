@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html class="dark" lang="pt-BR">
+<html class="dark" lang="pt-BR" data-bs-theme="dark">
   <head>
     <meta charset="utf-8" />
+    <script>(function(){try{var p=JSON.parse(localStorage.getItem('cs_preferences')||'{}');if(p.tema==='light'){document.documentElement.className='light';document.documentElement.dataset.bsTheme='light';}}catch(e){}})();</script>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>
       Preferências - Crypto Sandbox
     </title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="assets/css/tema.css" rel="stylesheet" />
     <style>
 
 
@@ -211,13 +213,9 @@
     .tab-link.active { color: #46d9ff; border-bottom-color: #46d9ff; }
 
     .prefs-grid {
-        display: grid;
-        grid-template-columns: 1.05fr .95fr;
-        gap: 1rem;
-        margin-top: 1.4rem;
-        align-items: start;
+        max-width: 580px;
+        margin: 1.4rem auto 0;
     }
-    @media (max-width: 991.98px) { .prefs-grid { grid-template-columns: 1fr; } }
 
     .panel {
         background: #1a2337;
@@ -344,7 +342,7 @@
           <a href="index.html" class="brand flex-shrink-0">
             Crypto Sandbox
           </a>
-          <nav class="d-none d-lg-flex align-items-center gap-1 mx-3">
+          <nav class="d-none d-md-flex align-items-center gap-1 mx-3">
             <a href="negociacao.html" class="nav-pill">
               Mercado
             </a>
@@ -364,17 +362,28 @@
                 Patrimônio Total
               </span>
               <span class="patrimony-value">
-                $42,500.24
+                $0.00
               </span>
             </div>
-            <button class="icon-btn">
-              <span class="material-symbols-outlined" style="font-size:1.25rem;">
-                notifications
-              </span>
-            </button>
-            <a href="index.html" class="btn-connect">
-              Conectar Carteira
-            </a>
+            <span class="patrimony-value d-none d-sm-flex d-md-none me-2">$0.00</span>
+            <div class="position-relative d-inline-block" id="notif-wrap">
+              <button class="icon-btn" id="notif-btn">
+                <span class="material-symbols-outlined" style="font-size:1.25rem;">
+                  notifications
+                </span>
+              </button>
+              <div id="notif-panel" class="notif-panel d-none">
+                <div class="notif-header d-flex align-items-center justify-content-between px-3 py-2">
+                  <span style="font-weight:600;font-size:.82rem;">Notificações</span>
+                </div>
+                <div class="notif-body px-3 py-3" id="notif-body" style="max-height:300px;overflow-y:auto;">
+                  <div class="notif-empty" style="text-align:center;color:var(--muted);font-size:.82rem;padding:1.5rem 0;">
+                    Nenhuma notificação
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a href="index.html" class="btn-connect" id="wallet-btn">Conectar Carteira</a>
           </div>
         </div>
       </div>
@@ -411,52 +420,52 @@
         </div>
         <div class="prefs-grid">
           <form novalidate>
-            <section class="panel">
-              <h2 class="panel-heading">
-                Configurações Gerais
-              </h2>
-              <div class="stack-gap">
-                <div>
-                  <div class="field-label">
-                    Moeda Principal
+            <div class="stack-gap">
+              <section class="panel">
+                <h2 class="panel-heading">
+                  Configurações Gerais
+                </h2>
+                <div class="stack-gap">
+                  <div>
+                    <div class="field-label">
+                      Moeda Principal
+                    </div>
+                    <select class="select-cs" name="moeda" id="moeda" aria-label="Moeda principal" required>
+                      <option value="">
+                        Selecione...
+                      </option>
+                      <option value="USD">
+                        USD (Dólar Americano)
+                      </option>
+                      <option value="BRL">
+                        BRL (Real Brasileiro)
+                      </option>
+                      <option value="EUR">
+                        EUR (Euro)
+                      </option>
+                    </select>
                   </div>
-                  <select class="select-cs" name="moeda" id="moeda" aria-label="Moeda principal" required>
-                    <option value="">
-                      Selecione...
-                    </option>
-                    <option value="USD">
-                      USD (Dólar Americano)
-                    </option>
-                    <option value="BRL">
-                      BRL (Real Brasileiro)
-                    </option>
-                    <option value="EUR">
-                      EUR (Euro)
-                    </option>
-                  </select>
-                </div>
-                <div>
-                  <div class="field-label">
-                    Idioma
+                  <div>
+                    <div class="field-label">
+                      Idioma
+                    </div>
+                    <select class="select-cs" name="idioma" id="idioma" aria-label="Idioma" required>
+                      <option value="">
+                        Selecione...
+                      </option>
+                      <option value="pt-BR">
+                        Português (Brasil)
+                      </option>
+                      <option value="en">
+                        English
+                      </option>
+                      <option value="es">
+                        Español
+                      </option>
+                    </select>
                   </div>
-                  <select class="select-cs" name="idioma" id="idioma" aria-label="Idioma" required>
-                    <option value="">
-                      Selecione...
-                    </option>
-                    <option value="pt-BR">
-                      Português (Brasil)
-                    </option>
-                    <option value="en">
-                      English
-                    </option>
-                    <option value="es">
-                      Español
-                    </option>
-                  </select>
                 </div>
-              </div>
-            </section>
-            <section class="stack-gap">
+              </section>
               <div class="panel">
                 <h2 class="panel-heading">
                   Aparência
@@ -465,7 +474,7 @@
                   Tema
                 </div>
                 <div class="theme-grid">
-                  <div class="theme-card active">
+                  <div class="theme-card active" data-theme="dark">
                     <span class="material-symbols-outlined">
                       dark_mode
                     </span>
@@ -473,7 +482,7 @@
                       Escuro
                     </span>
                   </div>
-                  <div class="theme-card">
+                  <div class="theme-card" data-theme="light">
                     <span class="material-symbols-outlined">
                       light_mode
                     </span>
@@ -507,7 +516,7 @@
                   Salvar Alterações
                 </button>
               </div>
-            </section>
+            </div>
           </form>
         </div>
       </div>
@@ -550,7 +559,7 @@
       <div class="container-fluid px-4 py-4" style="max-width:1440px;">
         <div class="d-flex flex-column align-items-center gap-2" style="opacity:.6;">
           <p class="m-0" style="font-size:.75rem; color:var(--muted);">
-            © 2026 Crypto Sandbox Protocol. Todos os direitos reservados.
+            © 2026 Crypto Sandbox. Todos os direitos reservados.
           </p>
         </div>
       </div>
@@ -561,6 +570,67 @@
     </script>
     <script src="scripts/validacao.js"></script>
     <script src="scripts/storage.js"></script>
+    <script src="scripts/api.js"></script>
     <script src="scripts/jquery-init.js"></script>
+    <script>
+      (function () {
+        function getPrefs() {
+          try { return JSON.parse(localStorage.getItem('cs_preferences') || '{}'); }
+          catch (e) { return {}; }
+        }
+
+        function setPrefs(obj) {
+          var p = getPrefs();
+          for (var k in obj) { if (obj.hasOwnProperty(k)) p[k] = obj[k]; }
+          localStorage.setItem('cs_preferences', JSON.stringify(p));
+        }
+
+        /* ---- Moeda ---- */
+        var moedaEl = document.getElementById('moeda');
+        if (moedaEl) {
+          function applyCurrency() {
+            if (window.fmtCurrency) {
+              var balance = parseFloat(localStorage.getItem('cs_balance') || '0');
+              var formatted = window.fmtCurrency(balance);
+              var els = document.querySelectorAll('.patrimony-value, .balance-big');
+              for (var i = 0; i < els.length; i++) {
+                els[i].textContent = formatted;
+              }
+            }
+          }
+          var prefs = getPrefs();
+          if (prefs.moeda) moedaEl.value = prefs.moeda;
+          applyCurrency();
+          moedaEl.addEventListener('change', function () {
+            setPrefs({ moeda: moedaEl.value });
+            applyCurrency();
+          });
+        }
+
+        /* ---- Tema ---- */
+        var themeCards = document.querySelectorAll('.theme-card[data-theme]');
+        if (themeCards.length) {
+          var currentTheme = getPrefs().tema || 'dark';
+          for (var i = 0; i < themeCards.length; i++) {
+            var card = themeCards[i];
+            if (card.getAttribute('data-theme') === currentTheme) {
+              card.classList.add('active');
+            } else {
+              card.classList.remove('active');
+            }
+            card.addEventListener('click', function () {
+              var theme = this.getAttribute('data-theme');
+              for (var j = 0; j < themeCards.length; j++) {
+                themeCards[j].classList.remove('active');
+              }
+              this.classList.add('active');
+              document.documentElement.className = theme;
+              document.documentElement.dataset.bsTheme = theme;
+              setPrefs({ tema: theme });
+            });
+          }
+        }
+      })();
+    </script>
   </body>
 </html>

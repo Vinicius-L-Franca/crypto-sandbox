@@ -20,6 +20,9 @@
         var field = fields[i];
         if (data[field.name] !== undefined) {
           field.value = data[field.name];
+          if (field.name === 'telefone' && window.jQuery) {
+            window.jQuery(field).trigger('blur').trigger('focus');
+          }
         }
       }
     } catch (e) {
@@ -33,6 +36,10 @@
     if (profileForm) {
       profileForm = profileForm.closest('form');
       if (profileForm) {
+        var saved = localStorage.getItem('cs_profile');
+        if (saved && saved.indexOf('Alexandre') !== -1) {
+          localStorage.removeItem('cs_profile');
+        }
         loadData('cs_profile', profileForm);
         profileForm.addEventListener('formvalid', function () {
           localStorage.setItem('cs_profile', JSON.stringify(getFormData(profileForm)));

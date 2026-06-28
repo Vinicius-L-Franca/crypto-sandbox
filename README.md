@@ -68,14 +68,13 @@ O site usa o bundle oficial do Bootstrap com um tema escuro personalizado em [cu
 
 ## 📦 Tecnologias e Dependências
 
-- **Bootstrap 5.3.8** - Framework CSS responsivo com componentes prontos
+- **Bootstrap 5.3.3** - Framework CSS responsivo com componentes prontos
 - **jQuery 4.0.0** - Biblioteca JavaScript para manipulação do DOM
-- **uuid 13.0.0** - Geração de identificadores únicos
-- **gh-pages 6.3.0** *(dev)* - Deploy para GitHub Pages
 - **json-server 0.17.4** *(dev)* - API fake para simulação de dados
 - **CoinGecko API (v3)** - Dados reais de criptomoedas em tempo real
 - **Fetch API (nativa)** - Requisições assíncronas
 - **localStorage (nativo)** - Armazenamento local no navegador
+- **Sass (Dart Sass)** - Pré-processador SCSS para estilos customizados
 
 ---
 
@@ -150,9 +149,8 @@ O sistema contará com pelo menos:
 ## 🎨 Componentes Visuais
 
 - 📈 Gráficos de linha (evolução de preços no mercado)
-- 🥧 Gráficos de pizza (distribuição de ativos no portfólio)
 - 🔐 Painel de Segurança (2FA, senha, autenticação biométrica)
-- ⚙️ Preferências (idioma, moeda base, precision view)
+- ⚙️ Preferências (idioma, moeda base, tema claro/escuro)
 
 ---
 
@@ -167,20 +165,40 @@ git clone https://github.com/Vinicius-L-Franca/crypto-sandbox
 
 Todos os arquivos HTML estão diretamente na raiz do repositório (estrutura flat):
 
+### Páginas
+
 - `index.html` — página inicial (Conectar Carteira)
-- `negociacao.html` — página de mercado
+- `negociacao.html` — página de mercado (compra/venda, gráfico)
 - `portfolio.html` — página de portfólio
 - `transacoes.html` — histórico de transações
 - `conf_perfil.html` — configurações de perfil
 - `conf_seguranca.html` — configurações de segurança
 - `conf_preferencias.html` — preferências do usuário
-- `assets/` — recursos estáticos
-	- `assets/css/custom-bootstrap.css` — tema personalizado do Bootstrap
-	- `assets/css/main.css` — estilos globais compilados (SCSS)
+
+### Assets
+
+- `assets/css/custom-bootstrap.css` — tema escuro personalizado do Bootstrap
+- `assets/css/main.css` — estilos globais compilados (SCSS)
+- `assets/css/tema.css` — tema claro (`.light` overrides)
+
+### Scripts
+
+- `scripts/api.js` — lógica principal (mercado, trades, carteira, conexão)
+- `scripts/validacao.js` — validação de formulários com REGEX
+- `scripts/jquery-init.js` — máscaras de input e comportamentos jQuery
+- `scripts/convert.py` — baixa e converte páginas externas para Bootstrap
+- `scripts/format_html.py` — formata todos os HTMLs da raiz
+
+### SCSS
+
 - `scss/` — arquivos-fonte SCSS
-- `scripts/` — utilitários de manutenção
-	- `scripts/convert.py` — baixa e converte páginas externas para Bootstrap, salvando na raiz
-	- `scripts/format_html.py` — formata todos os HTMLs da raiz
+
+### Config / Dados
+
+- `db.json` — base de dados da API fake (JSON Server)
+- `package.json` — dependências e scripts npm
+- `.eslintrc.json` — configuração do ESLint
+- `.prettierrc` — configuração do Prettier
 
 Consulte também a documentação de estrutura: [docs/structure.md](docs/structure.md)
 
@@ -229,13 +247,16 @@ npm run dev
 # API em http://localhost:3001
 # Frontend em http://localhost:8000
 ```
-
 As páginas com `data-page` (`portfolio.html`, `negociacao.html`, `transacoes.html`) consomem automaticamente os dados da API fake quando o servidor está rodando.
 
-## 🌐 API Pública (CoinGecko)
+## 🌐 API Pública (CoinGecko + ExchangeRate-API)
 
-Além da API fake, o projeto integra a **CoinGecko API v3** para exibir preços reais atualizados de criptomoedas.  
-Os elementos com atributos `data-cg` e `data-cg-field` são preenchidos automaticamente com dados ao vivo quando a página carrega.
+Além da API fake, o projeto integra duas APIs públicas:
+
+- **CoinGecko API v3** — preços reais de criptomoedas. Os elementos com atributos `data-cg` e `data-cg-field` são preenchidos automaticamente. Os preços reais também atualizam `currentAsset.current_price`, usados nas trades, gráfico e estimativas.
+- **ExchangeRate-API** (`/v4/latest/USD`) — taxas de câmbio reais de USD para BRL e EUR, substituindo as taxas fixas anteriormente hardcoded.
+
+Ambas são chamadas em paralelo via `Promise.all` no `DOMContentLoaded`.
 
 ## 📄 Histórico de Mudanças Relevantes
 
@@ -243,3 +264,9 @@ Os elementos com atributos `data-cg` e `data-cg-field` são preenchidos automati
 - Todos os HTMLs movidos da pasta `pages/` para a raiz do projeto.
 - `conectar_carteira.html` renomeado para `index.html` (página de entrada padrão do GitHub Pages).
 - `scripts/convert.py` e `scripts/format_html.py` atualizados para trabalhar com a estrutura flat.
+- Balance compacto adicionado para telas sm (576px–767px) via `d-none d-sm-flex d-md-none`.
+- Nav pills com padding reduzido em tablets (768px–991px) via media query.
+- Setinhas do input number removidas no formulário de trade.
+- Formulário de compra/venda agora usa a moeda preferida do usuário (label/suffix dinâmicos + `toUSD()`).
+- Preços da CoinGecko atualizam `currentAsset.current_price` (trades usam preço real).
+- Taxas de câmbio BRL/EUR agora obtidas da ExchangeRate-API em tempo real.
