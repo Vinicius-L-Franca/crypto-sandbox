@@ -57,6 +57,11 @@ function fmtUSD(n) {
     var suffixEl = document.getElementById('valor-suffix');
     if (labelEl) labelEl.textContent = 'Valor (' + cur + ')';
     if (suffixEl) suffixEl.textContent = cur;
+    var sym = currentAsset ? currentAsset.symbol : 'BTC';
+    var qtyLabel = document.getElementById('qty-label');
+    var qtySuffix = document.getElementById('qty-suffix');
+    if (qtyLabel) qtyLabel.textContent = 'Quantidade (' + sym + ')';
+    if (qtySuffix) qtySuffix.textContent = sym;
   }
 
   function getBalance() {
@@ -144,6 +149,8 @@ function fmtUSD(n) {
   var allAssets = [];
   var allSummary = null;
   var currentFilter = { period: '30D', type: 'all' };
+  var _currentPage = 1;
+  var _perPage = 10;
 
   var FALLBACK_ASSETS = [
     { id: 'bitcoin', symbol: 'BTC', name: 'Bitcoin', image: '', current_price: 64231.50 },
@@ -177,6 +184,7 @@ function fmtUSD(n) {
   }
 
   function applyFilters() {
+    _currentPage = 1;
     var filtered = [];
     for (var f = 0; f < allTx.length; f++) {
       var tx = allTx[f];
@@ -201,7 +209,7 @@ function fmtUSD(n) {
       });
     }
 
-    if (page === 'negociacao') {
+    if (page === 'mercado') {
       fetchJSON(FAKE + '/assets').then(function (assets) {
         allAssets = assets;
         if (window.initMercado) window.initMercado(assets);
@@ -265,9 +273,9 @@ function fmtUSD(n) {
         }
       }
 
-      if (page === 'negociacao' && currentAsset) {
+      if (page === 'mercado' && currentAsset) {
         renderAssetUI(currentAsset);
-        renderChart(currentAsset, currentTF);
+        loadChart(currentAsset, currentTF);
         renderRecentTrades(currentAsset);
         renderPortfolioSummary(currentAsset);
         updateTradeForm(currentAsset);
@@ -321,7 +329,18 @@ function fmtUSD(n) {
 
     if (!hasAssets) {
       var tbody = document.querySelector('.cs-table tbody');
-      if (tbody) tbody.innerHTML = '';
+      if (tbody) {
+        var rows = tbody.querySelectorAll('tr');
+        for (var ri = 0; ri < rows.length; ri++) {
+          var tds2 = rows[ri].querySelectorAll('td');
+          if (tds2.length >= 5) {
+            tds2[1].textContent = '—';
+            tds2[2].innerHTML = '—';
+            tds2[3].textContent = '—';
+            tds2[4].innerHTML = '—';
+          }
+        }
+      }
     }
 
     /* Gains */
@@ -422,7 +441,7 @@ function fmtUSD(n) {
 
     for (var t = 0; t < trades.length; t++) {
       var tr = trades[t];
-      if (!assetMap[tr.symbol]) continue;
+      if (!assetMap[tr.symbol] || tr.status === 'Negada') continue;
       if (tr.type === 'buy') {
         assetMap[tr.symbol].balance += tr.quantity;
         assetMap[tr.symbol].total_invested += tr.total;
@@ -523,7 +542,7 @@ function fmtUSD(n) {
     var trades = getTrades();
     var bal = 0;
     for (var i = 0; i < trades.length; i++) {
-      if (trades[i].symbol === symbol) {
+      if (trades[i].symbol === symbol && trades[i].status !== 'Negada') {
         bal += trades[i].type === 'buy' ? trades[i].quantity : -trades[i].quantity;
       }
     }
@@ -553,11 +572,27 @@ function fmtUSD(n) {
     currentAsset = asset;
     localStorage.setItem(SELECTED_KEY, asset.id);
     renderAssetUI(asset);
-    renderChart(asset, currentTF);
+    loadChart(asset, currentTF);
     renderRecentTrades(asset);
     renderPortfolioSummary(asset);
     updateTradeForm(asset);
     updateCGAttributes(asset.id);
+
+    var qtyLabel = document.getElementById('qty-label');
+    var qtySuffix = document.getElementById('qty-suffix');
+    if (qtyLabel) qtyLabel.textContent = 'Quantidade (' + asset.symbol + ')';
+    if (qtySuffix) qtySuffix.textContent = asset.symbol;
+
+    var isBuy = document.getElementById('btnBuy').classList.contains('active-buy');
+    var availEl = document.getElementById('qty-available');
+    if (availEl) {
+      if (isBuy) {
+        availEl.textContent = '';
+      } else {
+        var bal = getAssetBalance(asset.symbol);
+        availEl.textContent = 'Disponível: ' + bal.toFixed(8) + ' ' + asset.symbol;
+      }
+    }
   }
 
   function renderAssetUI(asset) {
@@ -590,39 +625,132 @@ function fmtUSD(n) {
     }
   }
 
-  function updateTradeForm(asset) {
+  function updateTradeForm(asset, source) {
+    if (window._syncingTradeForm) return;
+    window._syncingTradeForm = true;
+
+    var isBuy = document.getElementById('btnBuy').classList.contains('active-buy');
+
     var maxEl = document.querySelector('[data-market-max]');
-    if (maxEl) maxEl.textContent = 'Máx: ' + fmtCurrency(getBalance());
+    if (maxEl) {
+      if (isBuy) {
+        maxEl.textContent = 'Máx: ' + fmtCurrency(getBalance());
+      } else {
+        var sellBal = getAssetBalance(asset.symbol);
+        maxEl.textContent = 'Máx: ' + fmtCurrency(sellBal * asset.current_price);
+      }
+    }
+    var valorEl = document.getElementById('valor');
+    var qtyEl = document.getElementById('quantidade');
+
+    if (source === 'quantidade' && qtyEl && valorEl && asset && asset.current_price > 0) {
+      var rawQty = qtyEl.value || '0';
+      var qty = parseFloat(rawQty) || 0;
+      var valUSD = qty * asset.current_price;
+      var cur = getCurrency();
+      var rate = CURRENCY_RATES[cur] || 1;
+      valorEl.value = (valUSD * rate).toFixed(2);
+    } else if (source === 'valor' && qtyEl && valorEl && asset && asset.current_price > 0) {
+      var rawVal = valorEl.value || '0';
+      var val = parseFloat(rawVal) || 0;
+      var valUSD = toUSD(val);
+      qtyEl.value = (valUSD / asset.current_price).toFixed(8);
+    }
+
+    var rawVal = (valorEl || {}).value || '0';
+    var val = parseFloat(rawVal) || 0;
+    var valUSD = toUSD(val);
     var estEl = document.getElementById('estimateVal');
     if (estEl && asset) {
-      var rawVal = (document.getElementById('valor') || {}).value || '0';
-      var val = parseFloat(rawVal.replace(/\./g, '').replace(',', '.')) || 0;
-      var valUSD = toUSD(val);
-      estEl.textContent = (asset.current_price > 0 ? (valUSD / asset.current_price) : 0).toFixed(8) + ' ' + asset.symbol;
+      if (isBuy) {
+        estEl.textContent = (asset.current_price > 0 ? (valUSD / asset.current_price) : 0).toFixed(8) + ' ' + asset.symbol;
+      } else {
+        estEl.textContent = fmtCurrency(valUSD);
+      }
     }
+
     var feeEl = document.getElementById('feeVal');
     if (feeEl && asset) feeEl.textContent = fmtCurrency(asset.current_price * 0.001);
-  }
 
-  function generateChartData(price, points) {
-    var data = [];
-    var vol = price * 0.02;
-    var val = price * (1 + (Math.random() - 0.5) * 0.04);
-    for (var i = 0; i < points; i++) {
-      val += (Math.random() - 0.48) * vol;
-      if (val < price * 0.9) val = price * 0.9;
-      if (val > price * 1.1) val = price * 1.1;
-      data.push(val);
+    var availEl = document.getElementById('qty-available');
+    if (availEl && asset) {
+      if (isBuy) {
+        availEl.textContent = '';
+      } else {
+        var bal = getAssetBalance(asset.symbol);
+        availEl.textContent = 'Disponível: ' + bal.toFixed(8) + ' ' + asset.symbol;
+      }
     }
-    data[data.length - 1] = price;
-    return data;
+
+    window._syncingTradeForm = false;
   }
 
-  function renderChart(asset, tf) {
+  /* ---- Chart: CoinGecko real data ---- */
+  var CHART_CACHE = {};
+  var DAYS_MAP = { '1H': 1, '4H': 1, '1D': 1, '1S': 7, 'TUDO': 30 };
+
+  function fetchChartData(assetId, tf) {
+    var days = DAYS_MAP[tf] || 1;
+    var cacheKey = assetId + '_' + days;
+    if (CHART_CACHE[cacheKey]) return Promise.resolve(CHART_CACHE[cacheKey]);
+    return fetchJSON(CG + '/coins/' + assetId + '/market_chart?vs_currency=usd&days=' + days)
+      .then(function (data) {
+        CHART_CACHE[cacheKey] = data.prices;
+        return data.prices;
+      });
+  }
+
+  function samplePrices(prices, targetPoints) {
+    if (prices.length <= targetPoints) return prices;
+    var step = prices.length / targetPoints;
+    var result = [];
+    for (var i = 0; i < targetPoints; i++) {
+      var idx = Math.min(Math.floor(i * step), prices.length - 1);
+      result.push(prices[idx]);
+    }
+    result[result.length - 1] = prices[prices.length - 1];
+    return result;
+  }
+
+  function loadChart(asset, tf) {
     var wrap = document.getElementById('chart-wrap');
     if (!wrap || !asset) return;
-    var points = TF_LABELS[tf] || 24;
-    var prices = generateChartData(asset.current_price, points);
+    wrap.innerHTML = '<div style="padding:2rem;text-align:center;color:var(--muted);">Carregando gráfico…</div>';
+    fetchChartData(asset.id, tf).then(function (rawPrices) {
+      var target = TF_LABELS[tf] || 24;
+      var sampled = samplePrices(rawPrices, target);
+      renderChart(asset, tf, sampled);
+    }).catch(function () {
+      var points = TF_LABELS[tf] || 24;
+      renderChart(asset, tf, null);
+    });
+  }
+
+  function renderChart(asset, tf, prices) {
+    var wrap = document.getElementById('chart-wrap');
+    if (!wrap || !asset) return;
+    var points;
+    var timestamps = null;
+    if (prices) {
+      points = prices.length;
+      timestamps = prices.map(function (p) { return p[0]; });
+      prices = prices.map(function (p) { return p[1]; });
+    } else {
+      points = TF_LABELS[tf] || 24;
+      prices = (function (price, pts) {
+        var data = [];
+        var vol = price * 0.02;
+        var val = price * (1 + (Math.random() - 0.5) * 0.04);
+        for (var i = 0; i < pts; i++) {
+          val += (Math.random() - 0.48) * vol;
+          if (val < price * 0.9) val = price * 0.9;
+          if (val > price * 1.1) val = price * 1.1;
+          data.push(val);
+        }
+        data[data.length - 1] = price;
+        return data;
+      })(asset.current_price, points);
+    }
     var h = 280, w = 1000;
     var min = Math.min.apply(null, prices);
     var max = Math.max.apply(null, prices);
@@ -634,7 +762,6 @@ function fmtUSD(n) {
 
     var pricePath = '';
     var areaPath = '';
-    var step = '';
     for (var i = 0; i < points; i++) {
       var px = x(i), py = y(prices[i]);
       var cmd = i === 0 ? 'M' : 'L';
@@ -656,20 +783,6 @@ function fmtUSD(n) {
     var lastX = x(points - 1);
     var lastY = y(prices[points - 1]);
 
-    var now = new Date();
-    var timeStr = now.toLocaleString('pt-BR', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }).replace('.', '');
-
-    var labels = '';
-    var stepLabel = Math.max(1, Math.floor(points / 6));
-    var interval = tf === '1H' ? 600000 : tf === '4H' ? 1800000 : tf === '1D' ? 3600000 : 86400000;
-    for (var li = 0; li < points; li += stepLabel) {
-      var d = new Date(now.getTime() - (points - 1 - li) * interval);
-      labels += '<span>' + d.toLocaleString('pt-BR', { hour: '2-digit', minute: '2-digit' }) + '</span>';
-    }
-
-    var timesEl = document.getElementById('chart-times');
-    if (timesEl) timesEl.innerHTML = labels;
-
     var isUp = prices[points - 1] >= prices[0];
     var lineColor = isUp ? '#00d4ff' : '#ff4d6a';
 
@@ -688,11 +801,7 @@ function fmtUSD(n) {
       '<circle cx="' + lastX + '" cy="' + lastY + '" r="5" fill="' + lineColor + '" />' +
       '<circle cx="' + lastX + '" cy="' + lastY + '" r="10" fill="' + lineColor + '" opacity=".18" />' +
       '<line x1="' + lastX + '" y1="' + lastY + '" x2="' + lastX + '" y2="' + h + '" stroke="' + lineColor + '" stroke-width="1" stroke-dasharray="4 3" opacity=".25" />' +
-      '</svg>' +
-      '<div class="chart-pin">' +
-      timeStr +
-      '<br /><span style="font-size:.95rem;color:' + lineColor + ';">' + fmtCurrency(asset.current_price) + '</span>' +
-      '</div>';
+      '</svg>';
   }
 
   function renderRecentTrades(asset) {
@@ -703,7 +812,7 @@ function fmtUSD(n) {
     var trades = getTrades();
     var filtered = [];
     for (var i = trades.length - 1; i >= 0 && filtered.length < 5; i--) {
-      if (trades[i].symbol === asset.symbol) filtered.push(trades[i]);
+      if (trades[i].symbol === asset.symbol && trades[i].status !== 'Negada') filtered.push(trades[i]);
     }
     if (filtered.length === 0) {
       list.innerHTML = '<div style="padding:1.5rem;text-align:center;color:var(--muted);font-size:.82rem;">Nenhuma transação recente de ' + asset.symbol + '.</div>';
@@ -762,7 +871,7 @@ function fmtUSD(n) {
       for (var j = 0; j < btns.length; j++) btns[j].classList.remove('active');
       btn.classList.add('active');
       currentTF = tf;
-      if (currentAsset) renderChart(currentAsset, tf);
+      if (currentAsset) loadChart(currentAsset, tf);
     });
   }
 
@@ -773,6 +882,7 @@ function fmtUSD(n) {
         btn.className = 'tab-btn active-buy';
         var sell = document.getElementById('btnSell');
         if (sell) sell.className = 'tab-btn';
+        if (currentAsset) updateTradeForm(currentAsset);
         return;
       }
       btn = e.target.closest('#btnSell');
@@ -780,6 +890,7 @@ function fmtUSD(n) {
         btn.className = 'tab-btn active-sell';
         var buy = document.getElementById('btnBuy');
         if (buy) buy.className = 'tab-btn';
+        if (currentAsset) updateTradeForm(currentAsset);
       }
     });
   }
@@ -790,7 +901,14 @@ function fmtUSD(n) {
     var valorInput = document.getElementById('valor');
     if (valorInput) {
       valorInput.addEventListener('input', function () {
-        if (currentAsset) updateTradeForm(currentAsset);
+        if (currentAsset) updateTradeForm(currentAsset, 'valor');
+      });
+    }
+
+    var qtyInput = document.getElementById('quantidade');
+    if (qtyInput) {
+      qtyInput.addEventListener('input', function () {
+        if (currentAsset) updateTradeForm(currentAsset, 'quantidade');
       });
     }
 
@@ -799,35 +917,40 @@ function fmtUSD(n) {
       if (!confirmBtn) return;
       e.preventDefault();
       if (!currentAsset) return;
-      var rawVal = (document.getElementById('valor') || {}).value || '0';
-      var cleanVal = parseFloat(rawVal.replace(/\./g, '').replace(',', '.'));
-      var val = cleanVal || 0;
-      var valUSD = toUSD(val);
-      if (!val || val <= 0) return;
       var isBuy = document.getElementById('btnBuy').classList.contains('active-buy');
       var balance = getBalance();
       var assetBalance = getAssetBalance(currentAsset.symbol);
       var errorEl = document.getElementById('errorAlert');
 
       if (isBuy) {
+        var rawVal = (document.getElementById('valor') || {}).value || '0';
+        var val = parseFloat(rawVal) || 0;
+        var valUSD = toUSD(val);
+        if (!val || val <= 0) return;
+        var qty = valUSD / currentAsset.current_price;
         if (valUSD > balance) {
           if (errorEl) errorEl.style.display = 'flex';
+          addTrade({ type: 'buy', symbol: currentAsset.symbol, quantity: qty, price: currentAsset.current_price, total: valUSD, status: 'Negada' });
           return;
         }
-        var qty = valUSD / currentAsset.current_price;
         setBalance(balance - valUSD);
         addTrade({ type: 'buy', symbol: currentAsset.symbol, quantity: qty, price: currentAsset.current_price, total: valUSD });
       } else {
-        var sellQty = valUSD / currentAsset.current_price;
-        if (sellQty > assetBalance) {
+        var rawQty = (document.getElementById('quantidade') || {}).value || '0';
+        var qty = parseFloat(rawQty) || 0;
+        if (!qty || qty <= 0) return;
+        if (qty > assetBalance) {
           if (errorEl) errorEl.style.display = 'flex';
+          addTrade({ type: 'sell', symbol: currentAsset.symbol, quantity: qty, price: currentAsset.current_price, total: qty * currentAsset.current_price, status: 'Negada' });
           return;
         }
+        var valUSD = qty * currentAsset.current_price;
         setBalance(balance + valUSD);
-        addTrade({ type: 'sell', symbol: currentAsset.symbol, quantity: sellQty, price: currentAsset.current_price, total: valUSD });
+        addTrade({ type: 'sell', symbol: currentAsset.symbol, quantity: qty, price: currentAsset.current_price, total: valUSD });
       }
       if (errorEl) errorEl.style.display = 'none';
       if (document.getElementById('valor')) document.getElementById('valor').value = '';
+      if (document.getElementById('quantidade')) document.getElementById('quantidade').value = '';
       updateTradeForm(currentAsset);
       renderRecentTrades(currentAsset);
       renderPortfolioSummary(currentAsset);
@@ -878,8 +1001,10 @@ function fmtUSD(n) {
   function loadTxFromTrades(assets) {
     var trades = getTrades();
     var assetNames = {};
+    var assetImages = {};
     for (var i = 0; i < assets.length; i++) {
       assetNames[assets[i].symbol] = assets[i].name;
+      assetImages[assets[i].symbol] = assets[i].image || '';
     }
 
     var txs = [];
@@ -902,10 +1027,11 @@ function fmtUSD(n) {
         type: tr.type === 'buy' ? 'Compra' : 'Venda',
         quantity: Number(tr.quantity).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 8 }),
         value_usd: tr.total,
-        status: 'Concluido'
+        status: tr.status || 'Concluido',
+        image: assetImages[tr.symbol] || ''
       });
 
-      if (d >= thirtyAgo) {
+      if (d >= thirtyAgo && tr.status !== 'Negada') {
         if (tr.type === 'buy') totalBought += tr.total;
         else totalSold += tr.total;
       }
@@ -939,7 +1065,7 @@ function fmtUSD(n) {
         var tr = document.createElement('tr');
         tr.innerHTML =
           '<td><div class="date-block"><div class="date-main">' + tx.date + '</div><div class="date-sub">' + tx.time + '</div></div></td>' +
-          '<td><div class="asset-cell"><div class="asset-chip"><span class="material-symbols-outlined" style="font-size:1rem;">currency_bitcoin</span></div><div><div class="asset-name">' + tx.asset + '</div><div class="asset-symbol">' + tx.symbol + '</div></div></div></td>' +
+          '<td><div class="asset-cell"><div class="asset-chip">' + (tx.image ? '<img src="' + tx.image + '" alt="" style="width:20px;height:20px;border-radius:50%;" loading="lazy" onerror="this.style.display=\'none\'" />' : '<span class="asset-letter" style="background:rgba(0,212,255,.15);color:var(--cyan);width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;">' + tx.symbol.charAt(0) + '</span>') + '</div><div><div class="asset-name">' + tx.asset + '</div><div class="asset-symbol">' + tx.symbol + '</div></div></div></td>' +
           '<td><span class="type-badge type-' + (tx.type === 'Compra' ? 'buy' : 'sell') + '">' + tx.type + '</span></td>' +
           '<td>' + tx.quantity + ' ' + tx.symbol + '</td>' +
           '<td class="val-cell">' + fmtCurrency(tx.value_usd) + '</td>' +
@@ -949,57 +1075,106 @@ function fmtUSD(n) {
     }
 
     if (summary) {
+      var totalFiltered = txs.length;
+      var totalAll = summary.total_transactions;
+      var totalPages = Math.ceil(totalFiltered / _perPage) || 1;
+      if (_currentPage > totalPages) _currentPage = totalPages;
+      var startIdx = (_currentPage - 1) * _perPage;
+      var pageTxs = txs.slice(startIdx, startIdx + _perPage);
+
+      var tbody = document.querySelector('.tx-table tbody');
+      if (tbody) {
+        tbody.innerHTML = '';
+        if (pageTxs.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:2.5rem;color:var(--muted);font-size:.9rem;">Nenhuma transação encontrada.</td></tr>';
+        } else {
+          for (var pi = 0; pi < pageTxs.length; pi++) {
+            var tx = pageTxs[pi];
+            var tr = document.createElement('tr');
+            tr.innerHTML =
+              '<td><div class="date-block"><div class="date-main">' + tx.date + '</div><div class="date-sub">' + tx.time + '</div></div></td>' +
+              '<td><div class="asset-cell"><div class="asset-chip">' + (tx.image ? '<img src="' + tx.image + '" alt="" style="width:20px;height:20px;border-radius:50%;" loading="lazy" onerror="this.style.display=\'none\'" />' : '<span style="background:rgba(0,212,255,.15);color:var(--cyan);width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;">' + tx.symbol.charAt(0) + '</span>') + '</div><div><div class="asset-name">' + tx.asset + '</div><div class="asset-symbol">' + tx.symbol + '</div></div></div></td>' +
+              '<td><span class="type-badge type-' + (tx.type === 'Compra' ? 'buy' : 'sell') + '">' + tx.type + '</span></td>' +
+              '<td>' + tx.quantity + ' ' + tx.symbol + '</td>' +
+              '<td class="val-cell">' + fmtCurrency(tx.value_usd) + '</td>' +
+'<td style="text-align:center;"><span class="status-wrap status-ok" style="' + (tx.status === 'Negada' ? 'color:#ff4d6a;' : '') + '"><span class="status-dot" style="background:' + (tx.status === 'Concluido' ? '#4be0ad' : tx.status === 'Negada' ? '#ff4d6a' : '#f0c74a') + ';"></span> ' + tx.status + '</span></td>';
+            tbody.appendChild(tr);
+          }
+        }
+      }
+
       var pageInfo = document.querySelector('.page-info');
       if (pageInfo) {
-        if (summary.total_transactions === 0) {
+        if (totalAll === 0) {
           pageInfo.textContent = 'mostrando 0 de 0 transações';
         } else {
-          pageInfo.textContent = 'Mostrando ' + txs.length + ' de ' + summary.total_transactions + ' transações';
+          var endShow = Math.min(startIdx + _perPage, totalFiltered);
+          pageInfo.textContent = 'Mostrando ' + (startIdx + 1) + '–' + endShow + ' de ' + totalFiltered + ' transações';
         }
       }
 
       var pagination = document.querySelector('.pagination-cs');
       if (pagination) {
         pagination.innerHTML = '';
-        var totalPages = Math.ceil(summary.total_transactions / 10) || 1;
 
-        var prevBtn = document.createElement('button');
-        prevBtn.className = 'page-btn';
-        prevBtn.ariaLabel = 'Anterior';
-        prevBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size:1rem;">chevron_left</span>';
-        pagination.appendChild(prevBtn);
+        if (totalPages > 1) {
+          var prevBtn = document.createElement('button');
+          prevBtn.className = 'page-btn' + (_currentPage <= 1 ? ' disabled' : '');
+          prevBtn.ariaLabel = 'Anterior';
+          prevBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size:1rem;">chevron_left</span>';
+          prevBtn.addEventListener('click', function () {
+            if (_currentPage > 1) { _currentPage--; renderTransactions(txs, summary); }
+          });
+          pagination.appendChild(prevBtn);
 
-        var maxVisible = 5;
-        var start = Math.max(1, 1 - 2);
-        var end = Math.min(totalPages, start + maxVisible - 1);
-        if (end - start + 1 < maxVisible) start = Math.max(1, end - maxVisible + 1);
+          var maxVisible = 5;
+          var half = Math.floor(maxVisible / 2);
+          var start = Math.max(1, _currentPage - half);
+          var end = Math.min(totalPages, start + maxVisible - 1);
+          if (end - start + 1 < maxVisible) start = Math.max(1, end - maxVisible + 1);
 
-        for (var p = start; p <= end; p++) {
-          var btn = document.createElement('button');
-          btn.className = 'page-btn' + (p === 1 ? ' active' : '');
-          btn.textContent = p;
-          pagination.appendChild(btn);
-        }
-
-        if (end < totalPages) {
-          if (end < totalPages - 1) {
-            var dots = document.createElement('span');
-            dots.style.cssText = 'color:#6f809d; padding:0 .25rem;';
-            dots.textContent = '...';
-            pagination.appendChild(dots);
+          for (var p = start; p <= end; p++) {
+            (function (pageNum) {
+              var btn = document.createElement('button');
+              btn.className = 'page-btn' + (pageNum === _currentPage ? ' active' : '');
+              btn.textContent = pageNum;
+              btn.addEventListener('click', function () {
+                _currentPage = pageNum;
+                renderTransactions(txs, summary);
+              });
+              pagination.appendChild(btn);
+            })(p);
           }
-          var lastBtn = document.createElement('button');
-          lastBtn.className = 'page-btn';
-          lastBtn.style.cssText = 'width:auto; padding:0 .45rem;';
-          lastBtn.textContent = totalPages;
-          pagination.appendChild(lastBtn);
-        }
 
-        var nextBtn = document.createElement('button');
-        nextBtn.className = 'page-btn';
-        nextBtn.ariaLabel = 'Próxima';
-        nextBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size:1rem;">chevron_right</span>';
-        pagination.appendChild(nextBtn);
+          if (end < totalPages) {
+            if (end < totalPages - 1) {
+              var dots = document.createElement('span');
+              dots.style.cssText = 'color:#6f809d; padding:0 .25rem;';
+              dots.textContent = '...';
+              pagination.appendChild(dots);
+            }
+            (function (last) {
+              var lastBtn = document.createElement('button');
+              lastBtn.className = 'page-btn';
+              lastBtn.style.cssText = 'width:auto; padding:0 .45rem;';
+              lastBtn.textContent = totalPages;
+              lastBtn.addEventListener('click', function () {
+                _currentPage = last;
+                renderTransactions(txs, summary);
+              });
+              pagination.appendChild(lastBtn);
+            })(totalPages);
+          }
+
+          var nextBtn = document.createElement('button');
+          nextBtn.className = 'page-btn' + (_currentPage >= totalPages ? ' disabled' : '');
+          nextBtn.ariaLabel = 'Próxima';
+          nextBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size:1rem;">chevron_right</span>';
+          nextBtn.addEventListener('click', function () {
+            if (_currentPage < totalPages) { _currentPage++; renderTransactions(txs, summary); }
+          });
+          pagination.appendChild(nextBtn);
+        }
       }
 
       var cards = document.querySelectorAll('.summary-value');

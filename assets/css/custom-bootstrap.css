@@ -347,19 +347,6 @@ h1, h2, h3, h4, h5, h6,
 .nav-pill.active {
     color: var(--cs-primary);
     background: rgba(0, 212, 255, 0.08);
-    position: relative;
-}
-
-.nav-pill.active::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    height: 2px;
-    background: var(--cs-primary);
-    border-radius: 2px 2px 0 0;
 }
 
 .patrimony-label {

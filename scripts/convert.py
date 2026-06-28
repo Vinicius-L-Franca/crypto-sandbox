@@ -6,7 +6,7 @@ screens = {
     "analytics_desempenho.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzU0NzU4ZGNmZDMyOTQzNmZhMDYwOGZjYWM3ZmRiYTc5EgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
     "portfolio.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzZjZGNiYTY0ZmEzZDQ2MmU4ZTIxYzc3ODNiNmU1ZjIwEgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
     "transacoes.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sX2E0ZjZkOTNiYjc0NjRhYzNiNWYwMmUzZDM1YzgwZWFiEgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
-    "negociacao.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzUzOGM3M2EyODFlMzQzNGY5MTFkNmMzZGYwYzU1OWVjEgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
+    "mercado.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzUzOGM3M2EyODFlMzQzNGY5MTFkNmMzZGYwYzU1OWVjEgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
     "painel_de_controle.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sX2M3NzkxYmM4NTExYTQ0ZTI5MzUyODNlZTkzZjA1YzFkEgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
     "conf_seguranca.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sXzEwN2JkNmE5OTdiMzQwNTJiZTVhYmRhN2ViYmNhM2JiEgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
     "analytics_desempenho.html": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ7Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpaCiVodG1sX2I1ZjAyMDgxNmY5NTQwNjhhM2ZkMjFlYjZlNmQ0MWU5EgsSBxDv7cmU_hgYAZIBIwoKcHJvamVjdF9pZBIVQhM3NTk4MzAyOTI1MjkwNjM2OTY5&filename=&opi=89354086",
@@ -159,7 +159,7 @@ def convert_to_bootstrap(html_content):
 repo_root = '/home/vinicius/Projetos/crypto-sandbox'
 
 output_dirs = {
-    'negociacao.html': '',
+    'mercado.html': '',
     'index.html': '',
     'portfolio.html': '',
     'transacoes.html': '',

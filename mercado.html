@@ -154,22 +154,6 @@
             background: rgba(0, 212, 255, .08);
         }
 
-        .nav-pill.active {
-            position: relative;
-        }
-
-        .nav-pill.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60%;
-            height: 2px;
-            background: var(--cyan);
-            border-radius: 2px 2px 0 0;
-        }
-
         .patrimony-label {
             font-size: .6rem;
             text-transform: uppercase;
@@ -808,7 +792,7 @@
     
     </style>
   </head>
-  <body data-page="negociacao">
+  <body data-page="mercado">
     <!-- Ambient -->
     <div class="ambient">
       <div class="ambient-blob blob-1">
@@ -828,7 +812,7 @@
           </a>
           <!-- Desktop Nav -->
           <nav class="d-none d-md-flex align-items-center gap-1 mx-3">
-            <a href="negociacao.html" class="nav-pill active">
+            <a href="mercado.html" class="nav-pill active">
               Mercado
             </a>
             <a href="portfolio.html" class="nav-pill">
@@ -844,15 +828,19 @@
           <!-- Right -->
           <div class="d-flex align-items-center gap-2 ms-auto flex-shrink-0">
             <!-- Patrimony (md+) -->
-            <div class="d-none d-md-flex flex-column align-items-end me-2 pe-2" style="border-right:1px solid var(--border);">
-              <span class="patrimony-label">
-                Patrimônio Total
-              </span>
-              <span class="patrimony-value">
-                $0.00
-              </span>
-            </div>
-            <span class="patrimony-value d-none d-sm-flex d-md-none me-2">$0.00</span>
+            <a href="portfolio.html" style="text-decoration:none;color:inherit;">
+              <div class="d-none d-md-flex flex-column align-items-end me-2 pe-2" style="border-right:1px solid var(--border);">
+                <span class="patrimony-label">
+                  Patrimônio Total
+                </span>
+                <span class="patrimony-value">
+                  $0.00
+                </span>
+              </div>
+            </a>
+            <a href="portfolio.html" style="text-decoration:none;color:inherit;">
+              <span class="patrimony-value d-none d-sm-flex d-md-none me-2">$0.00</span>
+            </a>
             <div class="position-relative d-inline-block" id="notif-wrap">
               <button class="icon-btn" id="notif-btn">
                 <span class="material-symbols-outlined" style="font-size:1.25rem;">
@@ -970,11 +958,6 @@
                     Média 24h
                   </span>
                 </div>
-                <button class="icon-btn">
-                  <span class="material-symbols-outlined" style="font-size:1.1rem;">
-                    fullscreen
-                  </span>
-                </button>
               </div>
               <!-- SVG Chart -->
               <div class="chart-wrap" id="chart-wrap">
@@ -1075,37 +1058,24 @@
                     </span>
                   </div>
                 </div>
-                <!-- Stats -->
-                <div class="cs-card-dark p-3 d-flex flex-column gap-2">
-                  <div class="info-row">
-                    <span class="label">
-                      Preço Atual de Mercado
+                <!-- Quantity -->
+                <div>
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="field-label" id="qty-label">
+                      Quantidade (BTC)
                     </span>
-                    <span class="value">
-                      $64,231.50
-                    </span>
-                  </div>
-                  <div class="divider-row">
-                  </div>
-                  <div class="info-row">
-                    <span class="label">
-                      Estimativa de Recebimento
-                    </span>
-                    <span class="value green" id="estimateVal">
-                      0.00000000 BTC
+                    <span style="font-size:.65rem; color:var(--muted);" id="qty-available">
+                      Disponível: 0 BTC
                     </span>
                   </div>
-                  <div class="divider-row">
-                  </div>
-                  <div class="info-row">
-                    <span class="label">
-                      Taxa de Negociação (0.1%)
-                    </span>
-                    <span class="value" id="feeVal">
-                      $0.00
+                  <div class="position-relative">
+                    <input type="number" class="amount-input" name="quantidade" id="quantidade" placeholder="0.00000000" step="any" />
+                    <span class="input-suffix position-absolute" id="qty-suffix" style="right:1rem; top:50%; transform:translateY(-50%);">
+                      BTC
                     </span>
                   </div>
                 </div>
+
                 <!-- Error -->
                 <div class="error-alert" id="errorAlert" style="display:none;">
                   <span class="material-symbols-outlined">
@@ -1186,7 +1156,7 @@
      MOBILE BOTTOM NAV
 ================================================================ -->
     <nav class="mobile-nav">
-      <a href="negociacao.html" class="mnav-link active">
+      <a href="mercado.html" class="mnav-link active">
         <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">
           show_chart
         </span>

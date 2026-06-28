@@ -84,19 +84,6 @@
         .nav-pill.active {
             color: var(--cyan);
             background: rgba(0, 212, 255, .08);
-            position: relative;
-        }
-
-        .nav-pill.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60%;
-            height: 2px;
-            background: var(--cyan);
-            border-radius: 2px 2px 0 0;
         }
 
         .patrimony-label {
@@ -268,7 +255,13 @@
             background: #1a2337;
             border: 1px solid rgba(255,255,255,.04);
             border-radius: 8px;
-            padding: 1.15rem;
+            padding: .9rem;
+        }
+
+        .panel > .panel-heading:first-child { margin-top: 0; }
+
+        @media (max-width: 767.98px) {
+            .panel { padding: .75rem; }
         }
 
         .panel-heading {
@@ -397,7 +390,7 @@
             Crypto Sandbox
           </a>
           <nav class="d-none d-md-flex align-items-center gap-1 mx-3">
-            <a href="negociacao.html" class="nav-pill">
+            <a href="mercado.html" class="nav-pill">
               Mercado
             </a>
             <a href="portfolio.html" class="nav-pill">
@@ -411,15 +404,19 @@
             </a>
           </nav>
           <div class="d-flex align-items-center gap-2 ms-auto flex-shrink-0">
-            <div class="d-none d-md-flex flex-column align-items-end me-2 pe-2" style="border-right:1px solid var(--border);">
-              <span class="patrimony-label">
-                Patrimônio Total
-              </span>
-              <span class="patrimony-value">
-                $0.00
-              </span>
-            </div>
-            <span class="patrimony-value d-none d-sm-flex d-md-none me-2">$0.00</span>
+            <a href="portfolio.html" style="text-decoration:none;color:inherit;">
+              <div class="d-none d-md-flex flex-column align-items-end me-2 pe-2" style="border-right:1px solid var(--border);">
+                <span class="patrimony-label">
+                  Patrimônio Total
+                </span>
+                <span class="patrimony-value">
+                  $0.00
+                </span>
+              </div>
+            </a>
+            <a href="portfolio.html" style="text-decoration:none;color:inherit;">
+              <span class="patrimony-value d-none d-sm-flex d-md-none me-2">$0.00</span>
+            </a>
             <div class="position-relative d-inline-block" id="notif-wrap">
               <button class="icon-btn" id="notif-btn">
                 <span class="material-symbols-outlined" style="font-size:1.25rem;">
@@ -471,18 +468,18 @@
           </a>
         </div>
       </header>
-      <div class="row g-4">
+      <div class="row g-3" id="confGrid">
         <!-- Account Security Section -->
-        <div class="col-12 col-lg-8 d-grid gap-4">
+        <div class="col-12 col-lg-8 d-grid gap-3">
           <!-- 2FA Section -->
           <section class="panel">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-4 mb-4">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-3">
               <div>
-                <h2 class="panel-heading mb-2">
+                <h2 class="panel-heading mb-1">
                   Autenticação de Dois Fatores (2FA)
                 </h2>
                 <p class="text-on-surface-variant small mb-0">
-                  Adicione uma camada extra de proteção à sua conta. Além da senha, será solicitado um código gerado pelo seu dispositivo.
+                  Adicione uma camada extra de proteção à sua conta.
                 </p>
               </div>
               <div class="d-flex align-items-center bg-surface-container-high px-3 py-2 rounded-3 shadow-sm border border-outline-variant/10">
@@ -491,7 +488,7 @@
                 </span>
               </div>
             </div>
-            <div class="row g-3">
+            <div class="row g-2">
               <div class="col-12 col-md-6">
                 <div class="bg-surface-container-lowest p-3 rounded-3 d-flex align-items-start gap-3 border border-outline-variant/5" data-2fa="app">
                   <span class="material-symbols-outlined text-primary-container mt-1">
@@ -528,9 +525,9 @@
           </section>
           <!-- Password Management -->
           <section class="panel">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-4">
-              <div class="d-flex align-items-center gap-4 w-100">
-                <div class="p-3 bg-surface-container-highest rounded-3">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
+              <div class="d-flex align-items-center gap-3 w-100">
+                <div class="p-2 bg-surface-container-highest rounded-3">
                   <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">
                     key
                   </span>
@@ -554,12 +551,10 @@
           </section>
           <!-- Active Sessions -->
           <section class="panel" data-empty-section>
-            <h2 class="panel-heading mb-4">
-              Sessões Ativas
-              &amp;
-              Log de Acesso
+            <h2 class="panel-heading mb-3">
+              Sessões Ativas &amp; Log de Acesso
             </h2>
-            <div class="d-grid gap-3">
+            <div class="d-grid gap-2">
               <div class="empty-state">
                 <div class="p-4 text-center text-on-surface-variant small">
                   Nenhuma sessão ativa no momento.
@@ -589,7 +584,7 @@
               <div class="sessions-list">
               </div>
             </div>
-            <div class="d-flex gap-2 mt-3">
+            <div class="d-flex gap-2 mt-2">
               <button class="btn-secondary-cs x-small" id="addSessionBtn">
                 Adicionar Sessão
               </button>
@@ -597,7 +592,7 @@
           </section>
         </div>
         <!-- Sidebar / API Keys & Help -->
-        <div class="col-12 col-lg-4 d-grid gap-4">
+        <div class="col-12 col-lg-4 d-grid gap-3">
           <!-- API Keys Card -->
           <section class="panel p-0 overflow-hidden" data-empty-section id="apiKeysSection">
             <div class="p-4">
@@ -674,11 +669,61 @@
               Adicionar Dispositivo
             </button>
           </div>
+          <!-- Danger Zone -->
+          <div class="panel p-0 overflow-hidden" style="border:1px solid rgba(255,77,106,0.25);">
+            <div class="d-flex align-items-center gap-3 px-4 py-3" style="cursor:pointer;" data-bs-toggle="collapse" data-bs-target="#dangerCollapse" aria-expanded="false" aria-controls="dangerCollapse">
+              <span class="material-symbols-outlined" style="color:#ff4d6a; font-variation-settings:'FILL' 1;">
+                warning
+              </span>
+              <h3 class="small font-headline fw-semibold mb-0 flex-grow-1" style="color:#ff4d6a;">
+                Zona de Perigo
+              </h3>
+              <span class="material-symbols-outlined" style="color:#ff4d6a; font-size:1.1rem; transition:transform .2s;" id="dangerArrow">
+                expand_more
+              </span>
+            </div>
+            <div class="collapse" id="dangerCollapse">
+              <div class="px-4 pb-4">
+                <p class="small text-on-surface-variant mb-3" style="color:var(--muted);">
+                  Apague todos os dados salvos (saldo, trades, preferências, perfil, carteira) e recomece do zero.
+                </p>
+                <button class="btn btn-sm" style="border:1px solid rgba(255,77,106,0.4); color:#ff4d6a; background:transparent; border-radius:8px; padding:.4rem 1rem; font-size:.78rem;" data-bs-toggle="modal" data-bs-target="#clearDataModal">
+                  Formatar Dados
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
+    <!-- Clear Data Modal -->
+    <div class="modal fade" id="clearDataModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content" style="background:var(--surface); border:1px solid var(--border);">
+          <div class="modal-header border-0">
+            <h5 class="modal-title" style="color:#ff4d6a;">
+              Formatar Dados
+            </h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+          </div>
+          <div class="modal-body">
+            <p class="small" style="color:var(--muted);">
+              Tem certeza? Esta ação remove permanentemente todo seu saldo, histórico de trades, preferências, perfil e conexão da carteira.
+            </p>
+          </div>
+          <div class="modal-footer border-0">
+            <button class="btn btn-sm" style="border:1px solid var(--border); color:var(--muted); background:transparent; border-radius:8px; padding:.4rem 1rem;" data-bs-dismiss="modal">
+              Cancelar
+            </button>
+            <button class="btn btn-sm" id="confirmClearData" style="background:#ff4d6a; color:#fff; border:none; border-radius:8px; padding:.4rem 1rem;">
+              Sim, Quero Recomeçar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <nav class="mobile-nav">
-      <a href="negociacao.html" class="mnav-link">
+      <a href="mercado.html" class="mnav-link">
         <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">
           show_chart
         </span>
@@ -941,6 +986,21 @@
           renderDevices(devices);
         });
       })();
+
+      document.getElementById('dangerCollapse').addEventListener('show.bs.collapse', function () {
+        document.getElementById('dangerArrow').style.transform = 'rotate(180deg)';
+      });
+      document.getElementById('dangerCollapse').addEventListener('hide.bs.collapse', function () {
+        document.getElementById('dangerArrow').style.transform = 'rotate(0deg)';
+      });
+
+      document.getElementById('confirmClearData').addEventListener('click', function () {
+        var keys = ['cs_balance','cs_profile','cs_preferences','cs_avatar','cs_api_keys','cs_sessions','cs_devices','cs_wallet','cs_trades','cs_selected_asset'];
+        for (var i = 0; i < keys.length; i++) localStorage.removeItem(keys[i]);
+        var m = bootstrap.Modal.getInstance(document.getElementById('clearDataModal'));
+        if (m) m.hide();
+        window.location.href = 'index.html';
+      });
     </script>
   </body>
 </html>

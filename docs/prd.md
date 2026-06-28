@@ -36,6 +36,7 @@ O problema que o sistema busca resolver é a dificuldade de iniciantes entrarem 
 
 - Como visitante, eu quero visualizar os preços atualizados das criptomoedas para acompanhar o mercado.
 - Como visitante, eu quero ver a variação de preço (alta/baixa) para entender tendências.
+- Como visitante, eu quero ver gráficos com dados históricos reais do CoinGecko para analisar tendências.
 
 ---
 
@@ -44,6 +45,7 @@ O problema que o sistema busca resolver é a dificuldade de iniciantes entrarem 
 - Como usuário, eu quero comprar criptomoedas informando o valor desejado para simular um investimento.
 - Como usuário, eu quero validar os dados do formulário para evitar erros na operação.
 - Como usuário, eu quero ver meu saldo atualizado após a compra para acompanhar meus investimentos.
+- Como usuário, eu quero que tentativas com saldo insuficiente sejam registradas no histórico como "Negada".
 
 ---
 
@@ -52,6 +54,7 @@ O problema que o sistema busca resolver é a dificuldade de iniciantes entrarem 
 - Como usuário, eu quero vender criptomoedas da minha carteira para simular lucro ou prejuízo.
 - Como usuário, eu quero escolher qual ativo vender para ter controle sobre minha carteira.
 - Como usuário, eu quero visualizar o valor recebido na venda para acompanhar resultados.
+- Como usuário, eu quero que o valor máximo de venda seja calculado com base na quantidade de moedas que possuo.
 
 ---
 
@@ -60,6 +63,9 @@ O problema que o sistema busca resolver é a dificuldade de iniciantes entrarem 
 - Como usuário, eu quero visualizar minha carteira de criptomoedas para acompanhar meus ativos.
 - Como usuário, eu quero ver o valor total investido para entender meu desempenho.
 - Como usuário, eu quero ver o valor atual da carteira com base no mercado para acompanhar lucros/prejuízos.
+- Como usuário, eu quero que o portfólio seja calculado a partir do histórico real de trades (localStorage), não de dados fixos.
+- Como usuário, eu quero clicar no "Patrimônio Total" para ir direto ao portfólio.
+- Como usuário, eu quero ver uma mensagem informando que os valores são fictícios e editáveis.
 
 ---
 
@@ -67,20 +73,23 @@ O problema que o sistema busca resolver é a dificuldade de iniciantes entrarem 
 
 - Como usuário, eu quero visualizar meu histórico de compras e vendas para acompanhar minhas operações.
 - Como usuário, eu quero identificar data, tipo e valor das transações para análise.
+- Como usuário, eu quero paginação (10 por página) e filtros por período/tipo.
+- Como usuário, eu quero ver transações negadas (saldo insuficiente) destacadas em vermelho.
 
 ---
 
 ### 🔄 Integração com API
 
-- Como sistema, eu quero consumir uma API de criptomoedas para obter dados reais de preços.
-- Como sistema, eu quero atualizar os dados automaticamente para manter as informações corretas.
+- Como sistema, eu quero consumir a CoinGecko API para obter dados reais de preços e histórico de gráficos.
+- Como sistema, eu quero consumir a ExchangeRate-API para converter valores entre USD, BRL e EUR.
+- Como sistema, eu quero atualizar os dados automaticamente a cada 30 segundos.
 
 ---
 
 ### 💾 Persistência de Dados
 
 - Como usuário, eu quero que meus dados sejam salvos no navegador para não perder minhas informações.
-- Como sistema, eu quero armazenar dados no localStorage para manter o estado da aplicação.
+- Como sistema, eu quero armazenar dados no localStorage (cs_balance, cs_trades, cs_profile, cs_preferences, etc.).
 
 ---
 
@@ -97,14 +106,7 @@ O problema que o sistema busca resolver é a dificuldade de iniciantes entrarem 
 - Como usuário, eu quero ativar autenticação 2FA para proteger minha conta.
 - Como usuário, eu quero escolher entre autenticação biométrica ou por OTP.
 - Como usuário, eu quero selecionar o idioma e a moeda base da aplicação.
-
----
-
-### 📈 Visualização de Gráficos
-
-- Como usuário, eu quero visualizar gráficos de linha do mercado para acompanhar tendências de preço.
-- Como usuário, eu quero ver um gráfico de pizza com a distribuição dos meus ativos no portfólio.
-- Como usuário, eu quero ajustar a precision view (casas decimais) dos criptoativos.
+- Como usuário, eu quero uma "Zona de Perigo" com botão para limpar todos os dados (accordion colapsável).
 
 ---
 

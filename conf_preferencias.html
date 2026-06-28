@@ -72,18 +72,7 @@
         white-space: nowrap;
     }
     .nav-pill:hover { color: #fff; background: rgba(255, 255, 255, .06); }
-    .nav-pill.active { color: var(--cyan); background: rgba(0, 212, 255, .08); position: relative; }
-    .nav-pill.active::after {
-        content: '';
-        position: absolute;
-        bottom: -1px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60%;
-        height: 2px;
-        background: var(--cyan);
-        border-radius: 2px 2px 0 0;
-    }
+    .nav-pill.active { color: var(--cyan); background: rgba(0, 212, 255, .08); }
     .patrimony-label {
         font-size: .6rem;
         text-transform: uppercase;
@@ -343,7 +332,7 @@
             Crypto Sandbox
           </a>
           <nav class="d-none d-md-flex align-items-center gap-1 mx-3">
-            <a href="negociacao.html" class="nav-pill">
+            <a href="mercado.html" class="nav-pill">
               Mercado
             </a>
             <a href="portfolio.html" class="nav-pill">
@@ -357,15 +346,19 @@
             </a>
           </nav>
           <div class="d-flex align-items-center gap-2 ms-auto flex-shrink-0">
-            <div class="d-none d-md-flex flex-column align-items-end me-2 pe-2" style="border-right:1px solid var(--border);">
-              <span class="patrimony-label">
-                Patrimônio Total
-              </span>
-              <span class="patrimony-value">
-                $0.00
-              </span>
-            </div>
-            <span class="patrimony-value d-none d-sm-flex d-md-none me-2">$0.00</span>
+            <a href="portfolio.html" style="text-decoration:none;color:inherit;">
+              <div class="d-none d-md-flex flex-column align-items-end me-2 pe-2" style="border-right:1px solid var(--border);">
+                <span class="patrimony-label">
+                  Patrimônio Total
+                </span>
+                <span class="patrimony-value">
+                  $0.00
+                </span>
+              </div>
+            </a>
+            <a href="portfolio.html" style="text-decoration:none;color:inherit;">
+              <span class="patrimony-value d-none d-sm-flex d-md-none me-2">$0.00</span>
+            </a>
             <div class="position-relative d-inline-block" id="notif-wrap">
               <button class="icon-btn" id="notif-btn">
                 <span class="material-symbols-outlined" style="font-size:1.25rem;">
@@ -522,7 +515,7 @@
       </div>
     </main>
     <nav class="mobile-nav">
-      <a href="negociacao.html" class="mnav-link">
+      <a href="mercado.html" class="mnav-link">
         <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">
           show_chart
         </span>

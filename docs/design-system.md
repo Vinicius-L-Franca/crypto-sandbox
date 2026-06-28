@@ -19,8 +19,6 @@ O sistema utiliza **Dark Mode como padrão**, contrastando dados financeiros sob
 
 ### Variáveis CSS (fonte primária)
 
-Estas são as variáveis definidas no `<style>` de cada página HTML e no SCSS:
-
 | Variável | Cor | Uso |
 |---|---|---|
 | `--bg` | `#080c14` | fundo geral da aplicação |
@@ -30,7 +28,7 @@ Estas são as variáveis definidas no `<style>` de cada página HTML e no SCSS:
 | `--border` | `rgba(255,255,255,0.07)` | bordas de containers |
 | `--cyan` | `#00d4ff` | primária — ação, links, gráfico |
 | `--green` | `#0fffa3` | alta/lucro (valores positivos) |
-| `--red` | `#ff4d6a` | baixa/prejuízo (valores negativos) |
+| `--red` | `#ff4d6a` | baixa/prejuízo (valores negativos), negada |
 | `--text` | `#dce8f8` | texto principal |
 | `--muted` | `rgba(255,255,255,0.42)` | texto secundário, labels |
 
@@ -49,7 +47,7 @@ A classe `.light` no `<html>` sobrescreve as variáveis via [tema.css](../assets
 
 ## 3. Tipografia
 
-- **Fonte principal:** `Inter, sans-serif` (fallback `Roboto`)
+- **Fonte principal:** `Inter, sans-serif`
 - **Fonte de dados:** `Space Grotesk, sans-serif` (números bold)
 
 ### 🔠 Hierarquia
@@ -69,7 +67,8 @@ Presente em todas as páginas:
 - Logo / nome "Crypto Sandbox"
 - Menu de navegação (Mercado, Portfólio, Transações, Configurações)
 - Botão "Conectar Carteira" (toggle wallet)
-- Saldo em USD
+- Patrimônio Total (clicável → leva ao portfólio)
+- Ícone de notificações
 
 ### 📌 Bottom Nav (mobile)
 
@@ -81,27 +80,39 @@ Em viewports menores (`< 768px`) a topbar é substituída por uma barra de naveg
 
 ### 📌 Balance Responsivo
 
-Em **sm (576px–767px)**: o valor do patrimônio é exibido de forma compacta (sem label/borda) ao lado da brand, usando `d-none d-sm-flex d-md-none`.
+Em **sm (576px–767px)**: o valor do patrimônio é exibido de forma compacta (sem label/borda) ao lado da brand.
 Em **md (768px–991px)**: os nav pills têm padding reduzido (`0.3rem 0.4rem`) para acomodar o balance + navegação sem overflow.
 
 ---
 
 ## 5. Componentes
 
-### 🧱 Cards (`.cs-card`)
+### 🧱 Cards (`.panel` / `.card-soft`)
 
 Usados em:
-- Saldo total
+- Saldo total / Patrimônio Líquido
 - Gráficos
 - Trade panel
 - Lista de transações
+- Configurações e segurança
 
 **Regras:**
 - Fundo: `var(--surface)` → `#0e1420`
 - Borda: `1px solid var(--border)`
 - Sombra: `0 4px 24px rgba(0,0,0,0.3)`
-- Padding: `1rem–1.5rem`
-- Border-radius: `12px`
+- Padding: `0.9rem` (responsive `.75rem` no mobile)
+- Border-radius: `8px`
+
+#### Flash azul no Patrimônio Líquido
+
+O card de Patrimônio Líquido no portfólio tem classe `flash-blue` que dispara animação `@keyframes flash-blue` ao entrar na página (0.6s, glow azul + background).
+
+#### Danger Zone (accordion)
+
+A Zona de Perigo é um card colapsável:
+- Inicialmente compacto (só cabeçalho com ícone warning + título + seta expand_more)
+- Ao clicar, expande via Bootstrap collapse
+- Seta gira 180° com transição CSS
 
 ---
 
@@ -111,38 +122,48 @@ Usados em:
 - Cor: `var(--cyan)` → `#00d4ff`
 - Uso: Comprar, Confirmar Transação
 
-#### Perigo (venda):
+#### Perigo (venda / formatação):
 - Cor: `var(--red)` → `#ff4d6a`
-- Uso: Vender ativo
+- Uso: Vender ativo, Formatar Dados
 
 #### Botão Conectar Carteira:
 - Gradiente `var(--cyan)` com glow
-- Texto branco
 - Quando conectado: fundo verde e endereço abreviado
+
+#### Danger link:
+- Cor: `#ff6b7d`
+- Uso: Remover chave de API, encerrar sessão, remover dispositivo
 
 ---
 
 ### 📊 Gráfico de Linha
 
 Gerado dinamicamente via SVG (sem biblioteca externa):
+- Dados reais do CoinGecko (`/coins/{id}/market_chart`)
+- Cache em `CHART_CACHE` para evitar requisições repetidas
+- Amostragem para ~24 pontos via `samplePrices()`
+- Fallback para dados aleatórios se API falhar
 - Linha principal: cor dinâmica (`--cyan` se alta, `--red` se baixa)
 - Área: gradiente com opacidade decrescente
-- Média 24h: linha tracejada verde
+- Média: linha tracejada verde
 - Grid: linhas horizontais sutis
-- Tooltip: `.chart-pin` com data/hora + preço
+- Loading state: "Carregando gráfico…" enquanto busca dados
+- **Sem tooltip, sem labels de horário** (removidos para visual limpo)
 
 ---
 
 ### 📋 Tabelas
 
 Usadas em:
-- Portfólio
-- Histórico de transações
+- Portfólio (tabela de ativos)
+- Histórico de transações (paginada)
 
 **Regras:**
 - Linhas com hover (`rgba(255,255,255,0.02)`)
 - Valores positivos → verde, negativos → vermelho
+- Status "Negada" → bolinha vermelha + texto vermelho
 - Colunas bem espaçadas, sem bordas pesadas
+- Scroll horizontal em mobile
 
 ---
 
@@ -150,21 +171,32 @@ Usadas em:
 
 - Inputs escuros (`var(--surface3)`)
 - Borda `var(--border)`
-- Validação:
-  - REGEX com feedback visual (classe `.invalid` + mensagem de erro)
-  - jQuery Mask para telefone e valores
+- Validação com REGEX + feedback visual (classe `.invalid` + mensagem de erro)
+- Máscaras jQuery para telefone e valores
 
 ---
 
 ### 🔄 Trade Panel (Painel de Compra/Venda)
 
-Presente em `negociacao.html`:
+Presente em `mercado.html`:
 - Abas "Comprar" / "Vender" com toggle visual
 - Input de valor com estimativa em tempo real (quantidade + taxa)
-- Label e suffix do input dinâmicos conforme moeda escolhida pelo usuário (USD/BRL/EUR)
+- Label e suffix do input dinâmicos conforme moeda escolhida pelo usuário
+- Input bidirecional: alterar valor ↔ altera quantidade e vice-versa
 - Botão "Confirmar Transação"
-- Alerta de erro (saldo insuficiente)
+- Alerta de erro (saldo insuficiente) com registro de trade negada
 - Resumo do portfólio do ativo selecionado
+- Máximo na compra: saldo em fiat; na venda: valor total das moedas
+
+---
+
+### 💬 Chip "Ambiente Simulado"
+
+No card de Patrimônio Líquido do portfólio:
+```
+Ambiente simulado — os valores exibidos são fictícios e podem ser editados livremente
+```
+Exibido em `.68rem`, cor muted, 65% opacidade.
 
 ---
 
@@ -175,6 +207,7 @@ Presente em `negociacao.html`:
 - Cards empilhados verticalmente em telas pequenas
 - Gráfico SVG com `preserveAspectRatio="none"` e `viewBox` fixo
 - Tabelas com scroll horizontal em mobile
+- Patrimônio compacto em sm (sem label/borda)
 
 ---
 
@@ -185,13 +218,17 @@ Presente em `negociacao.html`:
 - Interface semelhante a plataformas reais de trading
 - Foco em leitura rápida de dados financeiros
 - Tema claro/escuro configurável em Preferências
+- Transações negadas em vermelho para fácil identificação
+- Loading states no gráfico enquanto busca dados reais
+- Clique no patrimônio → navega direto ao portfólio
+- Painéis de configuração mais compactos e colapsáveis
 
 ---
 
 ## 8. Padrões Visuais Importantes
 
 - Verde = lucro / alta
-- Vermelho = prejuízo / baixa
+- Vermelho = prejuízo / baixa / erro / negada
 - Ciano = ação primária (comprar, navegar, confirmar)
 - Contraste alto entre fundo escuro e texto claro
 - Interface limpa, sem excesso de elementos

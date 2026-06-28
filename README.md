@@ -136,7 +136,7 @@ O sistema contará com pelo menos:
 ## 📱 Páginas da Aplicação
 
 1. **Conectar Carteira / Home** (`index.html`) - Página inicial e conexão de carteira digital
-2. **Mercado/Negociação** (`negociacao.html`) - Lista de criptomoedas com opções de compra e venda
+2. **Mercado/Negociação** (`mercado.html`) - Lista de criptomoedas com opções de compra e venda
 3. **Portfólio/Carteira** (`portfolio.html`) - Carteira do usuário com distribuição de ativos
 4. **Transações** (`transacoes.html`) - Histórico de compras e vendas
 5. **Configurações** - Perfil, segurança e preferências do usuário:
@@ -168,7 +168,7 @@ Todos os arquivos HTML estão diretamente na raiz do repositório (estrutura fla
 ### Páginas
 
 - `index.html` — página inicial (Conectar Carteira)
-- `negociacao.html` — página de mercado (compra/venda, gráfico)
+- `mercado.html` — página de mercado (compra/venda, gráfico)
 - `portfolio.html` — página de portfólio
 - `transacoes.html` — histórico de transações
 - `conf_perfil.html` — configurações de perfil
@@ -247,7 +247,7 @@ npm run dev
 # API em http://localhost:3001
 # Frontend em http://localhost:8000
 ```
-As páginas com `data-page` (`portfolio.html`, `negociacao.html`, `transacoes.html`) consomem automaticamente os dados da API fake quando o servidor está rodando.
+As páginas com `data-page` (`portfolio.html`, `mercado.html`, `transacoes.html`) consomem automaticamente os dados da API fake quando o servidor está rodando.
 
 ## 🌐 API Pública (CoinGecko + ExchangeRate-API)
 
